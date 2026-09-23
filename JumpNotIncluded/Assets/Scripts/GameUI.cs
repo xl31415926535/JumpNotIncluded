@@ -28,7 +28,7 @@ namespace JumpNotIncluded
         }
         private void OnScoreChanged(int value){displayedScore=value;}
         private void OnDestroy()
-        {if(channel!=null)channel.ScoreChanged-=OnScoreChanged;if(font!=null)Destroy(font);if(pixelFont!=null)Destroy(pixelFont);}
+        {if(channel!=null)channel.ScoreChanged-=OnScoreChanged;if(font!=null)Destroy(font);if(pixelFont!=null)Destroy(pixelFont);if(titleBurst!=null)Destroy(titleBurst);}
         public void ResetFocus(){focus=0;submit=false;paymentFocusPending=true;}
         private void Update()
         {
@@ -164,6 +164,8 @@ namespace JumpNotIncluded
             Hud();
             Box(473,168,666,263,new Color(.27f,.08f,.035f));Box(461,156,666,263,new Color(.69f,.2f,.07f));
             Text(495,174,595,195,"SUPER\nMARIO BROS.",72,paper,true,TextAnchor.MiddleCenter,true);
+            Text(495,370,595,36,"Jump Not Included",24,new Color(1,.83f,.58f),true,TextAnchor.MiddleCenter,true);
+            FreeToPlayBadge();
             Button(581,473,438,57,"1 PLAYER GAME",game.NewGame);
             Button(581,550,438,51,"MUSIC  "+(game.audioDirector.MusicEnabled?"ON":"OFF"),game.audioDirector.ToggleMusic);
             Button(581,617,438,51,"SOUND  "+(game.audioDirector.EffectsEnabled?"ON":"OFF"),game.audioDirector.ToggleEffects);

@@ -3,6 +3,7 @@
 这些文件记录实际执行的检查及保留的历史证据。旧资料的 Git 入库日期不代表执行日期；v1.11.0 的新检查于 2026-09-23 执行。
 
 - `unity-runtime-checks.txt`：v1.11.0 的 161 项 Unity Play Mode 检查结果，结尾为 ALL RUNTIME CHECKS PASSED。新增 16 项覆盖 SGD 虚拟卡与钱包支付的完整流程。
+- `menu-ui-checks.txt` 与 `previews/menu-free-to-play*.png`：v1.11.1 副标题及爆炸框的三种分辨率检查；这次外观修改未重新执行完整玩法检查。
 - `payment-ui-checks.txt`：新充值页的渲染、确认和取消分发检查，以及 Windows 构建结果。
 - `previews/payment/`：9 个新充值界面状态 × 3 种分辨率的 27 张 Unity 实际渲染图。测试账户及额度是可重复验证使用的数据。
 - `history/v1.10.2-runtime-checks.txt`：保留的 v1.10.2 阶段 145 项结果。

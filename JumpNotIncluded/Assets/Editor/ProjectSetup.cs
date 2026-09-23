@@ -44,7 +44,7 @@ namespace JumpNotIncluded.EditorTools
             foreach(string p in new[]{Data,Data+"/Sprites",Data+"/FSM",Data+"/Products","Assets/Scenes","Assets/Resources"})Directory.CreateDirectory(p);
             AssetDatabase.Refresh();
             PlayerSettings.companyName="Student Arcade";PlayerSettings.productName="Jump Not Included";
-            PlayerSettings.bundleVersion="1.11.0";PlayerSettings.colorSpace=ColorSpace.Gamma;
+            PlayerSettings.bundleVersion="1.11.1";PlayerSettings.colorSpace=ColorSpace.Gamma;
             PlayerSettings.defaultScreenWidth=1280;PlayerSettings.defaultScreenHeight=720;
             PlayerSettings.fullScreenMode=FullScreenMode.Windowed;PlayerSettings.resizableWindow=true;
             PlayerSettings.runInBackground=false;
