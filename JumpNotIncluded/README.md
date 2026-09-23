@@ -4,7 +4,7 @@ Unity 6.3（6000.3.24f1）二维平台游戏，当前版本 **v1.10.2**。两个
 
 ## 直接运行
 
-运行 `Builds/Windows/JumpNotIncluded.exe`，选择 **1 PLAYER GAME → START**。压缩包需完整解压，保留 exe 旁的数据目录。
+使用已构建的 Windows 包时，运行 `Builds/Windows/JumpNotIncluded.exe`，选择 **1 PLAYER GAME → START**。压缩包需完整解压，保留 exe 旁的数据目录。GitHub 源码仓库不包含生成的 exe，可按下文在 Unity 中运行或构建。
 
 在 Unity 中：
 
@@ -126,7 +126,7 @@ Unity **6000.3.24f1** 的 **145 项实际 Play Mode 检查已通过**。覆盖�
 - 父目录 `./tools/check-project.ps1`：C# 编译、纯经济规则、100 轮随机广告验证。
 - Unity **Tools → Jump Not Included → Run runtime checks**：实际场景回归；结束恢复测试输入设备和最高分，输出到父目录 `work/unity-runtime-checks.txt`。
 - Unity **Tools → Jump Not Included → Build Windows**：生成 Windows 可执行文件。
-- 运行记录及画面预览在父目录 `artifacts/`。完整人工通关、盲测和课程录屏尚未完成。
+- 仓库保存的运行记录及画面预览在父目录 `verification/`；本地打包产物仍生成到 `artifacts/`。完整人工通关、盲测和课程录屏尚未完成。
 
 ## 素材与参考
 
