@@ -30,6 +30,12 @@
 
 FREE CHECKPOINT RETRY 调用的是 `Retry`，用于恢复检查点；展示“完整重置”时应点击 RESTART RUN。
 
+## 充值代码与文字编辑
+
+在 `Assets/Scripts/GameUI.Payment.cs` 搜索 `PaymentPacks`（礼包与支付来源）、`VirtualCard`（卡片外观）、`PaymentSummary`（订单与按钮）、`PaymentReceiptView`（收据）和 `PaymentActivity`（交易记录），可以直接找到英文文字及坐标。
+
+`SceneRoot.Payment.cs` 的 `ContinueCheckout`、`LinkPaymentCard`、`ConfirmTopUp`、`AdvancePayment` 管理流程；`PaymentAccount.cs` 的 `Problem` 和 `Purchase` 校验额度、扣减选中的来源并生成收据。`RunState.Capture / Restore` 保存与恢复整个支付账户。此功能属于游戏的额外设计，不代替 Lab 1 的死亡、计分和重开演示。
+
 ## 演示顺序
 
 1. 解锁跳跃，展示移动、跳跃与敌人移动。

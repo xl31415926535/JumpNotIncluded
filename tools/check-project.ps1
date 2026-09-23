@@ -14,9 +14,9 @@ $argsFile=Join-Path $workRoot 'unity-compile.rsp'
 & $mono $compiler ('@'+$argsFile)
 if($LASTEXITCODE -ne 0){throw 'C# compilation failed.'}
 $entry=Join-Path $workRoot 'RunRules.cs'
-'class Program { static void Main() { JumpNotIncluded.EditorTools.RuleChecks.Run(); System.Console.WriteLine("PASS: shuffled ad rotation, cash rewards, $99 cap, coin packs and refunds, six upgrade prices and access, refund/repurchase, independent VIP fire, economy routes, reward and score deduplication, reset."); } }' | Set-Content -LiteralPath $entry -Encoding utf8
+'class Program { static void Main() { JumpNotIncluded.EditorTools.RuleChecks.Run(); System.Console.WriteLine("PASS: ad rotation, SGD wallet cap, coin packs, upgrades and refunds, VIP, economy routes, score deduplication, virtual card linking and limits, atomic payments, duplicate order protection, receipt ledger, reset."); } }' | Set-Content -LiteralPath $entry -Encoding utf8
 $exe=Join-Path $workRoot 'RuleChecks.exe'
-& $mono $compiler /nologo /target:exe ('/out:'+$exe) (Join-Path $projectRoot 'JumpNotIncluded\Assets\Scripts\RunModel.cs') (Join-Path $projectRoot 'JumpNotIncluded\Assets\Editor\RuleChecks.cs') $entry
+& $mono $compiler /nologo /target:exe ('/out:'+$exe) (Join-Path $projectRoot 'JumpNotIncluded\Assets\Scripts\RunModel.cs') (Join-Path $projectRoot 'JumpNotIncluded\Assets\Scripts\PaymentAccount.cs') (Join-Path $projectRoot 'JumpNotIncluded\Assets\Editor\RuleChecks.cs') $entry
 if($LASTEXITCODE -ne 0){throw 'Rule test compilation failed.'}
 & $mono $exe
 if($LASTEXITCODE -ne 0){throw 'Rule tests failed.'}

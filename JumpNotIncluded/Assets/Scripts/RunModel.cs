@@ -53,6 +53,8 @@ namespace JumpNotIncluded
         public List<string> claimed = new List<string>();
         public List<Receipt> receipts = new List<Receipt>();
         public List<string> collected = new List<string>();
+        public PaymentAccount payments = new PaymentAccount();
+        public PaymentAccount Payments => payments??(payments=new PaymentAccount());
         public static int Price(Product p)
         {
             switch(p)
@@ -66,9 +68,7 @@ namespace JumpNotIncluded
         public bool CanFire(Form form, Buff buff) => Owns(Product.Gatling)||buff == Buff.VIP || form == Form.Fire && Owns(Product.FireFlower);
         public bool ExchangeCash(int pack)
         {
-            int cost=PackCost(pack),amount=PackCoins(pack);
-            if(cost<0||wallet<cost||coins>int.MaxValue-amount)return false;
-            wallet-=cost;coins+=amount;return true;
+            return Payments.Purchase(this,pack,PaymentMethod.Wallet,Guid.NewGuid().ToString("N"),out _);
         }
 
         public int Credit(int cents)

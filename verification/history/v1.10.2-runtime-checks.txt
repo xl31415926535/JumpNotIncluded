@@ -14,7 +14,7 @@ PASS: idle state machines remain stable after asset reload
 PASS: Goomba sprite and collider feet align with floor
 PASS: Goomba frames include all 16 pixels, including feet
 PASS: idle gameplay accrues level time without inventing ad or control time
-PASS: right movement faces right (dx=1.539999, input=0, mode=Playing)
+PASS: right movement faces right (dx=1.649998, input=0, mode=Playing)
 PASS: real movement input accrues hands-on time once per frame
 PASS: left movement faces left
 PASS: holding gameplay keys in a pause menu adds no tracked time
@@ -144,20 +144,4 @@ PASS: ad and hands-on totals carry through the loading scene without adding menu
 PASS: paid route clears all ten Bowsers and World 2 by holding right and fire, with no jumps or extra deaths (position=(108.04, 0.94), mode=Results)
 PASS: final receipt totals both worlds while keeping the original viewing and purchase amounts
 PASS: a new run clears all receipt telemetry
-PASS: checkout cannot open or submit during normal gameplay
-PASS: SGD checkout requires linking a card while the world stays paused
-PASS: linking the virtual card is saved without charging it
-PASS: confirmation starts one pending payment and does not deliver coins early
-PASS: unfocused checkout cannot finish a pending payment
-PASS: cancel returns to pack selection without charging or delivering
-PASS: an ad cannot replace a pending card payment
-PASS: confirmed card payment charges SGD 9.80 and delivers 1000 coins
-PASS: repeated callbacks cannot duplicate a payment or its receipt
-PASS: card binding, payment history and delivered coins survive checkpoint reload
-PASS: unfunded SGD wallet reports failure without creating a charge
-PASS: wallet reward returns to the checkout with SGD credit
-PASS: wallet checkout spends only the chosen source and saves its own receipt
-PASS: payment activity reopens the original immutable receipt and credit balance
-PASS: payment account and history persist across the actual loading scene
-PASS: full restart resets simulated card credit and payment activity
 ALL RUNTIME CHECKS PASSED

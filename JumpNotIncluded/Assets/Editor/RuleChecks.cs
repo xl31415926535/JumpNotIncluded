@@ -69,6 +69,29 @@ namespace JumpNotIncluded.EditorTools
             int first=(int)new AdRotation(new Random(0)).Next();bool varied=false;
             for(int seed=1;seed<20;seed++)varied|=(int)new AdRotation(new Random(seed)).Next()!=first;
             Check(varied,"Different seeds produce different opening ads.");
+            CheckPayments();
+        }
+        private static void CheckPayments()
+        {
+            var r=new RunModel();var card=r.Payments;string error;
+            Check(!card.Purchase(r,1,PaymentMethod.VirtualCard,"before-link",out error)&&r.coins==0&&card.orders.Count==0,"An unlinked card cannot pay or create an order.");
+            card.LinkCard();
+            Check(card.Purchase(r,1,PaymentMethod.VirtualCard,"card-1",out error)&&r.coins==1000&&r.wallet==0&&card.cardCharged==980,"A virtual card pays exactly SGD 9.80 without spending the reward wallet.");
+            Check(!card.Purchase(r,2,PaymentMethod.VirtualCard,"card-1",out error)&&r.coins==1000&&card.cardCharged==980&&card.orders.Count==1,"A duplicate order cannot charge or award twice, even with a different pack.");
+            var receipt=card.Find("card-1");
+            Check(receipt.cents==980&&receipt.coins==1000&&receipt.balanceAfter==1000&&receipt.fundsAfter==8920&&receipt.method==PaymentMethod.VirtualCard&&!string.IsNullOrEmpty(receipt.createdAt),"Receipt contains the actual amount, delivery, remaining credit, method and timestamp.");
+            Check(!card.Purchase(r,7,PaymentMethod.VirtualCard,"invalid-pack",out error)&&!card.Purchase(r,0,(PaymentMethod)99,"invalid-method",out error)&&!card.Purchase(r,0,PaymentMethod.VirtualCard,"",out error),"Invalid checkout requests cannot mutate balances.");
+            card.UnlinkCard();card.LinkCard();Check(card.AvailableCredit==8920,"Unlinking and re-linking preserves outstanding virtual charges.");
+            r.coins=int.MaxValue;
+            Check(!card.Purchase(r,0,PaymentMethod.VirtualCard,"overflow",out error)&&card.cardCharged==980&&card.orders.Count==1,"An overflowing coin balance cannot charge the card.");
+            r.coins=1000;
+            for(int i=0;i<4;i++)Check(card.Purchase(r,2,PaymentMethod.VirtualCard,"large-"+i,out error),"Valid card payments reduce remaining credit.");
+            int before=r.coins,charged=card.cardCharged;
+            Check(!card.Purchase(r,2,PaymentMethod.VirtualCard,"declined",out error)&&r.coins==before&&card.cardCharged==charged&&card.Find("declined")==null,"Insufficient card credit fails atomically without a receipt.");
+            r.wallet=100;
+            Check(card.Purchase(r,0,PaymentMethod.Wallet,"wallet-1",out error)&&r.wallet==0&&card.cardCharged==charged&&card.Total(PaymentMethod.Wallet)==100&&card.Find("wallet-1").fundsAfter==0,"Wallet is an independent funding source with its own receipt.");
+            Check(!card.Purchase(r,0,PaymentMethod.Wallet,"wallet-declined",out error)&&card.Find("wallet-declined")==null,"Unfunded wallet does not create a completed transaction.");
+            var fresh=new RunModel();Check(!fresh.Payments.cardLinked&&fresh.Payments.orders.Count==0&&fresh.Payments.AvailableCredit==9900,"Starting a new run resets the simulated account and transaction history.");
         }
     }
 }

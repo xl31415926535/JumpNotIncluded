@@ -262,6 +262,45 @@ namespace JumpNotIncluded.EditorTools
             var goombaChecks=CheckGoombas();while(goombaChecks.MoveNext())yield return goombaChecks.Current;
             var premiumChecks=CheckPremium();while(premiumChecks.MoveNext())yield return premiumChecks.Current;
             var paidChecks=CheckPaidVictory();while(paidChecks.MoveNext())yield return paidChecks.Current;
+            var paymentChecks=CheckPayments();while(paymentChecks.MoveNext())yield return paymentChecks.Current;
+        }
+        private static IEnumerator CheckPayments()
+        {
+            var g=Game;g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.35f);g=Game;
+            g.OpenRecharge();g.ContinueCheckout();Check(!g.rechargeOpen&&g.checkoutStep==CheckoutStep.Packs,"checkout cannot open or submit during normal gameplay");
+            g.KillPlayer("Payment regression.");g.OpenShop();yield return Wait(.35f);g=Game;
+            g.OpenRecharge();g.SelectPack(1);g.SelectPayment(PaymentMethod.VirtualCard);g.ContinueCheckout();
+            Check(g.checkoutStep==CheckoutStep.LinkCard&&g.Run.coins==0&&Time.timeScale==0,"SGD checkout requires linking a card while the world stays paused");
+            g.LinkPaymentCard();
+            Check(g.checkoutStep==CheckoutStep.Review&&g.Run.Payments.cardLinked&&g.Run.Payments.cardCharged==0&&g.Run.Payments.orders.Count==0,"linking the virtual card is saved without charging it");
+            Check(g.ConfirmTopUp()&&!g.ConfirmTopUp()&&g.Run.coins==0,"confirmation starts one pending payment and does not deliver coins early");
+            g.hasFocus=false;g.AdvancePayment(20);
+            Check(g.checkoutStep==CheckoutStep.Processing&&g.paymentElapsed==0&&g.Run.Payments.cardCharged==0,"unfocused checkout cannot finish a pending payment");
+            g.CloseOverlay();g.hasFocus=true;g.AdvancePayment(20);
+            Check(g.checkoutStep==CheckoutStep.Packs&&g.rechargeOpen&&g.Run.Payments.orders.Count==0&&g.Run.Payments.cardCharged==0,"cancel returns to pack selection without charging or delivering");
+            g.ContinueCheckout();g.ConfirmTopUp();g.StartAd(AdKind.Cash);
+            Check(g.mode==ScreenMode.Shop&&g.checkoutStep==CheckoutStep.Processing,"an ad cannot replace a pending card payment");
+            g.AdvancePayment(SceneRoot.PaymentDuration);
+            string id=g.paymentOrderId;
+            Check(g.checkoutStep==CheckoutStep.Receipt&&g.Run.Payments.cardCharged==980&&g.Run.coins==1000&&g.Run.wallet==0,"confirmed card payment charges SGD 9.80 and delivers 1000 coins");
+            g.AdvancePayment(20);g.ConfirmTopUp();
+            Check(g.Run.Payments.orders.Count==1&&g.Run.Payments.Find(id).balanceAfter==1000&&g.Run.coins==1000,"repeated callbacks cannot duplicate a payment or its receipt");
+            g.CloseRecharge();g.CloseOverlay();g.KillPlayer("Paid retry.");g.Retry();yield return Wait(.35f);g=Game;
+            Check(g.Run.Payments.cardLinked&&g.Run.Payments.cardCharged==980&&g.Run.Payments.Find(id)!=null&&g.Run.coins==1000,"card binding, payment history and delivered coins survive checkpoint reload");
+            g.KillPlayer("Wallet checkout.");g.OpenShop();yield return Wait(.35f);g=Game;g.OpenRecharge();
+            g.SelectPayment(PaymentMethod.Wallet);g.ContinueCheckout();
+            Check(!g.ConfirmTopUp()&&g.checkoutStep==CheckoutStep.Review&&!string.IsNullOrEmpty(g.paymentError)&&g.Run.Payments.orders.Count==1,"unfunded SGD wallet reports failure without creating a charge");
+            g.BackToPacks();g.SelectPack(0);g.StartAd(AdKind.Cash);g.hasFocus=true;g.AdvanceAd(1);g.FinishAd();
+            Check(g.rechargeOpen&&g.mode==ScreenMode.Shop&&g.Run.wallet==100,"wallet reward returns to the checkout with SGD credit");
+            g.ContinueCheckout();g.ConfirmTopUp();g.AdvancePayment(SceneRoot.PaymentDuration);
+            Check(g.checkoutStep==CheckoutStep.Receipt&&g.Run.wallet==0&&g.Run.coins==1100&&g.Run.Payments.cardCharged==980&&g.PaymentReceipt.method==PaymentMethod.Wallet,"wallet checkout spends only the chosen source and saves its own receipt");
+            g.ShowPaymentActivity();g.ShowPaymentReceipt(id);
+            Check(g.checkoutStep==CheckoutStep.Receipt&&g.PaymentReceipt.id==id&&g.PaymentReceipt.balanceAfter==1000&&g.PaymentReceipt.fundsAfter==8920,"payment activity reopens the original immutable receipt and credit balance");
+            g.CloseRecharge();g.CloseOverlay();g.CompleteWorld();g.NextWorld();yield return Wait(.35f);g=Game;g.EnterWorld();
+            double until=Time.realtimeSinceStartupAsDouble+5;
+            while(Game.world!=2&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.1f);
+            g=Game;Check(g.world==2&&g.Run.Payments.cardLinked&&g.Run.Payments.orders.Count==2&&g.Run.Payments.cardCharged==980,"payment account and history persist across the actual loading scene");
+            g.session.NewRun();Check(!g.Run.Payments.cardLinked&&g.Run.Payments.orders.Count==0&&g.Run.Payments.AvailableCredit==9900,"full restart resets simulated card credit and payment activity");
         }
         private static IEnumerator CheckGoombas()
         {

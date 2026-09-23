@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace JumpNotIncluded
 {
-    public class GameUI : MonoBehaviour
+    public partial class GameUI : MonoBehaviour
     {
         private SceneRoot game;
         private Font font,pixelFont;
@@ -29,7 +29,7 @@ namespace JumpNotIncluded
         private void OnScoreChanged(int value){displayedScore=value;}
         private void OnDestroy()
         {if(channel!=null)channel.ScoreChanged-=OnScoreChanged;if(font!=null)Destroy(font);if(pixelFont!=null)Destroy(pixelFont);}
-        public void ResetFocus(){focus=0;submit=false;}
+        public void ResetFocus(){focus=0;submit=false;paymentFocusPending=true;}
         private void Update()
         {
             navCooldown-=Time.unscaledDeltaTime;
@@ -92,7 +92,7 @@ namespace JumpNotIncluded
             bool selected=submit&&focus==index&&Event.current.type==EventType.Repaint;
             if(enabled&&(clicked||selected)){submit=false;action?.Invoke();}
         }
-        private string Money(int cents)=>"$"+(cents/100f).ToString("0.00",System.Globalization.CultureInfo.InvariantCulture);
+        private string Money(long cents)=>"S$"+(cents/100m).ToString("0.00",System.Globalization.CultureInfo.InvariantCulture);
         private void Veil()
         {
             var matrix=GUI.matrix;GUI.matrix=Matrix4x4.identity;
@@ -234,7 +234,7 @@ namespace JumpNotIncluded
             Text(526,111,488,50,title,29,paper,true,TextAnchor.MiddleCenter);
             if(game.rechargeOpen)
             {
-                Text(1086,110,263,24,"AD CASH",13,muted,true,TextAnchor.MiddleRight);
+                Text(1086,110,263,24,"SGD WALLET",13,muted,true,TextAnchor.MiddleRight);
                 Text(1086,134,263,38,Money(game.Run.wallet),26,gold,true,TextAnchor.MiddleRight);
             }
             Button(1391,106,42,42,"X",game.CloseOverlay,false,true,true);
@@ -250,38 +250,7 @@ namespace JumpNotIncluded
                     SpriteImage("coin",x,baseline-52-row*24,37,52);
                 }
         }
-        private void Recharge()
-        {
-            CommerceHeader("COIN TOP-UP");
-            Gradient(176,190,1238,126,new Color(.11f,.32f,.52f),new Color(.065f,.15f,.26f));
-            Box(176,190,1238,3,cyan);
-            Text(204,211,1010,49,"FUND YOUR INEVITABLE GREATNESS.",35,gold,true);
-            Text(206,266,980,30,"Convert ordinary ad cash into destiny. Bigger fortunes. Smaller laws of physics.",18,paper);
-            SpriteImage("small-jump",1263,211,76,76,true);
-            SpriteImage("coin",1360,215,26,37);
-            string[] badges={"A TASTE OF DESTINY","PATRON OF GREATNESS / SAVE 2%","ROYAL TREASURY / SAVE 6%"};
-            string[] savings={"A royal beginning. An unfair tomorrow.","Save $0.20. Invest in your legend.","Save $1.20. Finance your coronation."};
-            for(int pack=0;pack<3;pack++)
-            {
-                int index=pack;float x=176+pack*420,y=334;
-                Color accent=pack==2?gold:cyan;
-                Box(x+4,y+6,396,352,new Color(0,0,0,.25f));Box(x,y,396,352,accent);
-                Gradient(x+1,y+1,394,350,new Color(.10f,.28f,.46f),new Color(.04f,.10f,.18f));
-                Box(x+1,y+1,394,34,pack==2?gold:new Color(.08f,.20f,.34f));
-                Text(x+14,y+5,368,26,badges[pack],15,pack==2?ink:gold,true,TextAnchor.MiddleCenter);
-                string amount=RunModel.PackCoins(pack).ToString("N0",System.Globalization.CultureInfo.InvariantCulture);
-                Text(x+18,y+48,360,56,amount+" COINS",34,paper,true,TextAnchor.MiddleCenter);
-                Text(x+18,y+105,360,28,savings[pack],17,cyan,false,TextAnchor.MiddleCenter);
-                CoinPile(x+198,y+259,pack);
-                bool canBuy=game.Run.wallet>=RunModel.PackCost(pack);
-                Button(x+22,y+277,352,54,Money(RunModel.PackCost(pack))+" AD CASH",()=>game.ExchangeCash(index),canBuy,canBuy);
-            }
-            bool canEarn=game.Run.wallet<RunModel.WalletLimit;
-            Button(176,725,390,48,canEarn?"WATCH & EARN $1 / SEC":"CASH BALANCE FULL",()=>game.StartAd(AdKind.Cash),true,canEarn);
-            Text(590,734,390,42,"Cash limit $99. Coins arrive instantly.",17,muted,false,TextAnchor.MiddleLeft);
-            Button(1014,725,400,48,"BACK TO UPGRADES",game.CloseOverlay);
-            Text(181,778,1020,26,"Ad cash only. No real payments. Every map coin also adds 1 spendable coin.",12,muted);
-        }
+        private void Recharge(){PaymentCheckout();}
         private void Advertisement()
         {
             bool revive=game.adKind==AdKind.Revive;
@@ -292,7 +261,7 @@ namespace JumpNotIncluded
             else TechnologyAdArt(game.adCampaign,215,276,600,473);
             Text(855,286,494,31,revive?"DEATH IS A NEGOTIABLE INCONVENIENCE":"YOUR ATTENTION MINTS DESTINY.",17,gold,true);
             Text(852,330,497,77,revive?"BACK TO YOUR\nCHECKPOINT":"+"+Money(game.adEarned),revive?29:52,paper,true);
-            Text(855,419,494,51,revive?"Your legend refuses to end here.\nResurrection only. No cash reward.":"BALANCE  "+Money(game.Run.wallet)+" / $99.00\n+$1 EVERY FULL SECOND",17,muted);
+            Text(855,419,494,51,revive?"Your legend refuses to end here.\nResurrection only. No cash reward.":"BALANCE  "+Money(game.Run.wallet)+" / S$99.00\n+S$1 EVERY FULL SECOND",17,muted);
             if(revive)
             {
                 RewardTile(855,488,152,"small-idle","WATCH 2 SECONDS","REVIVE");
@@ -302,11 +271,11 @@ namespace JumpNotIncluded
             else
             {
                 int seconds=Mathf.FloorToInt(game.adTime),first=seconds/5*5;
-                for(int i=0;i<5;i++)RewardTile(855+i*100,488,94,"coin","SEC "+(first+i+1),seconds>first+i?"CLAIMED":"+$1.00",seconds>first+i);
+                for(int i=0;i<5;i++)RewardTile(855+i*100,488,94,"coin","SEC "+(first+i+1),seconds>first+i?"CLAIMED":"+S$1.00",seconds>first+i);
             }
             float progress=revive?game.adTime/SceneRoot.ReviveAdDuration:game.adTime-Mathf.Floor(game.adTime);
             Box(855,620,494,5,line);Box(855,620,494*Mathf.Clamp01(progress),5,gold);
-            Text(855,640,494,40,revive?"Your game resumes when the ad finishes.":"Next $1 in "+(1-progress).ToString("0.0",System.Globalization.CultureInfo.InvariantCulture)+"s. Stop any time; full seconds count.",16,muted);
+            Text(855,640,494,40,revive?"Your game resumes when the ad finishes.":"Next S$1 in "+(1-progress).ToString("0.0",System.Globalization.CultureInfo.InvariantCulture)+"s. Stop any time; full seconds count.",16,muted);
             if(revive)Text(855,695,494,49,"PREPARING YOUR COMEBACK...",18,gold,true,TextAnchor.MiddleCenter);
             else
             {
@@ -325,7 +294,7 @@ namespace JumpNotIncluded
             Text(1007,414,333,30,"THE NEXT STAGE OF EVOLUTION",16,gold,true);
             Text(1007,455,333,67,"Transcend limits.\nEmbrace greatness.",25,paper,true);
             Button(624,554,350,62,"REVIVE - 2 SECOND AD",()=>game.StartAd(AdKind.Revive),true);
-            Button(994,554,354,62,game.Run.wallet<RunModel.WalletLimit?"EARN CASH - $1 / SEC":"BALANCE FULL - $99",()=>game.StartAd(AdKind.Cash),false,game.Run.wallet<RunModel.WalletLimit);
+            Button(994,554,354,62,game.Run.wallet<RunModel.WalletLimit?"EARN S$1 / SEC":"BALANCE FULL - S$99",()=>game.StartAd(AdKind.Cash),false,game.Run.wallet<RunModel.WalletLimit);
             Button(624,634,350,51,"FREE CHECKPOINT RETRY",game.Retry,false,true,true);
             Button(994,634,354,51,"VIEW ALL UPGRADES",game.OpenShop,false,true,true);
             Box(624,704,724,1,line);
@@ -364,7 +333,7 @@ namespace JumpNotIncluded
                 game.world==1?"Level cleared. Receipt enclosed.":"VICTORY, ITEMIZED.");
             Text(216,245,1168,36,spent>0?"You bought the advantage. The receipt remembers.":"No upgrades purchased. The receipt has nothing to hide.",23,gold);
             ReceiptMetric(216,"ADS WATCHED",Seconds(run.adWatchTime),run.ads+" rewarded ads.\nThank you for your attention.",gold);
-            ReceiptMetric(616,"COINS SPENT",Count(spent),"Refunded: "+Count(refunded)+"  |  Net: "+Count(spent-refunded)+"\nReal money paid: $0.00",gold);
+            ReceiptMetric(616,"COINS SPENT",Count(spent),"Refunded: "+Count(refunded)+"  |  Net: "+Count(spent-refunded)+"\nCard paid: "+Money(run.Payments.Total(PaymentMethod.VirtualCard))+" SGD",gold);
             ReceiptMetric(1016,"YOU ACTUALLY PLAYED",Seconds(run.activeInputTime),"Move / jump / fire held.\nIdle, menus and ads excluded.",cyan);
             float tracked=run.adWatchTime+run.playTime,denominator=Mathf.Max(.001f,tracked);
             float adShare=run.adWatchTime/denominator,inputShare=Mathf.Min(run.activeInputTime,run.playTime)/denominator;
@@ -376,7 +345,7 @@ namespace JumpNotIncluded
             Text(616,577,368,29,(inputShare*100).ToString("0",culture)+"% USING CONTROLS",18,cyan,true,TextAnchor.MiddleCenter);
             Text(1016,577,368,29,(idleShare*100).ToString("0",culture)+"% IDLE IN LEVEL",18,muted,true,TextAnchor.MiddleCenter);
             Text(216,626,1168,35,"SCORE  "+Count(run.score)+"     BEST  "+Count(game.HighScore)+"     DEATHS  "+run.deaths,23,paper,true,TextAnchor.MiddleCenter);
-            Text(216,668,1168,30,game.world==1?"Next: World 1-2. Clear bonus: up to $4.00. Your purchases follow you.":
+            Text(216,668,1168,30,game.world==1?"Next: World 1-2. Clear bonus: up to S$4.00. Your purchases follow you.":
                 spent>0?"Congratulations. Your purchasing power has defeated the game.":"No purchases. No premium rescue. This victory belongs to you.",20,gold,false,TextAnchor.MiddleCenter);
             if(game.world==1)Button(216,718,1168,55,"NEXT WORLD",game.NextWorld,true);
             else

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace JumpNotIncluded
 {
-    public class SceneRoot : MonoBehaviour
+    public partial class SceneRoot : MonoBehaviour
     {
         public GameAssets assets;
         public RunState session;
@@ -95,6 +95,7 @@ namespace JumpNotIncluded
                 }
             }
             if(mode==ScreenMode.Shop) shopTime+=Time.unscaledDeltaTime;
+            if(mode==ScreenMode.Shop&&rechargeOpen)AdvancePayment(Time.unscaledDeltaTime);
             if(mode==ScreenMode.Ad&&hasFocus)
             {if(skipAdFrame)skipAdFrame=false;else AdvanceAd(Time.unscaledDeltaTime);}
             if(input.pause.WasPressedThisFrame())
@@ -107,7 +108,7 @@ namespace JumpNotIncluded
         public void SetMode(ScreenMode value)
         {
             mode=value;Time.timeScale=Playing?1:0;
-            if(value!=ScreenMode.Shop&&value!=ScreenMode.Ad)rechargeOpen=false;
+            if(value!=ScreenMode.Shop&&value!=ScreenMode.Ad){rechargeOpen=false;ResetCheckout();}
             input?.SetPlaying(Playing);
             if(ui!=null) ui.ResetFocus();
         }
@@ -123,12 +124,15 @@ namespace JumpNotIncluded
         public void OpenRecharge()
         {
             if(mode!=ScreenMode.Shop)return;
-            rechargeOpen=true;toastUntil=0;ui?.ResetFocus();
+            rechargeOpen=true;ResetCheckout();toastUntil=0;ui?.ResetFocus();
         }
         public void CloseOverlay()
         {
             if(mode==ScreenMode.Shop&&rechargeOpen)
-            {rechargeOpen=false;toastUntil=0;ui?.ResetFocus();return;}
+            {
+                if(checkoutStep!=CheckoutStep.Packs){ResetCheckout();ui?.ResetFocus();return;}
+                rechargeOpen=false;toastUntil=0;ui?.ResetFocus();return;
+            }
             if(mode==ScreenMode.Shop||mode==ScreenMode.Pause){toastUntil=0;SetMode(ScreenMode.Playing);}
         }
         public bool Buy(Product product)
@@ -153,14 +157,15 @@ namespace JumpNotIncluded
         }
         public bool ExchangeCash(int pack)
         {
-            if(mode!=ScreenMode.Shop)return false;
-            if(!Run.ExchangeCash(pack)){events.Sound("error");Toast("Not enough ad cash. Watch & earn first.");return false;}
-            events.Sound("coin");Toast("Your royal treasury swells by "+RunModel.PackCoins(pack)+" coins. Destiny applauds.");
+            if(mode!=ScreenMode.Shop||checkoutStep==CheckoutStep.Processing)return false;
+            if(!Run.ExchangeCash(pack)){events.Sound("error");Toast("Not enough SGD wallet balance for this pack.");return false;}
+            events.Sound("coin");Toast(RunModel.PackCoins(pack)+" coins added. Payment recorded in your wallet activity.");
             SaveCheckpoint(new Vector2(session.checkpointPosition.x,player.Big?1.02f:.55f));return true;
         }
         public void StartAd(AdKind kind)
         {
             if(mode!=ScreenMode.Dead&&mode!=ScreenMode.Shop)return;
+            if(mode==ScreenMode.Shop&&rechargeOpen&&checkoutStep!=CheckoutStep.Packs)return;
             if(kind!=AdKind.Revive&&kind!=AdKind.Cash)return;
             if(kind==AdKind.Revive&&mode!=ScreenMode.Dead)return;
             if(kind==AdKind.Cash&&Run.wallet>=RunModel.WalletLimit)return;
@@ -211,7 +216,7 @@ namespace JumpNotIncluded
                 session.shopOnLoad=true;ReloadWorld();return;
             }
             SetMode(ScreenMode.Shop);
-            Toast(Run.wallet>=RunModel.WalletLimit?"Balance limit reached: $99.00.":"Your cash is saved. Thanks for your time.",4);
+            Toast(Run.wallet>=RunModel.WalletLimit?"SGD wallet limit reached: S$99.00.":"Your SGD wallet credit is saved. Thanks for your time.",4);
         }
         public void StartTrial()
         {
