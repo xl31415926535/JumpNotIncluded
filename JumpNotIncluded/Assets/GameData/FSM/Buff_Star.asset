@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201477d89e178864488701399b629df1, type: 3}
+  m_Name: Buff_Star
+  m_EditorClassIdentifier: Assembly-CSharp::JumpNotIncluded.StateDefinition
+  key: 1
+  enterActions:
+  - {fileID: 11400000, guid: c97a4fc910aa02c458acfdf93698ce87, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 8434f5d5257e39346b9e2232b8033726, type: 2}
+    target: {fileID: 11400000}
+  - decision: {fileID: 11400000, guid: ac991e263c1b0b84a890fc9657d9a736, type: 2}
+    target: {fileID: 11400000, guid: 70fa42256e0986b42b1dca3b879244ab, type: 2}
+  - decision: {fileID: 11400000, guid: 236e3226aa420b64da46a5a991b9cf46, type: 2}
+    target: {fileID: 11400000, guid: c3f96e5b09b855a45915b4516687da77, type: 2}

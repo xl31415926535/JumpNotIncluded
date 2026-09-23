@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201477d89e178864488701399b629df1, type: 3}
+  m_Name: HurtSuperGrace
+  m_EditorClassIdentifier: Assembly-CSharp::JumpNotIncluded.StateDefinition
+  key: 5
+  enterActions:
+  - {fileID: 11400000, guid: 26477aadb5555634e84bd478d385fa74, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 8cf422a0362b28b47b1605248f26457b, type: 2}
+    target: {fileID: 11400000, guid: d40db62dab3cf4043934e2598dc75ee9, type: 2}
+  - decision: {fileID: 11400000, guid: 25b09a2814389154c9748bd1ba9988d6, type: 2}
+    target: {fileID: 11400000, guid: 0979a5f285eb8d7439ae79f8d3d42c00, type: 2}

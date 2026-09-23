@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031806ba164f5f247a492b3f2d4a6047, type: 3}
+  m_Name: GameAssets
+  m_EditorClassIdentifier: Assembly-CSharp::JumpNotIncluded.GameAssets
+  revision: 8
+  sprites:
+  - key: small-idle
+    sprite: {fileID: 21300000, guid: 1aa4aaf1acf6acb409599c2db8216880, type: 2}
+  - key: small-walk0
+    sprite: {fileID: 21300000, guid: 9f159822de9966742b45a1f361e4e445, type: 2}
+  - key: small-walk1
+    sprite: {fileID: 21300000, guid: 855dbe0242fc83f48a6702fa24580362, type: 2}
+  - key: small-walk2
+    sprite: {fileID: 21300000, guid: 1b6e75a6298b61c4994535d152db48c4, type: 2}
+  - key: small-jump
+    sprite: {fileID: 21300000, guid: 3049de694d8a8c3428a648859257d850, type: 2}
+  - key: big-idle
+    sprite: {fileID: 21300000, guid: 6b233ad204c10e54dbf861b5c7ceb677, type: 2}
+  - key: big-walk0
+    sprite: {fileID: 21300000, guid: b5fca19f3c1da6e4ca7bdf939fe0eb2b, type: 2}
+  - key: big-walk1
+    sprite: {fileID: 21300000, guid: 73bacc7b9f9083845a6c9767ba737aa4, type: 2}
+  - key: big-walk2
+    sprite: {fileID: 21300000, guid: d7088eabeb6bf574094180a0b3f86dbd, type: 2}
+  - key: big-jump
+    sprite: {fileID: 21300000, guid: 92602e8fff0b61d4abbcc15e5462b9b2, type: 2}
+  - key: fire-idle
+    sprite: {fileID: 21300000, guid: ba071f765697ad447b987932f0a3437a, type: 2}
+  - key: fire-walk0
+    sprite: {fileID: 21300000, guid: eac0f266a1320224da65d21897ab1970, type: 2}
+  - key: fire-walk1
+    sprite: {fileID: 21300000, guid: 4197397bcbed6724b83b7ed706d17100, type: 2}
+  - key: fire-walk2
+    sprite: {fileID: 21300000, guid: c56c924a3110d0946830e5e1254684cd, type: 2}
+  - key: fire-jump
+    sprite: {fileID: 21300000, guid: fd9cedd88189b104583f6643572082bd, type: 2}
+  - key: goomba0
+    sprite: {fileID: 21300000, guid: a44000f3c4ca1104ba52e9171f1f2818, type: 2}
+  - key: goomba1
+    sprite: {fileID: 21300000, guid: 96e2b3aac25479040a6e532cbd8a00c7, type: 2}
+  - key: goomba-dead
+    sprite: {fileID: 21300000, guid: 19ff02f9b6f3e784faa1bb7ad163cd33, type: 2}
+  - key: bowser0
+    sprite: {fileID: 21300000, guid: c30a8fc0dac506446a7ca8dd91e7c947, type: 2}
+  - key: bowser1
+    sprite: {fileID: 21300000, guid: 8f30da66c23e58a4693f44e216358180, type: 2}
+  - key: bowser-flame
+    sprite: {fileID: 21300000, guid: cc88a0e168b62634dbe8be34b3e702dc, type: 2}
+  - key: wings
+    sprite: {fileID: 21300000, guid: 7eb6d130f2ddfd540ae7c9aeb954465b, type: 2}
+  - key: ground
+    sprite: {fileID: 21300000, guid: 9e3384d080b702d4d816c052eb3df493, type: 2}
+  - key: brick
+    sprite: {fileID: 21300000, guid: 93bbcc21697b5494ca37394b1c4e2082, type: 2}
+  - key: question
+    sprite: {fileID: 21300000, guid: a95d1111f20d4f6469d13ea7e540675a, type: 2}
+  - key: spent
+    sprite: {fileID: 21300000, guid: 9a1aad8ea368f0e4985f770b3c0f2022, type: 2}
+  - key: mushroom
+    sprite: {fileID: 21300000, guid: ed405ac1cc56d594597d765db40755ab, type: 2}
+  - key: flower
+    sprite: {fileID: 21300000, guid: d5a761bc30354764bac524840ad1d20f, type: 2}
+  - key: star
+    sprite: {fileID: 21300000, guid: aeaa34983fc9eda45a61f37f71774a76, type: 2}
+  - key: coin
+    sprite: {fileID: 21300000, guid: 8dd9960f2a1882745a9d3b7dca5e4e75, type: 2}
+  - key: pipe
+    sprite: {fileID: 21300000, guid: 2385d3a7fcfe89e4bbeea8855c7a2832, type: 2}
+  - key: cloud
+    sprite: {fileID: 21300000, guid: ec09a52ae677cd14b8d2148ddf2f44f7, type: 2}
+  - key: hill
+    sprite: {fileID: 21300000, guid: e5a03d4ee6703e847a10bbbe575966da, type: 2}
+  - key: hill-large
+    sprite: {fileID: 21300000, guid: 8bfe7ff9fe97bc44e8f389d7ea25603c, type: 2}
+  - key: castle
+    sprite: {fileID: 21300000, guid: 9d421ad980c4cae4088ecb44b71122a2, type: 2}
+  - key: solid
+    sprite: {fileID: 21300000, guid: 820b25b2357ce99478c32a43dec6b95c, type: 2}
+  sounds:
+  - key: theme
+    clip: {fileID: 8300000, guid: fecb020051eddce4397c73140e9e11c8, type: 3}
+  - key: underground
+    clip: {fileID: 8300000, guid: e01cd20b4a418dc43991dccb20fde232, type: 3}
+  - key: jump
+    clip: {fileID: 8300000, guid: 31ef0878deed7394399cffe4d28c9263, type: 3}
+  - key: coin
+    clip: {fileID: 8300000, guid: 2d15c088cab9de6428652926131ba71f, type: 3}
+  - key: stomp
+    clip: {fileID: 8300000, guid: 6f01218252de5f24e96cedc298dde8a0, type: 3}
+  - key: bump
+    clip: {fileID: 8300000, guid: 28841c3111f02de4da9e45c029a7e2ba, type: 3}
+  - key: error
+    clip: {fileID: 8300000, guid: 28841c3111f02de4da9e45c029a7e2ba, type: 3}
+  - key: powerup
+    clip: {fileID: 8300000, guid: b9cc950be1f529a4f924f2b9fc248330, type: 3}
+  - key: break
+    clip: {fileID: 8300000, guid: 58ac50c407086614793c32ab69154e1e, type: 3}
+  - key: appear
+    clip: {fileID: 8300000, guid: 131bbffa318ebce4fb1cb5c0f2b866ac, type: 3}
+  - key: fire
+    clip: {fileID: 8300000, guid: 1cdb3fbf5173ea742be3bd54f27827e7, type: 3}
+  - key: pause
+    clip: {fileID: 8300000, guid: 9fd67555bbfdc074caecb4be44524141, type: 3}
+  - key: death
+    clip: {fileID: 8300000, guid: 52d07fbaa844e034c92f1150516b72ac, type: 3}
+  - key: complete
+    clip: {fileID: 8300000, guid: dba9d566301b7ab4fa83ac9078a6870e, type: 3}
+  - key: expiry
+    clip: {fileID: 8300000, guid: 5b6d71cbef3cdcb44bbb34211d51dc33, type: 3}
+  - key: bowser-fire
+    clip: {fileID: 8300000, guid: 19b8c380daaa3244db963023c1aa34b7, type: 3}
+  - key: bowser-fall
+    clip: {fileID: 8300000, guid: eeeaf692a548f924496bbf5cb916ebeb, type: 3}
+  blueKey: {fileID: 2100000, guid: 043670e1b0391b745b259aba5f0e79f7, type: 2}
+  greenKey: {fileID: 2100000, guid: c6b6708d5b444a8418b4d0ebdacdf862, type: 2}
+  solid: {fileID: 21300000, guid: 820b25b2357ce99478c32a43dec6b95c, type: 2}
+  sutdAIAd: {fileID: 2800000, guid: bb93ba8f4436a554c8a088309761620a, type: 3}
+  sutdRobotAd: {fileID: 2800000, guid: e2de759968f3a6d4e84c4fbbc4ead403, type: 3}
+  slCheaterAd: {fileID: 2800000, guid: 565cd56985c4ca342af5d2b67b3e9d3c, type: 3}
+  formStates:
+  - {fileID: 11400000, guid: f72b3e5086adcff439a6a5c1e5bbe7ad, type: 2}
+  - {fileID: 11400000, guid: 0979a5f285eb8d7439ae79f8d3d42c00, type: 2}
+  - {fileID: 11400000, guid: d40db62dab3cf4043934e2598dc75ee9, type: 2}
+  - {fileID: 11400000, guid: b7e125718b4e2fe419b7f20b65ce5ebc, type: 2}
+  - {fileID: 11400000, guid: 0f12a72285b44da4aaeb488cd8f5090a, type: 2}
+  - {fileID: 11400000, guid: 06e0ddb1974f77d41833a735cd7b2725, type: 2}
+  buffStates:
+  - {fileID: 11400000, guid: c3f96e5b09b855a45915b4516687da77, type: 2}
+  - {fileID: 11400000, guid: 8d9b3e129270b4441a301bcf722391da, type: 2}
+  - {fileID: 11400000, guid: 70fa42256e0986b42b1dca3b879244ab, type: 2}
+  products:
+  - {fileID: 11400000, guid: 5bf0c8741b40ab64ca00fde389b3d366, type: 2}
+  - {fileID: 11400000, guid: be8ccd88850ad034a97a94721d0e6974, type: 2}
+  - {fileID: 11400000, guid: c33f8c870d4886749bb73a8ebf55cc81, type: 2}
+  - {fileID: 11400000, guid: 9445aeb43d6a6f54c912d97f9a161d9b, type: 2}
+  - {fileID: 11400000, guid: d65a10dbb79141149ad64be81af784d7, type: 2}
+  - {fileID: 11400000, guid: 83db66f857da53343b89957b004e08e6, type: 2}
+  mixer: {fileID: 24100000, guid: 605ff84cf2f89d745beed239f2a90f4a, type: 2}
+  musicGroup: {fileID: -783317064275163643, guid: 605ff84cf2f89d745beed239f2a90f4a, type: 2}
+  worldGroup: {fileID: -6102583907308804098, guid: 605ff84cf2f89d745beed239f2a90f4a, type: 2}
+  uiGroup: {fileID: 5541604016879268568, guid: 605ff84cf2f89d745beed239f2a90f4a, type: 2}

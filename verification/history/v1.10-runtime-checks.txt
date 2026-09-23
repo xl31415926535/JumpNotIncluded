@@ -1,0 +1,128 @@
+RUNNING
+PASS: fresh world starts without commerce
+PASS: commerce cannot open during ordinary play
+PASS: current assets retain the short denied-jump cue
+PASS: official SUTD and SL Cheater artwork loads from bundled textures
+PASS: World 1 has no map flowers
+PASS: Jump product text is English after asset migration
+PASS: FireFlower product text is English after asset migration
+PASS: Purify product text is English after asset migration
+PASS: MasterGuide product text is English after asset migration
+PASS: DoubleJump product text is English after asset migration
+PASS: Gatling product text is English after asset migration
+PASS: idle state machines remain stable after asset reload
+PASS: Goomba sprite and collider feet align with floor
+PASS: Goomba frames include all 16 pixels, including feet
+PASS: idle gameplay accrues level time without inventing ad or control time
+PASS: right movement faces right (dx=1.649998, input=0, mode=Playing)
+PASS: real movement input accrues hands-on time once per frame
+PASS: left movement faces left
+PASS: holding gameplay keys in a pause menu adds no tracked time
+PASS: unfocused gameplay input does not count as hands-on time
+PASS: unowned jump remains locked
+PASS: repeated denied jumps do not restart or replace BGM
+PASS: music, world effects and UI route through separate mixer groups
+PASS: music toggle leaves sound effect volume unchanged
+PASS: block side is solid and cannot award a coin
+PASS: player lands on block top without activating it
+PASS: underside head hit awards one coin
+PASS: bump animation leaves the one-tile collision body stationary
+PASS: spent block cannot award twice
+PASS: small Mario bumps an empty brick without consuming it
+PASS: big Mario breaks an empty brick from underneath (form=Super, y=2.060039, height=1.85)
+PASS: death freezes gameplay and reveals the offer
+PASS: revive ad starts with a valid randomized creative
+PASS: revive ad cannot finish early or award cash
+PASS: ads stop counting while the application is unfocused
+PASS: unfocused ad time is excluded from the receipt
+PASS: revive ad keeps one creative until two full seconds
+PASS: two-second ad revives at the checkpoint without a cash reward
+PASS: revive viewing seconds survive the checkpoint scene reload
+PASS: next ad avoids the revive creative across scene reload
+PASS: cash ad pays nothing before one full second
+PASS: cash ad awards exactly one dollar at one full second
+PASS: closing a 2.4-second cash ad preserves two dollars and opens the death shop
+PASS: duplicate completion cannot pay again and revive ads require a death
+PASS: first three ad openings cover all three campaigns without repetition
+PASS: closing a short repeat ad does not pay for an unfinished second
+PASS: receipt includes fractional cash-ad viewing even when no reward was earned
+PASS: cash ads fund coin packs, then jump costs 199 coins with one coin left
+PASS: purchased jump works through the actual Input System
+PASS: free retry preserves purchases, both balances and ad history without duplicating rewards
+PASS: failed attempts retain both viewing and control time after retry
+PASS: repeat cash ad converts into coins for instant Fire Flower
+PASS: flower purchase transforms immediately in the paused shop and saves a tall checkpoint
+PASS: fire Mario shoots in play mode
+PASS: retry restores the purchased fire form above the floor without a pickup
+PASS: World 2 has no map flowers
+PASS: second world carries both balances and purchases with its one-time subsidy
+PASS: death shop refund revokes fire upgrade and returns the exact coin price
+PASS: discount coin pack completes the refund economy route
+PASS: Mushroom ID makes every existing poison mushroom safe
+PASS: cash ad uses actual unscaled time while gameplay is paused
+PASS: cash ad clips the last reward to the cap and stops automatically at 99 dollars
+PASS: cash cap counts only the visible second before the ad auto-closes
+PASS: full wallet cannot start another cash ad
+PASS: coin exchange creates room under the cash cap and funds a repurchase
+PASS: cash ads can be repeated after spending
+PASS: checkpoint retry preserves both balances after reaching the cap
+PASS: VIP trial returns safely to play without a terminal
+PASS: serialized VIP timer expires after eight seconds
+PASS: cash creative stays visible for the first five seconds
+PASS: five-second rotation preserves the ad timer and all cash earned
+PASS: unfocused ads pause both creative rotation and rewards
+PASS: ten-second rotation completes the shuffled set without resetting rewards
+PASS: checkpoint retry preserves rotation history and earned cash
+PASS: one flower payment activates fire immediately and duplicate clicks cannot charge again
+PASS: first hit changes Fire to Super while preserving feet and granting hurt protection
+PASS: repeated enemy and poison contacts cannot skip the protected Super form
+PASS: hurt timer expires into Super without regaining fire or shrinking again
+PASS: poison damage changes Super to Small instead of killing and keeps feet in place (mode=Playing, form=Small, protected=True, feet=0.09500003 -> 0.09500003, body=(2.00, 0.57), transform=(1.46, 0.94, 0.00))
+PASS: Small Mario is protected against repeated contacts during the shrink grace period
+PASS: only the third unprotected hit kills after Fire to Super to Small
+PASS: actual Goomba side contact shrinks Super Mario once without killing
+PASS: unrevealed blocks are invisible triggers outside the ground layer
+PASS: side contact passes through a hidden block without triggering it
+PASS: falling through a hidden block cannot reveal it or fake a landing
+PASS: head contact reveals the hidden block, stops ascent and awards exactly one spendable coin
+PASS: revealed hidden coin cannot be farmed by hitting it twice
+PASS: hidden star block releases an actual invincibility pickup
+PASS: collecting the hidden star enables real invincibility
+PASS: opening has no hidden blocks and the six-tile cliff conceals eight traps
+PASS: ordinary cliff-edge jump hits the hidden trap and falls (position=(47.24, -4.24), mode=Dead)
+PASS: early first-visit jump also hits the upper ambush and falls into the wider gap
+PASS: largest cash pack credits 2000 coins inside the shop
+PASS: all three premium upgrades purchase through the real death shop
+PASS: buying wings includes jumping and blocks a redundant jump purchase
+PASS: Master Guide reveals four outline edges and a reward icon without activating the block
+PASS: second jump restores ascent and displays Monarch Wings through actual input
+PASS: a third press cannot grant another midair jump
+PASS: landing recharges the single air jump
+PASS: holding J fires more than three straight Gatling bullets without Fire Mario
+PASS: one Gatling bullet destroys a brick and the enemy behind it
+PASS: shooting a hidden reward pays its coin once before breaking it
+PASS: retry retains all premium abilities and exact coin balance
+PASS: destroyed reward blocks remain destroyed after a checkpoint reload
+PASS: World 2 opens with ten independently identified 18-health Bowsers
+PASS: World 2 contains 29 Goombas and 31 poison mushrooms across its hostile corridors
+PASS: Bowser patrols and fires toward the player
+PASS: pause freezes Bowser and his projectiles
+PASS: ordinary fireball damages Bowser without instantly killing him
+PASS: sustained Gatling fire defeats the front rank of Bowsers
+PASS: Gatling defeats each boss in range without erasing the distant survivors
+PASS: checkpoint retry preserves every boss defeat and leaves the surviving Bowsers alive
+PASS: firing backward leaves the cliff and forward traps intact
+PASS: forward Gatling fire fills all six gap tiles and destroys both tiers of hidden bricks above the muzzle
+PASS: Gatling clears the forward pipe and poisonous ground hazards
+PASS: repeated paving cannot farm hidden rewards or destruction scores
+PASS: a checkpoint inside the former abyss restores paved ground and demolished pipes before the player spawns
+PASS: ad cash funds Gatling alone through three real coin-pack purchases
+PASS: paid route clears all of World 1 by holding right and fire, with no jumps or extra deaths (position=(92.09, 0.94), mode=Results)
+PASS: first-world receipt contains actual ad seconds, held-control seconds and the Gatling coin receipt
+PASS: result screen freezes both receipt timers
+PASS: Gatling carries through the actual loading scene into World 2
+PASS: ad and hands-on totals carry through the loading scene without adding menu time
+PASS: paid route clears all ten Bowsers and World 2 by holding right and fire, with no jumps or extra deaths (position=(108.04, 0.94), mode=Results)
+PASS: final receipt totals both worlds while keeping the original viewing and purchase amounts
+PASS: a new run clears all receipt telemetry
+ALL RUNTIME CHECKS PASSED

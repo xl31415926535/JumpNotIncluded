@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201477d89e178864488701399b629df1, type: 3}
+  m_Name: Fire
+  m_EditorClassIdentifier: Assembly-CSharp::JumpNotIncluded.StateDefinition
+  key: 2
+  enterActions:
+  - {fileID: 11400000, guid: 17757deebb616774ea51abe886168294, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 7bebb394cbf173f4ba634dff502e4d24, type: 2}
+    target: {fileID: 11400000, guid: 06e0ddb1974f77d41833a735cd7b2725, type: 2}
+  - decision: {fileID: 11400000, guid: bbd2bdd414559174eb19fe1c585a1b45, type: 2}
+    target: {fileID: 11400000, guid: 0979a5f285eb8d7439ae79f8d3d42c00, type: 2}

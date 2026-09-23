@@ -1,0 +1,27 @@
+# Unity generated files and local preferences
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Bb]uilds/
+**/[Bb]uild/
+.vs/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.pidb
+*.booproj
+*.opendb
+*.VC.db
+# Private local scratch space, course import staging, packaged executables
+/work/
+/artifacts/
+/lab-inspection/
+/.codex/
+/.agents/
+/*.zip
+.DS_Store
+Thumbs.db
