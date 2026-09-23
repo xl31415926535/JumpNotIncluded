@@ -31,13 +31,13 @@ namespace JumpNotIncluded.EditorTools
             var existing=AssetDatabase.LoadAssetAtPath<GameAssets>("Assets/Resources/GameAssets.asset");
             if(existing!=null)
             {
-                if(existing.revision<8)
+                if(existing.revision<9)
                 {
-                    if(existing.revision<6){CreateSounds(existing);CreateStates(existing);CreateAds(existing);}
+                    if(existing.revision<6){CreateStates(existing);CreateAds(existing);}
                     if(existing.revision<7)CreateProducts(existing);
-                    CreateSprites(existing);existing.revision=8;
+                    CreateSprites(existing);CreateSounds(existing);existing.revision=9;
                     EditorUtility.SetDirty(existing);AssetDatabase.SaveAssets();
-                    Debug.Log("JNI assets updated: native-size hill sprites with ground-aligned pivots.");
+                    Debug.Log("JNI assets updated: red growth mushroom and Starman music.");
                 }
                 return;
             }
@@ -63,7 +63,7 @@ namespace JumpNotIncluded.EditorTools
             bank.blueKey=new Material(shader){name="Blue background key"};bank.blueKey.SetColor("_KeyColor",new Color(0,136/255f,1));
             bank.greenKey=new Material(shader){name="Green background key"};bank.greenKey.SetColor("_KeyColor",Color.green);
             AssetDatabase.CreateAsset(bank.blueKey,Data+"/BlueKey.mat");AssetDatabase.CreateAsset(bank.greenKey,Data+"/GreenKey.mat");
-            CreateSounds(bank);bank.revision=8;
+            CreateSounds(bank);bank.revision=9;
             CreateStates(bank);CreateProducts(bank);CreateAds(bank);CreateMixer(bank);
             var session=ScriptableObject.CreateInstance<RunState>();session.NewRun();
             var events=ScriptableObject.CreateInstance<GameEvents>();
@@ -116,7 +116,7 @@ namespace JumpNotIncluded.EditorTools
             Add("wings",wings,0,0,wings.width,wings.height);
             Add("ground",terrain,373,124,16,16);Add("brick",terrain,373,47,16,16);
             Add("question",terrain,372,160,16,16);Add("spent",terrain,373,65,16,16);
-            Add("mushroom",terrain,52,43,16,16);Add("flower",terrain,52,64,16,16);
+            Add("mushroom",terrain,71,43,16,16);Add("flower",terrain,52,64,16,16);
             Add("star",terrain,52,103,16,16);Add("coin",terrain,427,163,10,14);
             Add("pipe",terrain,613,46,32,32);Add("cloud",terrain,46,198,48,24);
             Add("hill",terrain,48,176,48,19,true);Add("hill-large",terrain,99,160,80,35,true);
@@ -135,6 +135,7 @@ namespace JumpNotIncluded.EditorTools
         {
             string[,] sounds={
                 {"theme","01-main-theme-overworld.mp3"},{"underground","02-underworld.mp3"},
+                {"star","05-starman.mp3"},
                 {"jump","smb_jump-small.wav"},{"coin","smb_coin.wav"},{"stomp","smb_stomp.wav"},
                 {"bump","smb_bump.wav"},{"error","smb_bump.wav"},{"powerup","smb_powerup.wav"},
                 {"break","smb_breakblock.wav"},{"appear","smb_powerup_appears.wav"},{"fire","smb_fireball.wav"},

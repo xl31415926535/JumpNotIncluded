@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031806ba164f5f247a492b3f2d4a6047, type: 3}
   m_Name: GameAssets
   m_EditorClassIdentifier: Assembly-CSharp::JumpNotIncluded.GameAssets
-  revision: 8
+  revision: 9
   sprites:
   - key: small-idle
     sprite: {fileID: 21300000, guid: 1aa4aaf1acf6acb409599c2db8216880, type: 2}
@@ -91,6 +91,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: fecb020051eddce4397c73140e9e11c8, type: 3}
   - key: underground
     clip: {fileID: 8300000, guid: e01cd20b4a418dc43991dccb20fde232, type: 3}
+  - key: star
+    clip: {fileID: 8300000, guid: 9b420b5548cb4f242b1c97ead7cf4fd0, type: 3}
   - key: jump
     clip: {fileID: 8300000, guid: 31ef0878deed7394399cffe4d28c9263, type: 3}
   - key: coin

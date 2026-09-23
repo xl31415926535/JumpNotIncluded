@@ -7,6 +7,8 @@ namespace JumpNotIncluded
         public SceneRoot game;
         public AudioSource music,world,ui;
         private bool musicPaused;
+        private AudioClip levelMusic,starMusic;
+        private int levelSample;
         private GameEvents channel;
         public bool MusicEnabled => music.volume>0;
         public bool EffectsEnabled => world.volume>0;
@@ -20,7 +22,8 @@ namespace JumpNotIncluded
             music.volume=PlayerPrefs.GetFloat("jni.music",.26f);
             world.volume=ui.volume=PlayerPrefs.GetFloat("jni.effects",.5f);
             AudioListener.volume=1;
-            music.clip=game.assets.Clip(game.world==2?"underground":"theme");
+            levelMusic=game.assets.Clip(game.world==2?"underground":"theme");starMusic=game.assets.Clip("star");
+            music.clip=levelMusic;
             if(game.world>0)music.Play();
             channel=game.events;channel.SoundRequested+=Play;
         }
@@ -33,8 +36,8 @@ namespace JumpNotIncluded
         }
         public void Play(string cue)
         {
-            // Music is started once per level, never by a gameplay sound event.
-            if(cue=="theme"||cue=="underground")return;
+            // Gameplay cues never start an extra copy of the background music.
+            if(cue=="theme"||cue=="underground"||cue=="star")return;
             var clip=game.assets.Clip(cue);
             if(clip==null) return;
             bool isUI=cue=="pause"||cue=="death"||cue=="complete";
@@ -48,6 +51,16 @@ namespace JumpNotIncluded
         {
             if(game==null) return;
             bool paused=game.mode==ScreenMode.Pause||game.mode==ScreenMode.Dead||game.mode==ScreenMode.Results;
+            bool invincible=game.player!=null&&game.player.buffs.Value==Buff.Star;
+            var wanted=invincible&&starMusic!=null?starMusic:levelMusic;
+            if(wanted!=null&&music.clip!=wanted)
+            {
+                // Resume the level track where the star interrupted it. Refreshing a star keeps its music playing.
+                if(music.clip==levelMusic)levelSample=music.timeSamples;
+                music.clip=wanted;
+                music.timeSamples=wanted==levelMusic?Mathf.Clamp(levelSample,0,wanted.samples-1):0;
+                if(game.world>0){music.Play();if(paused)music.Pause();}
+            }
             if(paused&&!musicPaused)music.Pause();
             else if(!paused&&musicPaused)music.UnPause();
             musicPaused=paused;

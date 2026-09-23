@@ -1,0 +1,15 @@
+Jump Not Included v1.10 - commerce and presentation verification
+Unity 6000.3.24f1 / 2026-09-23
+
+PASS: Opening COIN TOP-UP keeps the world paused.
+PASS: Ending a cash ad returns to COIN TOP-UP.
+PASS: The $9.80 pack deducts exactly 980 cents and credits 1000 coins.
+PASS: Returning from COIN TOP-UP opens the paused upgrade shop.
+PASS: Unity renders the coin counter, plus entry and three-pack recharge page.
+Visual inspection: 1280x720, 960x540, 1024x768. No clipped product descriptions or buttons.
+PASS: Exaggerated English descriptions fit all six product cards, including the smallest checked resolution.
+PASS: The recharge footer is fully visible at 960x540.
+PASS: Gameplay previews show the six-tile cliff, two tiers of eight hidden blocks and the continuous road created by Gatling fire.
+PASS: Both worlds render the original small and large hill sprites at native proportions, grounded without blue seams; hills no longer overhang the first cliff.
+Previews: upgrade-shop.png, coin-top-up.png, coin-top-up-purchased.png and alternate resolutions.
+This check uses Unity rendering and navigation methods; it is not a desktop mouse-click recording.

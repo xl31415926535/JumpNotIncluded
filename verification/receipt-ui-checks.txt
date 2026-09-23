@@ -1,0 +1,19 @@
+Jump Not Included v1.10 - victory receipt and World 2 verification
+Unity 6000.3.24f1 / 2026-09-23
+
+PASS: Both world-complete screens show ad seconds, gross coins spent and hands-on input seconds in three parallel cards.
+PASS: Refunds, net spending, death count, score and a three-part time-share bar remain visible.
+PASS: First-world continuation, final refunded-purchase receipt and zero-purchase/zero-time layout render correctly.
+Visual inspection: 1280x720, 960x540 and 1024x768. No clipped metric values, descriptions or buttons.
+Receipt screenshots use illustrative fixture values for layout checks, not claimed player statistics.
+
+Real scene behavior is covered by unity-runtime-checks.txt (126 passing checks):
+- Focused ad time includes unrewarded fractions and stops at automatic completion.
+- Gameplay input accrues once per frame; idle, pause, results and unfocused input do not add control time.
+- Death/retry and world transitions retain elapsed viewing and control time; restarting clears it.
+- World 2 starts with 10 independently tracked Bowsers, 29 Goombas and 31 poisonous mushrooms.
+- Defeated bosses stay defeated after retry while untouched bosses survive.
+- Buying only Gatling and holding D+J clears both worlds and all 10 Bowsers without additional deaths.
+
+Previews: results-world1*.png, results-final*.png, results-no-purchases.png, world2-battalion.png, world2-hazard-corridor.png.
+These previews use Unity rendering, not a desktop mouse-click recording.

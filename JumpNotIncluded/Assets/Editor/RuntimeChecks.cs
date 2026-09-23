@@ -91,7 +91,7 @@ namespace JumpNotIncluded.EditorTools
             var g=Game;var p=g.player;
             Check(g.Playing&&g.Run.deaths==0,"fresh world starts without commerce");
             g.OpenShop();g.StartAd(AdKind.Cash);g.StartAd(AdKind.Revive);Check(g.Playing&&!g.Buy(Product.Jump),"commerce cannot open during ordinary play");
-            Check(g.assets.revision>=7&&g.assets.Clip("error").length<.3f,"current assets retain the short denied-jump cue");
+            Check(g.assets.revision>=9&&g.assets.Clip("error").length<.3f,"current assets retain the short denied-jump cue");
             Check(g.assets.sutdAIAd!=null&&g.assets.sutdRobotAd!=null&&g.assets.slCheaterAd!=null,"official SUTD and SL Cheater artwork loads from bundled textures");
             Check(Array.TrueForAll(UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None),item=>item.kind!=ItemKind.Flower),"World 1 has no map flowers");
             foreach(var product in g.assets.products)
@@ -322,8 +322,30 @@ namespace JumpNotIncluded.EditorTools
             Place(p,6,2.1f,new Vector2(0,12));yield return Wait(.15f);
             var reward=Array.Find(UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None),item=>item.id=="check.star.item");
             Check(star.spent&&reward!=null&&reward.kind==ItemKind.Star,"hidden star block releases an actual invincibility pickup");
+            var audio=g.audioDirector;var levelTrack=audio.music.clip;int levelSample=audio.music.timeSamples;
             Place(p,6,4.55f,Vector2.zero);yield return Wait(.4f);
             Check(p.buffs.Value==Buff.Star&&p.Protected&&g.Run.collected.Contains("check.star.item"),"collecting the hidden star enables real invincibility");
+            p.enabled=true;
+            Check(audio.music.clip==g.assets.Clip("star")&&audio.music.clip.name=="05-starman"&&audio.music.isPlaying&&audio.music.loop,
+                "collecting a real star replaces level BGM with the looping Starman track on the music channel");
+            int starSample=audio.music.timeSamples;yield return Wait(.2f);
+            Check(audio.music.timeSamples>starSample,"Starman BGM keeps advancing instead of restarting every frame");
+            g.SetMode(ScreenMode.Pause);yield return Wait(.1f);starSample=audio.music.timeSamples;float remaining=p.buffs.Remaining;
+            yield return Wait(.2f);
+            Check(!audio.music.isPlaying&&audio.music.timeSamples==starSample&&p.buffs.Remaining==remaining,"pause freezes Starman playback and the invincibility timer together");
+            g.CloseOverlay();yield return Wait(.15f);
+            Check(audio.music.isPlaying&&audio.music.timeSamples>starSample,"unpausing resumes Starman from its paused position");
+            remaining=p.buffs.Remaining;starSample=audio.music.timeSamples;
+            g.level.Pickup("check.star.refresh",ItemKind.Star,p.body.position);yield return Wait(.4f);
+            Check(g.Run.collected.Contains("check.star.refresh")&&p.buffs.Remaining>remaining&&audio.music.clip==g.assets.Clip("star")&&audio.music.timeSamples>starSample,
+                "collecting another star refreshes protection without restarting its BGM");
+            double until=Time.realtimeSinceStartupAsDouble+7;
+            while(p.buffs.Value==Buff.Star&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.1f);
+            yield return Wait(.1f);
+            Check(p.buffs.Value==Buff.None&&audio.music.clip==levelTrack&&audio.music.isPlaying&&audio.music.timeSamples>=levelSample&&audio.music.timeSamples<levelSample+levelTrack.frequency,
+                "natural star expiry resumes the overworld music at its saved playhead");
+            p.buffs.Signal("star");yield return Wait(.1f);g.KillPlayer("Star audio death check.");yield return Wait(.15f);
+            Check(!audio.music.isPlaying&&p.buffs.Value==Buff.None,"death stops star music without restarting audible level BGM");
 
             g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;p=g.player;
             var mapBlocks=UnityEngine.Object.FindObjectsByType<BlockActor>(FindObjectsSortMode.None);
@@ -398,6 +420,12 @@ namespace JumpNotIncluded.EditorTools
             g.SaveCheckpoint(new Vector2(2,.55f));g.KillPlayer("Boss persistence check.");g.Retry();yield return Wait(.3f);g=Game;
             bosses=UnityEngine.Object.FindObjectsByType<BossActor>(FindObjectsSortMode.None);
             Check(bosses.Length==WorldBuilder.OpeningBossCount-defeated.Count&&Array.TrueForAll(bosses,b=>!defeated.Contains(b.id)),"checkpoint retry preserves every boss defeat and leaves the surviving Bowsers alive");
+            audio=g.audioDirector;float musicVolume=audio.music.volume;audio.music.volume=0;
+            g.player.buffs.Signal("star");yield return Wait(.15f);
+            Check(audio.music.clip==g.assets.Clip("star")&&audio.music.volume==0,"star music respects the muted music channel in World 2");
+            g.player.buffs.Tick(6.01f);yield return Wait(.15f);
+            Check(audio.music.clip==g.assets.Clip("underground")&&audio.music.volume==0,"star expiry restores World 2's own track and preserves music mute");
+            audio.music.volume=musicVolume;
         }
         private static IEnumerator CheckPaidVictory()
         {
