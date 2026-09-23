@@ -8,16 +8,22 @@ namespace JumpNotIncluded
         public string id;
         private SpriteRenderer sprite;
         private Rigidbody2D body;
-        private float left,right,age,deathAge;
+        private BoxCollider2D box;
+        private ContactFilter2D terrain;
+        private readonly RaycastHit2D[] hits=new RaycastHit2D[4];
+        private const float Skin=.005f;
+        private float age,deathAge,fallSpeed;
+        private bool active;
         private int direction=-1;
         public bool dead;
-        public void Init(SceneRoot root,string key,float x,float min,float max)
+        public void Init(SceneRoot root,string key,float x)
         {
-            game=root;id=key;left=min;right=max;transform.position=new Vector3(x,0,0);
+            game=root;id=key;transform.position=new Vector3(x,0,0);
             sprite=gameObject.AddComponent<SpriteRenderer>();sprite.sprite=game.assets.Sprite("goomba0");sprite.sharedMaterial=game.assets.blueKey;sprite.sortingOrder=5;
-            var collider=gameObject.AddComponent<BoxCollider2D>();collider.size=new Vector2(.84f,1);collider.offset=Vector2.up*.5f;collider.isTrigger=true;
+            box=gameObject.AddComponent<BoxCollider2D>();box.size=new Vector2(.84f,1);box.offset=Vector2.up*.5f;box.isTrigger=true;
             body=gameObject.AddComponent<Rigidbody2D>();body.bodyType=RigidbodyType2D.Kinematic;
             body.interpolation=RigidbodyInterpolation2D.Interpolate;
+            terrain.SetLayerMask(1<<8);terrain.useTriggers=false;
         }
         private void Update()
         {
@@ -29,9 +35,33 @@ namespace JumpNotIncluded
         private void FixedUpdate()
         {
             if(!game.Playing||dead)return;
-            float x=body.position.x+direction*1.15f*Time.fixedDeltaTime;
-            if(x<left){x=left;direction=1;}if(x>right){x=right;direction=-1;}
-            body.MovePosition(new Vector2(x,0));
+            // Start when the camera reaches us, then keep walking even off screen.
+            if(!active)
+            {
+                float halfWidth=game.cameraView.orthographicSize*game.cameraView.aspect;
+                if(Mathf.Abs(body.position.x-game.cameraView.transform.position.x)>halfWidth+box.size.x*.5f)return;
+                active=true;
+            }
+            Vector2 position=body.position;
+            float step=1.15f*Time.fixedDeltaTime;
+            var wall=CastTerrain(position,Vector2.right*direction,step);
+            position.x+=direction*(wall.collider!=null?Mathf.Max(0,wall.distance-Skin):step);
+            if(wall.collider!=null)direction=-direction;
+            // Unsupported Goombas fall into gaps; only actual terrain turns them around.
+            fallSpeed=Mathf.Min(fallSpeed-Physics2D.gravity.y*3.2f*Time.fixedDeltaTime,24);
+            float drop=fallSpeed*Time.fixedDeltaTime;
+            var floor=CastTerrain(position,Vector2.down,drop);
+            position.y-=floor.collider!=null?Mathf.Max(0,floor.distance-Skin):drop;
+            if(floor.collider!=null)fallSpeed=0;
+            body.MovePosition(position);
+            if(position.y<-5)Destroy(gameObject);
+        }
+        private RaycastHit2D CastTerrain(Vector2 position,Vector2 movement,float distance)
+        {
+            int count=Physics2D.BoxCast(position+box.offset,box.size-Vector2.one*(Skin*2),0,movement,terrain,hits,distance+Skin);
+            for(int i=0;i<count;i++)
+                if(Vector2.Dot(hits[i].normal,movement)<-.5f)return hits[i];
+            return default;
         }
         private void OnTriggerEnter2D(Collider2D other){Touch(other);}
         private void OnTriggerStay2D(Collider2D other){Touch(other);}

@@ -126,6 +126,8 @@ namespace JumpNotIncluded.EditorTools
             Check(audio.world.volume==effectsVolume,"music toggle leaves sound effect volume unchanged");
             Capture("revised-gameplay.png");yield return Wait(.15f);
 
+            // Isolate block fixtures from the opening enemy now that it can reach this area.
+            foreach(var walker in UnityEngine.Object.FindObjectsByType<EnemyActor>(FindObjectsSortMode.None))UnityEngine.Object.Destroy(walker.gameObject);
             var block=new GameObject("Regression question block").AddComponent<BlockActor>();
             block.Init(g,"regression.block",new Vector2(5,3.5f),true,true,ItemKind.Coin);
             p.enabled=false;Place(p,3.5f,3.5f,new Vector2(8,0));yield return Wait(.25f);
@@ -253,12 +255,52 @@ namespace JumpNotIncluded.EditorTools
 
             g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(1.1f);g=Game;p=g.player;
             p.PowerUp("mushroom");p.enabled=false;
-            new GameObject("Damage regression Goomba").AddComponent<EnemyActor>().Init(g,"damage.regression",5,5,5);
+            new GameObject("Damage regression Goomba").AddComponent<EnemyActor>().Init(g,"damage.regression",5);
             Place(p,5,1.02f,Vector2.zero);yield return Wait(.15f);
             Check(g.Playing&&p.forms.Value==Form.Small&&p.Protected&&g.Run.deaths==0,"actual Goomba side contact shrinks Super Mario once without killing");
             p.enabled=true;
+            var goombaChecks=CheckGoombas();while(goombaChecks.MoveNext())yield return goombaChecks.Current;
             var premiumChecks=CheckPremium();while(premiumChecks.MoveNext())yield return premiumChecks.Current;
             var paidChecks=CheckPaidVictory();while(paidChecks.MoveNext())yield return paidChecks.Current;
+        }
+        private static IEnumerator CheckGoombas()
+        {
+            var g=Game;g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;var p=g.player;
+            var enemies=UnityEngine.Object.FindObjectsByType<EnemyActor>(FindObjectsSortMode.None);
+            var opening=Array.Find(enemies,e=>e.id=="w1.enemy.14");
+            var distant=Array.Find(enemies,e=>e.id=="w1.enemy.64");
+            Vector2 distantStart=distant.GetComponent<Rigidbody2D>().position;
+            yield return Wait(3);
+            Check(opening.GetComponent<Rigidbody2D>().position.x<10.8f&&Mathf.Abs(opening.GetComponent<Rigidbody2D>().position.y)<.01f,
+                "opening Goomba walks past the former invisible patrol wall while staying on the floor");
+            Check(distant.GetComponent<Rigidbody2D>().position==distantStart,"unseen Goombas wait for the camera instead of migrating across the level");
+            Vector2 before=opening.GetComponent<Rigidbody2D>().position;g.SetMode(ScreenMode.Pause);yield return Wait(.25f);
+            Check(opening.GetComponent<Rigidbody2D>().position==before,"pause freezes a freely walking Goomba");g.CloseOverlay();
+            double until=Time.realtimeSinceStartupAsDouble+12;
+            while(g.Playing&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.2f);
+            Check(g.mode==ScreenMode.Dead&&g.Run.deaths==1&&Mathf.Abs(p.body.position.x-2)<.05f&&opening.GetComponent<Rigidbody2D>().position.x<3,
+                "opening Goomba reaches the untouched spawn and kills idle Small Mario by actual contact");
+
+            g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;p=g.player;
+            var pipeWalker=new GameObject("Pipe turn regression Goomba").AddComponent<EnemyActor>();pipeWalker.Init(g,"check.pipe.walker",20);
+            yield return Wait(.7f);float atPipe=pipeWalker.GetComponent<Rigidbody2D>().position.x;
+            Check(atPipe>=19.31f&&atPipe<19.55f,"Goomba meets the actual pipe collider without entering it");
+            yield return Wait(.7f);
+            Check(pipeWalker.GetComponent<Rigidbody2D>().position.x>atPipe+.5f,"Goomba reverses after contacting a real pipe");
+            var stomped=new GameObject("Stomp regression Goomba").AddComponent<EnemyActor>();stomped.Init(g,"check.stomp.walker",5);
+            p.enabled=false;Place(p,5,2.1f,new Vector2(0,-6));yield return Wait(.2f);
+            Check(stomped.dead&&p.body.linearVelocity.y>0&&g.Run.collected.Contains("check.stomp.walker"),"a moving Goomba can still be stomped and bounce the player");
+
+            g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;p=g.player;
+            p.enabled=false;Place(p,54,.55f,Vector2.zero);yield return Wait(.4f);
+            distant=Array.Find(UnityEngine.Object.FindObjectsByType<EnemyActor>(FindObjectsSortMode.None),e=>e.id=="w1.enemy.64");
+            Check(distant.GetComponent<Rigidbody2D>().position.x<64,"distant Goomba starts walking when the camera reaches it");
+            var falling=new GameObject("Cliff regression Goomba").AddComponent<EnemyActor>();falling.Init(g,"check.falling.walker",50.6f);
+            int score=g.Run.score;yield return Wait(1.3f);
+            Check(falling!=null&&falling.GetComponent<Rigidbody2D>().position.x<50&&falling.GetComponent<Rigidbody2D>().position.y<-.3f,
+                "Goomba walks off the actual cliff and falls instead of turning at an invisible edge or floating");
+            yield return Wait(.7f);
+            Check(falling==null&&g.Run.score==score&&!g.Run.collected.Contains("check.falling.walker"),"a Goomba falling out of the world is removed without granting a player kill reward");
         }
         private static IEnumerator CheckPremium()
         {
@@ -320,7 +362,7 @@ namespace JumpNotIncluded.EditorTools
             foreach(var shot in shots)UnityEngine.Object.Destroy(shot.gameObject);
             p.enabled=false;Place(p,2,3.45f,Vector2.zero);p.facing=1;
             var brick=new GameObject("Bullet brick check").AddComponent<BlockActor>();brick.Init(g,"check.bullet.brick",new Vector2(5,3.5f),false,false,ItemKind.Coin);
-            var target=new GameObject("Bullet Goomba check").AddComponent<EnemyActor>();target.Init(g,"check.bullet.enemy",7,7,7);target.enabled=false;target.GetComponent<Rigidbody2D>().position=new Vector2(7,3);
+            var target=new GameObject("Bullet Goomba check").AddComponent<EnemyActor>();target.Init(g,"check.bullet.enemy",7);target.enabled=false;target.GetComponent<Rigidbody2D>().position=new Vector2(7,3);
             var bullet=new GameObject("Piercing check").AddComponent<Fireball>();bullet.Init(g,p,true);yield return Wait(.3f);
             Check(brick==null&&g.Run.collected.Contains("check.bullet.brick.broken")&&g.Run.collected.Contains("check.bullet.enemy"),"one Gatling bullet destroys a brick and the enemy behind it");
             if(bullet!=null)UnityEngine.Object.Destroy(bullet.gameObject);yield return Wait(.1f);

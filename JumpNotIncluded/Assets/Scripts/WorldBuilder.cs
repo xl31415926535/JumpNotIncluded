@@ -123,25 +123,25 @@ namespace JumpNotIncluded
         }
         private void Item(float x,float y,ItemKind kind)
         {Pickup("w"+world+".item."+x+"."+y,kind,new Vector2(x,y));}
-        private void Enemy(float x,float min,float max)
+        private void Enemy(float x)
         {
             string id="w"+world+".enemy."+x;if(game.Run.collected.Contains(id))return;
-            var go=new GameObject("Goomba "+id);go.transform.SetParent(transform,false);go.AddComponent<EnemyActor>().Init(game,id,x,min,max);
+            var go=new GameObject("Goomba "+id);go.transform.SetParent(transform,false);go.AddComponent<EnemyActor>().Init(game,id,x);
         }
         private void BuildOne()
         {
-            Enemy(14,11,16);Pipe(18,1);
+            Enemy(14);Pipe(18,1);
             Block(22,3.5f,true,false,ItemKind.Mushroom);Block(21,3.5f,false,false);Block(23,3.5f,false,true);
             Block(34,3.5f,true,true);Block(37,3.5f,false,true);Block(38,3.5f,false,false);
-            Item(32,.7f,ItemKind.Mushroom);Enemy(40,38,43);
+            Item(32,.7f,ItemKind.Mushroom);Enemy(40);
             for(int i=0;i<3;i++)Block(44.5f+i,2.6f,true,true,ItemKind.Coin,true);
             for(int i=0;i<5;i++)Block(44.5f+i,4.9f,true,i!=2,i==2?ItemKind.Star:ItemKind.Coin,true);
             Item(43,2,ItemKind.Coin);Item(47,3.2f,ItemKind.Coin);Item(50.7f,2,ItemKind.Coin);
             Item(51,.7f,ItemKind.Poison);Item(53,.7f,ItemKind.Mushroom);
-            Pipe(56,2);Enemy(64,61,67);
+            Pipe(56,2);Enemy(64);
             Block(66,3.5f,true,true);Block(70,3.5f,true,false,ItemKind.Star,true);
             for(int i=0;i<3;i++)Block(82+i*2,4.5f,true,true,ItemKind.Coin,true);
-            Enemy(75,72,77);Enemy(80,78,83);
+            Enemy(75);Enemy(80);
             for(int i=0;i<5;i++)Item(83+i,1.8f,ItemKind.Coin);
         }
         private void BuildTwo()
@@ -156,13 +156,13 @@ namespace JumpNotIncluded
             Item(6,.7f,ItemKind.Poison);Item(10,.7f,ItemKind.Poison);
             for(int i=0;i<16;i++)
             {
-                float x=36+i*2.2f;Enemy(x,x-.65f,x+.65f);Item(x+1.1f,.7f,ItemKind.Poison);
+                float x=36+i*2.2f;Enemy(x);Item(x+1.1f,.7f,ItemKind.Poison);
                 if(i%3==0)Item(x+.55f,2,ItemKind.Coin);
             }
-            Pipe(72,2);Enemy(75,74.4f,75.6f);Item(76,.7f,ItemKind.Poison);
+            Pipe(72,2);Enemy(75);Item(76,.7f,ItemKind.Poison);
             Block(82,3.5f,true,true);Block(84,3.5f,false,true);Block(86,3.5f,false,false);
             for(int i=0;i<12;i++)
-            {float x=82+i*2.1f;Enemy(x,x-.65f,x+.65f);Item(x+1.05f,.7f,ItemKind.Poison);}
+            {float x=82+i*2.1f;Enemy(x);Item(x+1.05f,.7f,ItemKind.Poison);}
             Item(97,2.6f,ItemKind.Mushroom);
             for(int i=0;i<5;i++)Item(98+i,1.8f,ItemKind.Coin);
         }
