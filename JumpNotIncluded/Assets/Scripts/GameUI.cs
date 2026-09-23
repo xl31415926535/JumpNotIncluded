@@ -221,7 +221,8 @@ namespace JumpNotIncluded
                 Button(x+16,y+173,364,33,owns?"OWNED":product.price+" COINS",()=>game.Buy(product.product),canBuy,canBuy);
             }
             Text(181,774,805,25,"Collect 1 coin per pickup. Upgrades last this run. All payments are simulated.",14,muted);
-            Button(1014,725,400,56,"BACK TO THE GAME",game.CloseOverlay,true);
+            Button(1014,725,400,56,game.ReviveRequired?"REVIVE - 2 SECOND AD":"BACK TO THE GAME",()=>
+            {if(game.ReviveRequired)game.StartAd(AdKind.Revive);else game.CloseOverlay();},true);
         }
         private void CommerceHeader(string title)
         {
@@ -239,7 +240,7 @@ namespace JumpNotIncluded
                 Text(1086,110,263,24,"SGD WALLET",13,muted,true,TextAnchor.MiddleRight);
                 Text(1086,134,263,38,Money(game.Run.wallet),26,gold,true,TextAnchor.MiddleRight);
             }
-            Button(1391,106,42,42,"X",game.CloseOverlay,false,true,true);
+            Button(1323,106,110,42,"BACK",game.CloseOverlay,false,true,true);
         }
         private void CoinPile(float center,float baseline,int pack)
         {
@@ -297,14 +298,11 @@ namespace JumpNotIncluded
             Text(1007,455,333,67,"Transcend limits.\nEmbrace greatness.",25,paper,true);
             Button(624,554,350,62,"REVIVE - 2 SECOND AD",()=>game.StartAd(AdKind.Revive),true);
             Button(994,554,354,62,game.Run.wallet<RunModel.WalletLimit?"EARN S$1 / SEC":"BALANCE FULL - S$99",()=>game.StartAd(AdKind.Cash),false,game.Run.wallet<RunModel.WalletLimit);
-            Button(624,634,350,51,"FREE CHECKPOINT RETRY",game.Retry,false,true,true);
-            Button(994,634,354,51,"VIEW ALL UPGRADES",game.OpenShop,false,true,true);
+            Button(624,634,724,51,"VIEW ALL UPGRADES",game.OpenShop,false,true,true);
             Box(624,704,724,1,line);
             Text(624,721,300,27,"SCORE "+game.Run.score.ToString("000000")+"   DEATHS "+game.Run.deaths,15,muted);
             Button(972,712,190,42,"RESTART RUN",game.NewGame,false,true,true);
             Button(1170,712,178,42,"MAIN MENU",game.ToMenu,false,true,true);
-            Button(1351,130,42,42,"X",game.Retry,false,true,true);
-            Text(430,823,740,28,"In-game offers only. No real payments. Free retry is always available.",15,muted,false,TextAnchor.MiddleCenter);
         }
         private void Pause()
         {

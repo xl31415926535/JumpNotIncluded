@@ -81,6 +81,16 @@ namespace JumpNotIncluded.EditorTools
         {if(!condition)throw new Exception(name);passed.Add("PASS: "+name);File.AppendAllText(Output,passed[passed.Count-1]+"\n");}
         private static double Wait(float seconds)=>Time.realtimeSinceStartupAsDouble+seconds;
         private static void Keys(params Key[] keys)=>InputSystem.QueueStateEvent(keyboard,new KeyboardState(keys));
+        private static AdCampaign WatchRevive(SceneRoot root)
+        {
+            root.Retry();var campaign=root.adCampaign;
+            root.hasFocus=true;root.AdvanceAd(SceneRoot.ReviveAdDuration);return campaign;
+        }
+        private static void Resume(SceneRoot root)
+        {
+            if(root.mode==ScreenMode.Shop&&root.ReviveRequired&&!root.rechargeOpen)WatchRevive(root);
+            else root.CloseOverlay();
+        }
         private static void Place(PlayerMotor p,float x,float y,Vector2 velocity,float gravity=0)
         {p.body.position=new Vector2(x,y);p.body.linearVelocity=velocity;p.body.gravityScale=gravity;Physics2D.SyncTransforms();}
         private static void Capture(string file)
@@ -110,7 +120,7 @@ namespace JumpNotIncluded.EditorTools
             float hands=g.Run.activeInputTime,levelTime=g.Run.playTime;
             g.SetMode(ScreenMode.Pause);Keys(Key.D,Key.Space,Key.J);yield return Wait(.2f);
             Check(g.Run.activeInputTime==hands&&g.Run.playTime==levelTime&&g.Run.adWatchTime==0,"holding gameplay keys in a pause menu adds no tracked time");
-            Keys();g.CloseOverlay();g.hasFocus=false;Keys(Key.D);yield return Wait(.15f);
+            Keys();Resume(g);g.hasFocus=false;Keys(Key.D);yield return Wait(.15f);
             Check(g.Run.activeInputTime==hands,"unfocused gameplay input does not count as hands-on time");
             Keys();g.hasFocus=true;yield return Wait(.1f);
             var audio=g.audioDirector;var clip=audio.music.clip;int sample=audio.music.timeSamples;
@@ -171,8 +181,8 @@ namespace JumpNotIncluded.EditorTools
             g.AdvanceAd(.001f);Check(g.Run.wallet==100,"cash ad awards exactly one dollar at one full second");
             g.AdvanceAd(1.4f);g.FinishAd();yield return Wait(.3f);g=Game;
             Check(g.mode==ScreenMode.Shop&&g.Run.wallet==200&&g.Run.deaths==2&&g.Run.ads==2,"closing a 2.4-second cash ad preserves two dollars and opens the death shop");
-            g.FinishAd();g.StartAd(AdKind.Revive);
-            Check(g.mode==ScreenMode.Shop&&g.Run.wallet==200,"duplicate completion cannot pay again and revive ads require a death");
+            g.FinishAd();
+            Check(g.mode==ScreenMode.Shop&&g.Run.wallet==200&&g.ReviveRequired,"duplicate cash completion cannot pay again or remove the death gate");
             g.StartAd(AdKind.Cash);
             Check(g.adCampaign!=reviveCampaign&&g.adCampaign!=cashCampaign,"first three ad openings cover all three campaigns without repetition");
             g.hasFocus=true;g.AdvanceAd(.5f);g.FinishAd();
@@ -180,20 +190,20 @@ namespace JumpNotIncluded.EditorTools
             Check(Mathf.Abs(g.Run.adWatchTime-4.9f)<.001f,"receipt includes fractional cash-ad viewing even when no reward was earned");
             Check(!g.Buy(Product.Jump)&&g.ExchangeCash(0)&&g.ExchangeCash(0)&&g.Buy(Product.Jump)&&g.Run.wallet==0&&g.Run.coins==1,"cash ads fund coin packs, then jump costs 199 coins with one coin left");
             Capture("revised-shop.png");yield return Wait(.15f);
-            g.CloseOverlay();Keys(Key.Space);yield return Wait(.2f);Keys();
+            Resume(g);Keys(Key.Space);yield return Wait(.2f);Keys();
             Check(g.Playing&&g.player.body.position.y>1,"purchased jump works through the actual Input System");
             hands=g.Run.activeInputTime;
-            g.KillPlayer("Checkpoint retry check.");g.Retry();yield return Wait(.3f);g=Game;
-            Check(g.Run.Owns(Product.Jump)&&g.Run.wallet==0&&g.Run.coins==1&&g.Run.ads==2,"free retry preserves purchases, both balances and ad history without duplicating rewards");
-            Check(Mathf.Abs(g.Run.adWatchTime-4.9f)<.001f&&Mathf.Abs(g.Run.activeInputTime-hands)<.05f&&hands>.1f,"failed attempts retain both viewing and control time after retry");
+            g.KillPlayer("Checkpoint retry check.");WatchRevive(g);yield return Wait(.3f);g=Game;
+            Check(g.Run.Owns(Product.Jump)&&g.Run.wallet==0&&g.Run.coins==1&&g.Run.ads==4,"ad-gated retry preserves purchases and balances while recording both revive ads");
+            Check(Mathf.Abs(g.Run.adWatchTime-8.9f)<.001f&&Mathf.Abs(g.Run.activeInputTime-hands)<.05f&&hands>.1f,"failed attempts retain both viewing and control time after retry");
             g.KillPlayer("Another chance to earn.");g.StartAd(AdKind.Cash);g.hasFocus=true;g.AdvanceAd(3.4f);g.FinishAd();yield return Wait(.3f);g=Game;
             for(int pack=0;pack<3;pack++)g.ExchangeCash(0);
             Check(g.Buy(Product.FireFlower)&&g.Run.wallet==0&&g.Run.coins==2,"repeat cash ad converts into coins for instant Fire Flower");
             Check(g.player.forms.Value==Form.Fire&&g.player.Big&&g.player.box.size.y>1.8f&&g.session.checkpointForm==Form.Fire&&g.session.checkpointPosition.y>.95f,"flower purchase transforms immediately in the paused shop and saves a tall checkpoint");
-            g.CloseOverlay();yield return Wait(.1f);
+            Resume(g);yield return Wait(.1f);
             Keys(Key.J);yield return Wait(.1f);Keys();
             Check(UnityEngine.Object.FindObjectsByType<Fireball>(FindObjectsSortMode.None).Length>0,"fire Mario shoots in play mode");
-            g.KillPlayer("Instant flower checkpoint check.");g.Retry();yield return Wait(.3f);g=Game;
+            g.KillPlayer("Instant flower checkpoint check.");WatchRevive(g);yield return Wait(.3f);g=Game;
             Check(g.player.forms.Value==Form.Fire&&g.player.box.bounds.min.y>=-.01f,"retry restores the purchased fire form above the floor without a pickup");
             g.CompleteWorld();SceneManager.LoadScene("World02");yield return Wait(.3f);g=Game;
             Check(Array.TrueForAll(UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None),item=>item.kind!=ItemKind.Flower),"World 2 has no map flowers");
@@ -214,10 +224,12 @@ namespace JumpNotIncluded.EditorTools
             Check(g.Buy(Product.FireFlower)&&g.Run.wallet==9600&&g.Run.coins==3,"coin exchange creates room under the cash cap and funds a repurchase");
             g.StartAd(AdKind.Cash);g.hasFocus=true;g.AdvanceAd(1);g.FinishAd();
             Check(g.Run.wallet==9700&&g.mode==ScreenMode.Shop,"cash ads can be repeated after spending");
-            g.CloseOverlay();g.KillPlayer("Capped balance retry check.");g.Retry();yield return Wait(.3f);g=Game;
+            Resume(g);g.KillPlayer("Capped balance retry check.");WatchRevive(g);yield return Wait(.3f);g=Game;
             Check(g.Run.wallet==9700&&g.Run.coins==3,"checkpoint retry preserves both balances after reaching the cap");
             g.KillPlayer("VIP trial check.");g.OpenShop();yield return Wait(.3f);g=Game;
-            g.StartTrial();Check(g.Playing&&g.player.buffs.Value==Buff.VIP,"VIP trial returns safely to play without a terminal");
+            g.StartTrial();Check(g.mode==ScreenMode.Ad&&g.ReviveRequired&&g.player.buffs.Value==Buff.None,"VIP trial waits behind the two-second revive ad");
+            g.hasFocus=true;g.AdvanceAd(SceneRoot.ReviveAdDuration);
+            Check(g.Playing&&g.player.buffs.Value==Buff.VIP&&!g.Run.trialPending,"VIP trial starts only after the revive ad finishes");
             g.player.buffs.Tick(8.01f);Check(g.player.buffs.Value==Buff.None,"serialized VIP timer expires after eight seconds");
 
             g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
@@ -231,15 +243,15 @@ namespace JumpNotIncluded.EditorTools
             g.hasFocus=true;g.AdvanceAd(5);var thirdCampaign=g.adCampaign;
             Check(thirdCampaign!=firstCampaign&&thirdCampaign!=secondCampaign&&g.adTime==10&&g.Run.wallet==1000&&g.adEarned==1000,"ten-second rotation completes the shuffled set without resetting rewards");
             g.FinishAd();yield return Wait(.3f);g=Game;
-            g.CloseOverlay();g.KillPlayer("Rotation checkpoint check.");g.Retry();yield return Wait(.3f);g=Game;
+            Resume(g);g.KillPlayer("Rotation checkpoint check.");var retryCampaign=WatchRevive(g);yield return Wait(.3f);g=Game;
             g.KillPlayer("Rotation after retry.");g.StartAd(AdKind.Cash);
-            Check(g.adCampaign!=thirdCampaign&&g.Run.wallet==1000&&g.Run.ads==1,"checkpoint retry preserves rotation history and earned cash");
+            Check(g.adCampaign!=retryCampaign&&g.Run.wallet==1000&&g.Run.ads==3,"checkpoint retry preserves rotation history and earned cash while counting revive ads");
 
             g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
             g.Run.coins=299;g.SaveCheckpoint(g.session.checkpointPosition);
             g.KillPlayer("Damage ladder check.");g.OpenShop();yield return Wait(.3f);g=Game;p=g.player;
             Check(g.Buy(Product.FireFlower)&&p.forms.Value==Form.Fire&&!g.Buy(Product.FireFlower)&&g.Run.wallet==0,"one flower payment activates fire immediately and duplicate clicks cannot charge again");
-            g.CloseOverlay();yield return Wait(1.1f);
+            Resume(g);yield return Wait(1.1f);
             float feet=p.box.bounds.min.y;int deaths=g.Run.deaths;p.Hit();
             Check(g.Playing&&p.forms.Value==Form.Super&&p.Big&&p.Protected&&Mathf.Abs(p.box.bounds.min.y-feet)<.01f,"first hit changes Fire to Super while preserving feet and granting hurt protection");
             for(int i=0;i<8;i++){p.Hit();p.Hit(true);}
@@ -263,6 +275,52 @@ namespace JumpNotIncluded.EditorTools
             var premiumChecks=CheckPremium();while(premiumChecks.MoveNext())yield return premiumChecks.Current;
             var paidChecks=CheckPaidVictory();while(paidChecks.MoveNext())yield return paidChecks.Current;
             var paymentChecks=CheckPayments();while(paymentChecks.MoveNext())yield return paymentChecks.Current;
+            var reviveChecks=CheckReviveGate();while(reviveChecks.MoveNext())yield return reviveChecks.Current;
+        }
+        private static IEnumerator CheckReviveGate()
+        {
+            var g=Game;g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
+            g.KillPlayer("Required revive advertisement.");g.CloseOverlay();g.SetMode(ScreenMode.Playing);
+            Keys(Key.Escape);yield return Wait(.1f);Keys();
+            Check(g.mode==ScreenMode.Dead&&g.ReviveRequired&&Time.timeScale==0,"death cannot be dismissed by closing, Escape or requesting play mode");
+            g.Retry();g.hasFocus=false;g.FinishAd();Keys(Key.Escape);yield return Wait(.1f);Keys();
+            Check(g.mode==ScreenMode.Ad&&g.ReviveRequired&&g.adTime==0,"retry enters the revive ad and Escape cannot skip it");
+            g.hasFocus=true;g.AdvanceAd(1.99f);g.FinishAd();g.CloseOverlay();
+            Check(g.mode==ScreenMode.Ad&&g.ReviveRequired&&!g.Playing,"1.99 seconds cannot authorize a checkpoint retry");
+            g.hasFocus=false;g.AdvanceAd(20);
+            Check(g.ReviveRequired&&g.adTime==1.99f,"time outside the focused ad cannot satisfy the revive requirement");
+            g.hasFocus=true;g.AdvanceAd(.01f);g.FinishAd();yield return Wait(.3f);g=Game;
+            Check(g.Playing&&!g.ReviveRequired&&g.Run.ads==1&&g.Run.wallet==0,"two complete revive seconds grant exactly one continuation without cash");
+            g.Retry();g.FinishAd();
+            Check(g.Playing&&g.Run.ads==1,"a completed revive cannot be claimed twice or reused through Retry");
+            g.KillPlayer("Each death requires its own ad.");g.session.Restore();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
+            Check(g.mode==ScreenMode.Dead&&g.ReviveRequired&&g.Run.ads==1,"checkpoint restoration and scene reload preserve the new death gate");
+            g.OpenShop();yield return Wait(.3f);g=Game;
+            Keys(Key.Escape);yield return Wait(.1f);Keys();
+            Check(g.mode==ScreenMode.Dead&&g.ReviveRequired&&Time.timeScale==0,"Escape from the death shop returns to death instead of resuming");
+            g.OpenShop();yield return Wait(.3f);g=Game;g.OpenRecharge();g.CloseRecharge();
+            Check(g.mode==ScreenMode.Shop&&g.ReviveRequired&&Time.timeScale==0,"closing checkout leaves the player behind the revive gate");
+            g.CloseOverlay();g.StartAd(AdKind.Cash);g.hasFocus=true;g.AdvanceAd(2);g.FinishAd();yield return Wait(.3f);g=Game;
+            Check(g.mode==ScreenMode.Shop&&g.ReviveRequired&&g.Run.wallet==200,"watching a cash ad earns SGD but does not replace the revive ad");
+            g.ExchangeCash(0);g.ExchangeCash(0);g.Buy(Product.Jump);g.CloseOverlay();
+            Check(g.mode==ScreenMode.Dead&&g.ReviveRequired&&g.Run.Owns(Product.Jump),"purchasing an upgrade and leaving its shop cannot revive for free");
+            g.OpenShop();yield return Wait(.3f);g=Game;
+            var body=g.player.body;var spawn=body.position;int ads=g.Run.ads;
+            g.StartAd(AdKind.Revive);g.hasFocus=true;g.AdvanceAd(1.99f);
+            Check(g.mode==ScreenMode.Ad&&g.ReviveRequired&&body.position==spawn,"shop continuation stays frozen until the entire revive ad finishes");
+            g.AdvanceAd(.01f);g.FinishAd();
+            Check(g.Playing&&!g.ReviveRequired&&g.Run.ads==ads+1&&g.Run.coins==1&&g.player.body==body,"completed shop revive resumes its safe checkpoint and preserves purchases exactly once");
+            g.KillPlayer("Restart test.");g.NewGame();yield return Wait(.3f);g=Game;
+            Check(g.mode==ScreenMode.Loading&&!g.ReviveRequired&&g.Run.deaths==0&&g.Run.coins==0&&g.Run.ads==0,"restart starts a fresh run rather than continuing the dead run");
+
+            g.session.NewRun();SceneManager.LoadScene("World02");yield return Wait(.3f);g=Game;
+            g.KillPlayer("VIP cannot bypass revival.");g.OpenShop();yield return Wait(.3f);g=Game;g.StartTrial();
+            g.hasFocus=true;g.AdvanceAd(1.99f);
+            Check(g.mode==ScreenMode.Ad&&g.ReviveRequired&&g.Run.trialPending&&g.player.buffs.Value==Buff.None,"claiming VIP cannot start gameplay or spend its buff timer before revival");
+            g.AdvanceAd(.01f);
+            Check(g.Playing&&g.player.buffs.Value==Buff.VIP&&!g.Run.trialPending,"VIP starts after the full revive ad and consumes its pending claim");
+            g.KillPlayer("VIP is single use.");WatchRevive(g);yield return Wait(.3f);g=Game;
+            Check(g.Playing&&g.Run.trialClaimed&&!g.Run.trialPending&&g.player.buffs.Value!=Buff.VIP,"a later death cannot restore and replay the consumed VIP trial");
         }
         private static IEnumerator CheckPayments()
         {
@@ -276,7 +334,7 @@ namespace JumpNotIncluded.EditorTools
             Check(g.ConfirmTopUp()&&!g.ConfirmTopUp()&&g.Run.coins==0,"confirmation starts one pending payment and does not deliver coins early");
             g.hasFocus=false;g.AdvancePayment(20);
             Check(g.checkoutStep==CheckoutStep.Processing&&g.paymentElapsed==0&&g.Run.Payments.cardCharged==0,"unfocused checkout cannot finish a pending payment");
-            g.CloseOverlay();g.hasFocus=true;g.AdvancePayment(20);
+            Resume(g);g.hasFocus=true;g.AdvancePayment(20);
             Check(g.checkoutStep==CheckoutStep.Packs&&g.rechargeOpen&&g.Run.Payments.orders.Count==0&&g.Run.Payments.cardCharged==0,"cancel returns to pack selection without charging or delivering");
             g.ContinueCheckout();g.ConfirmTopUp();g.StartAd(AdKind.Cash);
             Check(g.mode==ScreenMode.Shop&&g.checkoutStep==CheckoutStep.Processing,"an ad cannot replace a pending card payment");
@@ -285,7 +343,7 @@ namespace JumpNotIncluded.EditorTools
             Check(g.checkoutStep==CheckoutStep.Receipt&&g.Run.Payments.cardCharged==980&&g.Run.coins==1000&&g.Run.wallet==0,"confirmed card payment charges SGD 9.80 and delivers 1000 coins");
             g.AdvancePayment(20);g.ConfirmTopUp();
             Check(g.Run.Payments.orders.Count==1&&g.Run.Payments.Find(id).balanceAfter==1000&&g.Run.coins==1000,"repeated callbacks cannot duplicate a payment or its receipt");
-            g.CloseRecharge();g.CloseOverlay();g.KillPlayer("Paid retry.");g.Retry();yield return Wait(.35f);g=Game;
+            g.CloseRecharge();Resume(g);g.KillPlayer("Paid retry.");WatchRevive(g);yield return Wait(.35f);g=Game;
             Check(g.Run.Payments.cardLinked&&g.Run.Payments.cardCharged==980&&g.Run.Payments.Find(id)!=null&&g.Run.coins==1000,"card binding, payment history and delivered coins survive checkpoint reload");
             g.KillPlayer("Wallet checkout.");g.OpenShop();yield return Wait(.35f);g=Game;g.OpenRecharge();
             g.SelectPayment(PaymentMethod.Wallet);g.ContinueCheckout();
@@ -296,7 +354,7 @@ namespace JumpNotIncluded.EditorTools
             Check(g.checkoutStep==CheckoutStep.Receipt&&g.Run.wallet==0&&g.Run.coins==1100&&g.Run.Payments.cardCharged==980&&g.PaymentReceipt.method==PaymentMethod.Wallet,"wallet checkout spends only the chosen source and saves its own receipt");
             g.ShowPaymentActivity();g.ShowPaymentReceipt(id);
             Check(g.checkoutStep==CheckoutStep.Receipt&&g.PaymentReceipt.id==id&&g.PaymentReceipt.balanceAfter==1000&&g.PaymentReceipt.fundsAfter==8920,"payment activity reopens the original immutable receipt and credit balance");
-            g.CloseRecharge();g.CloseOverlay();g.CompleteWorld();g.NextWorld();yield return Wait(.35f);g=Game;g.EnterWorld();
+            g.CloseRecharge();Resume(g);g.CompleteWorld();g.NextWorld();yield return Wait(.35f);g=Game;g.EnterWorld();
             double until=Time.realtimeSinceStartupAsDouble+5;
             while(Game.world!=2&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.1f);
             g=Game;Check(g.world==2&&g.Run.Payments.cardLinked&&g.Run.Payments.orders.Count==2&&g.Run.Payments.cardCharged==980,"payment account and history persist across the actual loading scene");
@@ -314,7 +372,7 @@ namespace JumpNotIncluded.EditorTools
                 "opening Goomba walks past the former invisible patrol wall while staying on the floor");
             Check(distant.GetComponent<Rigidbody2D>().position==distantStart,"unseen Goombas wait for the camera instead of migrating across the level");
             Vector2 before=opening.GetComponent<Rigidbody2D>().position;g.SetMode(ScreenMode.Pause);yield return Wait(.25f);
-            Check(opening.GetComponent<Rigidbody2D>().position==before,"pause freezes a freely walking Goomba");g.CloseOverlay();
+            Check(opening.GetComponent<Rigidbody2D>().position==before,"pause freezes a freely walking Goomba");Resume(g);
             double until=Time.realtimeSinceStartupAsDouble+12;
             while(g.Playing&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.2f);
             Check(g.mode==ScreenMode.Dead&&g.Run.deaths==1&&Mathf.Abs(p.body.position.x-2)<.05f&&opening.GetComponent<Rigidbody2D>().position.x<3,
@@ -372,7 +430,7 @@ namespace JumpNotIncluded.EditorTools
             g.SetMode(ScreenMode.Pause);yield return Wait(.1f);starSample=audio.music.timeSamples;float remaining=p.buffs.Remaining;
             yield return Wait(.2f);
             Check(!audio.music.isPlaying&&audio.music.timeSamples==starSample&&p.buffs.Remaining==remaining,"pause freezes Starman playback and the invincibility timer together");
-            g.CloseOverlay();yield return Wait(.15f);
+            Resume(g);yield return Wait(.15f);
             Check(audio.music.isPlaying&&audio.music.timeSamples>starSample,"unpausing resumes Starman from its paused position");
             remaining=p.buffs.Remaining;starSample=audio.music.timeSamples;
             g.level.Pickup("check.star.refresh",ItemKind.Star,p.body.position);yield return Wait(.4f);
@@ -406,7 +464,7 @@ namespace JumpNotIncluded.EditorTools
             Check(g.ExchangeCash(2)&&g.Run.wallet==0&&g.Run.coins==22000,"largest cash pack credits 2000 coins inside the shop");
             Check(g.Buy(Product.MasterGuide)&&g.Buy(Product.DoubleJump)&&g.Buy(Product.Gatling)&&g.Run.coins==11003,"all three premium upgrades purchase through the real death shop");
             Check(g.Run.Owns(Product.Jump)&&!g.Buy(Product.Jump),"buying wings includes jumping and blocks a redundant jump purchase");
-            g.CloseOverlay();yield return Wait(.1f);
+            Resume(g);yield return Wait(.1f);
             hidden=Array.Find(UnityEngine.Object.FindObjectsByType<BlockActor>(FindObjectsSortMode.None),b=>b.hidden&&!b.revealed);
             Check(hidden.GuideVisible&&Array.FindAll(hidden.GetComponentsInChildren<SpriteRenderer>(),s=>s.enabled).Length==5&&!hidden.revealed,"Master Guide reveals four outline edges and a reward icon without activating the block");
             Keys(Key.Space);yield return Wait(.13f);Keys();yield return Wait(.08f);
@@ -430,7 +488,7 @@ namespace JumpNotIncluded.EditorTools
             var broken=new GameObject("Broken hidden reward check").AddComponent<BlockActor>();broken.Init(g,"check.broken.reward",new Vector2(6,7),true,true,ItemKind.Coin,true);
             coins=g.Run.coins;broken.BreakByBullet();broken.BreakByBullet();yield return Wait(.1f);
             Check(g.Run.coins==coins+1&&g.Run.collected.Contains("check.broken.reward.broken"),"shooting a hidden reward pays its coin once before breaking it");
-            Place(p,2,.55f,Vector2.zero);g.SaveCheckpoint(new Vector2(2,.55f));g.KillPlayer("Premium persistence check.");g.Retry();yield return Wait(.3f);g=Game;p=g.player;
+            Place(p,2,.55f,Vector2.zero);g.SaveCheckpoint(new Vector2(2,.55f));g.KillPlayer("Premium persistence check.");WatchRevive(g);yield return Wait(.3f);g=Game;p=g.player;
             Check(g.Run.Owns(Product.MasterGuide)&&g.Run.Owns(Product.DoubleJump)&&g.Run.Owns(Product.Gatling)&&g.Run.coins==coins+1,"retry retains all premium abilities and exact coin balance");
             broken=new GameObject("Broken block reload check").AddComponent<BlockActor>();broken.Init(g,"check.broken.reward",new Vector2(6,7),true,true,ItemKind.Coin,true);yield return Wait(.1f);
             Check(broken==null&&g.Run.coins==coins+1,"destroyed reward blocks remain destroyed after a checkpoint reload");
@@ -447,7 +505,7 @@ namespace JumpNotIncluded.EditorTools
             var flame=UnityEngine.Object.FindFirstObjectByType<BossFlame>();
             Check(flame!=null&&flame.GetComponent<Rigidbody2D>().linearVelocity.x<0,"Bowser patrols and fires toward the player");
             Vector3 bossBefore=boss.transform.position,flameBefore=flame.transform.position;g.SetMode(ScreenMode.Pause);yield return Wait(.25f);
-            Check(boss.transform.position==bossBefore&&flame.transform.position==flameBefore,"pause freezes Bowser and his projectiles");g.CloseOverlay();
+            Check(boss.transform.position==bossBefore&&flame.transform.position==flameBefore,"pause freezes Bowser and his projectiles");Resume(g);
             foreach(var f in UnityEngine.Object.FindObjectsByType<BossFlame>(FindObjectsSortMode.None))UnityEngine.Object.Destroy(f.gameObject);
             Place(p,boss.transform.position.x-3,1.1f,Vector2.zero);p.facing=1;
             var fire=new GameObject("Boss fireball check").AddComponent<Fireball>();fire.Init(g,p);yield return Wait(.3f);
@@ -456,7 +514,7 @@ namespace JumpNotIncluded.EditorTools
             Check(boss==null&&g.Run.collected.Contains(WorldBuilder.BossKey(0)),"sustained Gatling fire defeats the front rank of Bowsers");
             var defeated=new HashSet<string>();for(int i=0;i<WorldBuilder.OpeningBossCount;i++)if(g.Run.collected.Contains(WorldBuilder.BossKey(i)))defeated.Add(WorldBuilder.BossKey(i));
             Check(defeated.Count>1&&defeated.Count<WorldBuilder.OpeningBossCount,"Gatling defeats each boss in range without erasing the distant survivors");
-            g.SaveCheckpoint(new Vector2(2,.55f));g.KillPlayer("Boss persistence check.");g.Retry();yield return Wait(.3f);g=Game;
+            g.SaveCheckpoint(new Vector2(2,.55f));g.KillPlayer("Boss persistence check.");WatchRevive(g);yield return Wait(.3f);g=Game;
             bosses=UnityEngine.Object.FindObjectsByType<BossActor>(FindObjectsSortMode.None);
             Check(bosses.Length==WorldBuilder.OpeningBossCount-defeated.Count&&Array.TrueForAll(bosses,b=>!defeated.Contains(b.id)),"checkpoint retry preserves every boss defeat and leaves the surviving Bowsers alive");
             audio=g.audioDirector;float musicVolume=audio.music.volume;audio.music.volume=0;
@@ -479,19 +537,19 @@ namespace JumpNotIncluded.EditorTools
             int coins=g.Run.coins,score=g.Run.score;
             shot=new GameObject("Repeated terraforming check").AddComponent<Fireball>();shot.Init(g,p,true);yield return Wait(.1f);
             Check(g.Run.coins==coins&&g.Run.score==score,"repeated paving cannot farm hidden rewards or destruction scores");
-            g.SaveCheckpoint(new Vector2(47,.55f));g.KillPlayer("Paved checkpoint check.");g.Retry();yield return Wait(.4f);g=Game;
+            g.SaveCheckpoint(new Vector2(47,.55f));g.KillPlayer("Paved checkpoint check.");WatchRevive(g);yield return Wait(.4f);g=Game;
             Check(g.Playing&&g.player.grounded&&g.player.body.position.y>.4f&&Physics2D.OverlapPoint(new Vector2(47,-.05f),1<<8)!=null&&Physics2D.OverlapPoint(new Vector2(56,1),1<<8)==null,"a checkpoint inside the former abyss restores paved ground and demolished pipes before the player spawns");
 
             g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
             g.KillPlayer("A premium victory awaits.");g.StartAd(AdKind.Cash);g.hasFocus=true;g.AdvanceAd(57);g.FinishAd();yield return Wait(.3f);g=Game;
             Check(g.ExchangeCash(2)&&g.ExchangeCash(2)&&g.ExchangeCash(2)&&g.Buy(Product.Gatling)&&g.Run.coins==1&&g.Run.wallet==60&&!g.Run.Owns(Product.Jump)&&!g.Run.Owns(Product.Purify),"ad cash funds Gatling alone through three real coin-pack purchases");
-            g.CloseOverlay();int deaths=g.Run.deaths;Keys(Key.D,Key.J);
+            Resume(g);int deaths=g.Run.deaths;Keys(Key.D,Key.J);
             double until=Time.realtimeSinceStartupAsDouble+25;
             while(g.Playing&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.2f);
             Keys();
             Check(g.mode==ScreenMode.Results&&g.Run.deaths==deaths&&g.player.body.position.x>91,"paid route clears all of World 1 by holding right and fire, with no jumps or extra deaths (position="+g.player.body.position+", mode="+g.mode+")");
             float hands=g.Run.activeInputTime,watched=g.Run.adWatchTime;
-            Check(Mathf.Abs(watched-57)<.001f&&hands>15&&hands<=g.Run.playTime&&g.Run.PaidTotal()==5999,
+            Check(Mathf.Abs(watched-59)<.001f&&hands>15&&hands<=g.Run.playTime&&g.Run.PaidTotal()==5999,
                 "first-world receipt contains actual ad seconds, held-control seconds and the Gatling coin receipt");
             yield return Wait(.2f);
             Check(g.Run.activeInputTime==hands&&g.Run.adWatchTime==watched,"result screen freezes both receipt timers");

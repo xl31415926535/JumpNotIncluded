@@ -14,7 +14,7 @@ PASS: idle state machines remain stable after asset reload
 PASS: Goomba sprite and collider feet align with floor
 PASS: Goomba frames include all 16 pixels, including feet
 PASS: idle gameplay accrues level time without inventing ad or control time
-PASS: right movement faces right (dx=1.649998, input=0, mode=Playing)
+PASS: right movement faces right (dx=1.539999, input=0, mode=Playing)
 PASS: real movement input accrues hands-on time once per frame
 PASS: left movement faces left
 PASS: holding gameplay keys in a pause menu adds no tracked time
@@ -42,13 +42,13 @@ PASS: next ad avoids the revive creative across scene reload
 PASS: cash ad pays nothing before one full second
 PASS: cash ad awards exactly one dollar at one full second
 PASS: closing a 2.4-second cash ad preserves two dollars and opens the death shop
-PASS: duplicate cash completion cannot pay again or remove the death gate
+PASS: duplicate completion cannot pay again and revive ads require a death
 PASS: first three ad openings cover all three campaigns without repetition
 PASS: closing a short repeat ad does not pay for an unfinished second
 PASS: receipt includes fractional cash-ad viewing even when no reward was earned
 PASS: cash ads fund coin packs, then jump costs 199 coins with one coin left
 PASS: purchased jump works through the actual Input System
-PASS: ad-gated retry preserves purchases and balances while recording both revive ads
+PASS: free retry preserves purchases, both balances and ad history without duplicating rewards
 PASS: failed attempts retain both viewing and control time after retry
 PASS: repeat cash ad converts into coins for instant Fire Flower
 PASS: flower purchase transforms immediately in the paused shop and saves a tall checkpoint
@@ -66,14 +66,13 @@ PASS: full wallet cannot start another cash ad
 PASS: coin exchange creates room under the cash cap and funds a repurchase
 PASS: cash ads can be repeated after spending
 PASS: checkpoint retry preserves both balances after reaching the cap
-PASS: VIP trial waits behind the two-second revive ad
-PASS: VIP trial starts only after the revive ad finishes
+PASS: VIP trial returns safely to play without a terminal
 PASS: serialized VIP timer expires after eight seconds
 PASS: cash creative stays visible for the first five seconds
 PASS: five-second rotation preserves the ad timer and all cash earned
 PASS: unfocused ads pause both creative rotation and rewards
 PASS: ten-second rotation completes the shuffled set without resetting rewards
-PASS: checkpoint retry preserves rotation history and earned cash while counting revive ads
+PASS: checkpoint retry preserves rotation history and earned cash
 PASS: one flower payment activates fire immediately and duplicate clicks cannot charge again
 PASS: first hit changes Fire to Super while preserving feet and granting hurt protection
 PASS: repeated enemy and poison contacts cannot skip the protected Super form
@@ -161,21 +160,4 @@ PASS: wallet checkout spends only the chosen source and saves its own receipt
 PASS: payment activity reopens the original immutable receipt and credit balance
 PASS: payment account and history persist across the actual loading scene
 PASS: full restart resets simulated card credit and payment activity
-PASS: death cannot be dismissed by closing, Escape or requesting play mode
-PASS: retry enters the revive ad and Escape cannot skip it
-PASS: 1.99 seconds cannot authorize a checkpoint retry
-PASS: time outside the focused ad cannot satisfy the revive requirement
-PASS: two complete revive seconds grant exactly one continuation without cash
-PASS: a completed revive cannot be claimed twice or reused through Retry
-PASS: checkpoint restoration and scene reload preserve the new death gate
-PASS: Escape from the death shop returns to death instead of resuming
-PASS: closing checkout leaves the player behind the revive gate
-PASS: watching a cash ad earns SGD but does not replace the revive ad
-PASS: purchasing an upgrade and leaving its shop cannot revive for free
-PASS: shop continuation stays frozen until the entire revive ad finishes
-PASS: completed shop revive resumes its safe checkpoint and preserves purchases exactly once
-PASS: restart starts a fresh run rather than continuing the dead run
-PASS: claiming VIP cannot start gameplay or spend its buff timer before revival
-PASS: VIP starts after the full revive ad and consumes its pending claim
-PASS: a later death cannot restore and replay the consumed VIP trial
 ALL RUNTIME CHECKS PASSED

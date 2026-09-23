@@ -1,11 +1,13 @@
 # Jump Not Included 跳跃另购
 
-Unity 2D 课程游戏，当前源码版本 **v1.11.1**，编辑器版本 **6000.3.24f1**。
+Unity 2D 课程游戏，当前源码版本 **v1.11.2**，编辑器版本 **6000.3.24f1**。
 开场保留经典平台游戏的画面，死亡后出现模拟广告与升级商店。
 包含两个关卡、六种升级、检查点、形态变化、星星、库巴和通关收据。
 充值使用 **SGD 新加坡元**计价，支持绑定虚拟信用卡、核对金额、确认付款、查看收据和交易记录。所有交易均在本地模拟。
 
 主菜单标题下显示 **Jump Not Included**，右侧有醒目的 **FREE TO PLAY** 爆炸框。[开场画面](verification/previews/menu-free-to-play.png)
+
+死亡后必须观看完整的 **2 秒复活广告**才能从检查点继续。死亡页没有免费重试或关闭按钮；关闭商店、充值或观看赚钱广告都不能跳过复活要求。**RESTART RUN** 会清空本局并重新开始。
 
 ## 打开工程
 
@@ -39,9 +41,11 @@ Windows 可执行文件在 Unity 中通过 **Tools → Jump Not Included → Bui
 
 ## 验证
 
-v1.11.0 的[实际运行报告](verification/unity-runtime-checks.txt)有 **161 项 PASS**，包含板栗移动、真实碰撞、音频播放位置、形态、经济规则、两关通关及新增的 16 项充值流程检查。另通过 C# 编译、纯规则检查和[充值界面验证](verification/payment-ui-checks.txt)：9 个界面状态、3 种分辨率，以及确认和取消的默认按钮分发。
+v1.11.2 的[实际运行报告](verification/unity-runtime-checks.txt)有 **179 项 PASS**，包含板栗移动、真实碰撞、音频播放位置、形态、经济规则、两关通关、充值流程以及两秒复活门槛。另通过 C# 编译、纯规则检查和[复活界面验证](verification/revive-ui-checks.txt)：死亡页、商店、复活广告各三种分辨率。原有[充值界面验证](verification/payment-ui-checks.txt)独立保留。
 
 旧版 145 项报告已独立保留在 [history/v1.10.2-runtime-checks.txt](verification/history/v1.10.2-runtime-checks.txt)，与本次新运行的结果区分。
+
+SGD 充值阶段的 161 项旧报告保留在 [history/v1.11.0-runtime-checks.txt](verification/history/v1.11.0-runtime-checks.txt)。
 
 本机安装 Unity 后可在 PowerShell 中运行：
 

@@ -32,6 +32,7 @@ namespace JumpNotIncluded
         private bool skipAdFrame;
         public RunModel Run => session.data;
         public bool Playing => mode==ScreenMode.Playing;
+        public bool ReviveRequired => session.reviveRequired;
         public int HighScore => PlayerPrefs.GetInt("jni.highscore",0);
 
         private void Awake()
@@ -46,6 +47,7 @@ namespace JumpNotIncluded
             world=scene=="World02"?2:scene=="World01"?1:0;
             mode=scene=="Loading"?ScreenMode.Loading:world==0?ScreenMode.Menu:ScreenMode.Playing;
             if(Run==null) session.NewRun();
+            deathReason=session.lastDeathReason;
             if(world>0) Run.world=world;
             if(world==2)Run.Grant("support",600);
             cameraView=GetComponentInChildren<Camera>();
@@ -70,7 +72,7 @@ namespace JumpNotIncluded
                 session.restoreCheckpoint=false;
                 if(string.IsNullOrEmpty(session.checkpointJson)) SaveCheckpoint(new Vector2(2,spawnY));
                 if(session.shopOnLoad){session.shopOnLoad=false;SetMode(ScreenMode.Shop);}
-                else if(Run.trialPending){Run.trialPending=false;player.buffs.Signal("vip");}
+                else ActivatePendingTrial();
             }
             ui=gameObject.AddComponent<GameUI>();ui.Init(this);
             SetMode(mode);
@@ -107,6 +109,7 @@ namespace JumpNotIncluded
         }
         public void SetMode(ScreenMode value)
         {
+            if(value==ScreenMode.Playing&&ReviveRequired)value=ScreenMode.Dead;
             mode=value;Time.timeScale=Playing?1:0;
             if(value!=ScreenMode.Shop&&value!=ScreenMode.Ad){rechargeOpen=false;ResetCheckout();}
             input?.SetPlaying(Playing);
@@ -167,7 +170,7 @@ namespace JumpNotIncluded
             if(mode!=ScreenMode.Dead&&mode!=ScreenMode.Shop)return;
             if(mode==ScreenMode.Shop&&rechargeOpen&&checkoutStep!=CheckoutStep.Packs)return;
             if(kind!=AdKind.Revive&&kind!=AdKind.Cash)return;
-            if(kind==AdKind.Revive&&mode!=ScreenMode.Dead)return;
+            if(kind==AdKind.Revive&&!ReviveRequired)return;
             if(kind==AdKind.Cash&&Run.wallet>=RunModel.WalletLimit)return;
             adFromDeath=mode==ScreenMode.Dead;
             if(adFromDeath)session.Restore();
@@ -205,9 +208,13 @@ namespace JumpNotIncluded
             if(mode!=ScreenMode.Ad)return;
             if(adKind==AdKind.Revive)
             {
-                if(adTime<ReviveAdDuration)return;
-                Run.ads++;session.Capture(session.checkpointPosition,session.checkpointForm);
-                session.shopOnLoad=false;ReloadWorld();return;
+                if(!ReviveRequired||adTime<ReviveAdDuration)return;
+                Run.ads++;session.reviveRequired=false;
+                session.Capture(session.checkpointPosition,session.checkpointForm);
+                session.shopOnLoad=false;
+                if(adFromDeath){session.Restore();ReloadWorld();}
+                else {SetMode(ScreenMode.Playing);ActivatePendingTrial();}
+                return;
             }
             // Full seconds were credited as they elapsed; closing the ad adds nothing.
             session.Capture(session.checkpointPosition,session.checkpointForm);
@@ -223,18 +230,25 @@ namespace JumpNotIncluded
             if(mode!=ScreenMode.Shop||world!=2 || Run.trialClaimed&&!Run.trialPending)return;
             Run.trialClaimed=true;Run.trialPending=true;
             SaveCheckpoint(session.checkpointPosition);
-            Run.trialPending=false;
-            player.buffs.Signal("vip");SetMode(ScreenMode.Playing);
+            if(ReviveRequired){StartAd(AdKind.Revive);return;}
+            SetMode(ScreenMode.Playing);ActivatePendingTrial();
+        }
+        private void ActivatePendingTrial()
+        {
+            if(ReviveRequired||!Run.trialPending)return;
+            Run.trialPending=false;player.buffs.Signal("vip");
+            SaveCheckpoint(session.checkpointPosition);
         }
         public void KillPlayer(string reason)
         {
             if(!Playing)return;
-            deathReason=reason;Run.deaths++;player.forms.Set((int)Form.Dead);
+            deathReason=session.lastDeathReason=reason;session.reviveRequired=true;
+            Run.deaths++;player.forms.Set((int)Form.Dead);
             player.buffs.Set((int)Buff.None,true);player.body.linearVelocity=Vector2.zero;
             SetMode(ScreenMode.Dead);RecordHigh();events.Sound("death");
         }
         public void Retry()
-        {session.Restore();ReloadWorld();}
+        {StartAd(AdKind.Revive);}
         private void ReloadWorld()
         {Time.timeScale=1;SceneManager.LoadScene(world==2?"World02":"World01");}
         public void NewGame()

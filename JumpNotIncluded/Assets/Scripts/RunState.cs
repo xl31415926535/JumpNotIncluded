@@ -12,6 +12,9 @@ namespace JumpNotIncluded
         public Form carryForm = Form.Small;
         public bool restoreCheckpoint;
         public bool shopOnLoad;
+        // Keep the death gate outside checkpoint JSON so restoring cannot erase it.
+        public bool reviveRequired;
+        public string lastDeathReason;
         public int nextWorld = 1;
         [System.NonSerialized] private AdRotation adRotation;
         public AdCampaign NextAdCampaign()
@@ -23,6 +26,7 @@ namespace JumpNotIncluded
             checkpointPosition = new Vector2(2, .6f);
             checkpointForm = carryForm = Form.Small;
             restoreCheckpoint = false; shopOnLoad = false; nextWorld = 1;
+            reviveRequired=false;lastDeathReason=null;
         }
         public void Capture(Vector2 safePosition, Form form)
         {

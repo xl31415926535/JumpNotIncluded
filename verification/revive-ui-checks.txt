@@ -1,0 +1,22 @@
+Jump Not Included v1.11.2 - required revive advertisement
+Unity 6000.3.24f1 / Windows / 2026-09-23
+
+PASS: C# runtime/editor compilation and pure-rule checks.
+PASS: Complete Play Mode suite: 179 assertions, including 18 new assertions.
+PASS: 1.99 seconds cannot complete a revive; two seconds can, once per death.
+PASS: Unfocused time, Escape, close, restore and scene reload cannot bypass it.
+PASS: Purchases, checkout, shop exits and cash ads cannot waive the revive ad.
+PASS: VIP activates after revival and cannot be replayed by a later death.
+PASS: Restart resets the run rather than continuing its checkpoint for free.
+PASS: Actual Unity rendering of death, shop and revive ad at 1280x720,
+      960x540 and 1024x768 (9 PNGs in previews/revive/).
+PASS: Death footer sentence, FREE CHECKPOINT RETRY and death-page X are absent.
+PASS: Shop has a BACK action and a REVIVE - 2 SECOND AD primary action.
+PASS: Revive ad displays a countdown/progress and has no skip/close action.
+PASS: Windows x64 build with bundleVersion 1.11.2.
+
+The earlier 161-check report is preserved under history/v1.11.0-runtime-checks.txt.
+The old tests now complete revive ads instead of assuming a free continuation,
+and expected ad counts/viewing times include these required ads.
+The batch editor emitted the previously documented Unity Search indexing
+exception; game checks, UI capture and the build completed with exit code 0.

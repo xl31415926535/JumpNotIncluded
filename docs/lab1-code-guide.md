@@ -28,7 +28,7 @@
 
 `GameUI.Death` 的 RESTART RUN 按钮调用 `SceneRoot.NewGame`，再调用 [RunState.cs](../JumpNotIncluded/Assets/Scripts/RunState.cs) 的 `NewRun`。它创建新的本局数据，清零分数与经济状态，回到第一关流程并恢复时间。
 
-FREE CHECKPOINT RETRY 调用的是 `Retry`，用于恢复检查点；展示“完整重置”时应点击 RESTART RUN。
+`SceneRoot.Retry` 现在进入两秒复活广告；只有 `FinishAd` 确认计时完成，才解除 `RunState.reviveRequired` 并继续检查点。`SetMode` 会阻止尚未复活时直接恢复游戏。死亡页已移除免费重试和 X；展示“完整重置”时仍点击 RESTART RUN。
 
 ## 充值代码与文字编辑
 

@@ -1,6 +1,6 @@
 # Jump Not Included 开发修改记录
 
-本文记录项目从原型到 v1.11.1 的实际迭代，用于查看修改原因、定位相关代码和理解已保留的验证证据。内容来自开发记录、现有源码、工程快照、打包脚本和测试报告。
+本文记录项目从原型到 v1.11.2 的实际迭代，用于查看修改原因、定位相关代码和理解已保留的验证证据。内容来自开发记录、现有源码、工程快照、打包脚本和测试报告。
 
 ## 记录方式
 
@@ -120,7 +120,7 @@
 
 `GameUI.Payment` 重做深蓝金色充值面板：明确 SGD 总价、零手续费、生成的虚拟卡、支付确认、进度、剩余额度和可回看的原始收据。先渲染发现价格、钱包按钮和交易记录入口有文字裁切，再调整高度、宽度和标签。默认键盘焦点指向当前主要操作，处理阶段指向取消。
 
-实际重新执行 C# 编译、纯规则检查与完整 Unity 场景检查，[161 项 PASS](../verification/unity-runtime-checks.txt)。新增 16 项覆盖支付的成功、拒绝、取消、重复执行和保存。额外生成 27 张三种分辨率截图，并检查默认按钮分发与 Windows 构建。[充值验证详情](../verification/payment-ui-checks.txt)、[新充值页](../verification/previews/payment/sgd-packs.png)、[付款收据](../verification/previews/payment/sgd-receipt.png)。
+实际重新执行 C# 编译、纯规则检查与完整 Unity 场景检查，[161 项 PASS](../verification/history/v1.11.0-runtime-checks.txt)。新增 16 项覆盖支付的成功、拒绝、取消、重复执行和保存。额外生成 27 张三种分辨率截图，并检查默认按钮分发与 Windows 构建。[充值验证详情](../verification/payment-ui-checks.txt)、[新充值页](../verification/previews/payment/sgd-packs.png)、[付款收据](../verification/previews/payment/sgd-receipt.png)。
 
 所有支付在本地模拟，不收集真实银行卡资料，交易记录仅保存于当前运行的存档。课程录屏仍需单独录制。
 
@@ -129,3 +129,11 @@
 按用户要求，在主标题下添加小字 Jump Not Included，右侧添加大号 FREE TO PLAY 爆炸框。`GameUI.Menu` 绘制副标题；`GameUI.Title` 用多边形轮廓生成并缓存标牌，带黄色渐变、红边和阴影，离开场景后释放纹理。旋转基于界面的逻辑坐标，保持不同分辨率下的位置一致。
 
 通过 C# 编译及规则检查，在 1280×720、960×540、1024×768 中实际渲染并检查布局，更新 Windows 构建。此次属于菜单外观修改，没有重复运行 161 项玩法检查；保留的完整运行报告来自 v1.11.0。[预览](../verification/previews/menu-free-to-play.png)。
+
+## v1.11.2 两秒广告作为检查点复活前提（2026-09-23）
+
+删除死亡页的底部原说明、FREE CHECKPOINT RETRY 和关闭叉。原有商店关闭与 VIP 试用也会直接恢复游玩，因此同时调整这些路径：关闭商店返回死亡页，商店主按钮播放复活广告，VIP 等广告结束后再激活。
+
+`RunState` 在检查点 JSON 之外保存 `reviveRequired`，死亡时设置，只有完整复活广告完成或完整重新开局才清除。`SetMode` 阻止带着此标记进入 Playing，`Retry` 统一调用复活广告；重复结束回调不会再次入账。购买、充值、赚钱广告及恢复旧快照都不解除这次死亡的复活要求。VIP 的待领取状态在实际激活后保存为已消费，避免后续死亡重复获得试用。
+
+更新原有回归中的复活步骤和广告时长预期，新增 18 项断言，完整运行达到 [179 项 PASS](../verification/unity-runtime-checks.txt)。覆盖 1.99 秒拒绝、失焦、Esc、商店、充值、购买、赚钱广告、场景重载、重复完成、完整重开及 VIP。检查三类界面各三种分辨率，并完成 Windows 构建。[死亡页预览](../verification/previews/revive/death-ad-required.png)、[验证详情](../verification/revive-ui-checks.txt)。
