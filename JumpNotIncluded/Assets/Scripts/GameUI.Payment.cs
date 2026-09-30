@@ -17,8 +17,7 @@ namespace JumpNotIncluded
             Gradient(109,67,1382,768,new Color(.065f,.12f,.20f),new Color(.025f,.05f,.09f));
             Text(144,89,245,44,"JNI / PAY",31,paper,true);
             Text(145,135,610,27,"SINGAPORE DOLLAR CHECKOUT",13,muted,true);
-            SpriteImage("coin",989,109,18,25);
-            Text(1024,101,204,34,Coins(game.Run.coins)+" coins",22,gold,true,TextAnchor.MiddleRight);
+            CoinAmount(960,101,268,34,Coins(game.Run.coins),22,gold,TextAnchor.MiddleRight);
             Box(1263,103,125,28,new Color(.11f,.23f,.25f));
             Text(1266,105,119,24,"SIMULATION",12,payGreen,true,TextAnchor.MiddleCenter);
             Button(1410,93,44,44,"X",game.CloseRecharge,false,true,true);
@@ -78,26 +77,27 @@ namespace JumpNotIncluded
         }
         private void PaymentPacks()
         {
-            Text(144,249,826,45,"Small purchase. Big main-character energy.",29,paper,true);
-            Text(145,300,802,28,"Choose a coin pack. All prices are in Singapore dollars.",18,muted);
-            string[] labels={"STARTER","MOST POPULAR","BEST VALUE / SAVE 6%"};
+            Text(144,249,826,45,"FUND YOUR LEGEND.",36,gold,true);
+            Text(145,300,802,30,"Bigger coffers. Smaller obstacles. Choose your advantage.",20,paper);
+            string[] labels={"THE FIRST TASTE","POWER PLAYER","BEST VALUE / SAVE 6%"};
             for(int i=0;i<3;i++)
             {
                 int pack=i;float x=144+i*280;bool selected=i==game.selectedPack;
-                Box(x,350,266,212,selected?gold:line);
-                Gradient(x+1,351,264,210,selected?new Color(.17f,.24f,.29f):panel,ink);
-                Text(x+17,363,232,25,labels[i],12,selected?gold:muted,true);
-                Text(x+17,401,191,43,Coins(RunModel.PackCoins(i)),35,paper,true);
-                SpriteImage("coin",x+217,408,20,28);
-                Text(x+18,447,230,37,Money(RunModel.PackCost(i))+" SGD",23,selected?gold:paper,true);
-                Text(x+18,485,226,25,i==1?"Save S$0.20 on 1,000 coins":i==2?"Save S$1.20 on 2,000 coins":"100 coins. A modest beginning.",12,muted);
-                Button(x+15,515,236,32,selected?"SELECTED":"SELECT PACK",()=>game.SelectPack(pack),selected);
+                Box(x,345,266,260,selected?gold:line);
+                Gradient(x+2,347,262,256,selected?new Color(.30f,.13f,.18f):panel,ink);
+                Box(x+2,347,262,29,selected?gold:promoWine);
+                Text(x+7,349,252,26,labels[i],14,selected?ink:gold,true,TextAnchor.MiddleCenter);
+                CoinAmount(x+12,382,242,44,Coins(RunModel.PackCoins(i)),35,paper,TextAnchor.MiddleCenter);
+                CoinPile(x+133,490,i,.48f);
+                Text(x+16,495,234,35,Money(RunModel.PackCost(i))+" SGD",23,gold,true,TextAnchor.MiddleCenter);
+                Text(x+12,531,242,23,i==1?"SAVE S$0.20":i==2?"SAVE S$1.20":"S$1.00 = 100 COINS",14,muted,true,TextAnchor.MiddleCenter);
+                Button(x+15,561,236,32,selected?"SELECTED":"SELECT PACK",()=>game.SelectPack(pack),selected);
             }
-            Text(145,580,826,30,"PAYMENT METHOD",14,muted,true);
+            Text(145,618,826,28,"PAYMENT METHOD",15,muted,true);
             bool card=game.paymentMethod==PaymentMethod.VirtualCard;
-            Button(144,620,826,49,game.Run.Payments.cardLinked?"VIRTUAL CARD  /  **** "+PaymentAccount.LastFour+"  /  "+Money(game.Run.Payments.AvailableCredit)+" AVAILABLE":"LINK A VIRTUAL CARD  /  "+Money(game.Run.Payments.AvailableCredit)+" CREDIT",()=>game.SelectPayment(PaymentMethod.VirtualCard),card);
-            Button(144,681,569,49,"SGD WALLET  /  "+Money(game.Run.wallet),()=>game.SelectPayment(PaymentMethod.Wallet),!card);
-            Button(728,681,242,49,"EARN SGD",()=>game.StartAd(AdKind.Cash),false,game.Run.wallet<RunModel.WalletLimit);
+            Button(144,654,826,44,game.Run.Payments.cardLinked?"VIRTUAL CARD  /  **** "+PaymentAccount.LastFour+"  /  "+Money(game.Run.Payments.AvailableCredit)+" AVAILABLE":"LINK A VIRTUAL CARD  /  "+Money(game.Run.Payments.AvailableCredit)+" CREDIT",()=>game.SelectPayment(PaymentMethod.VirtualCard),card);
+            Button(144,710,569,44,"SGD WALLET  /  "+Money(game.Run.wallet),()=>game.SelectPayment(PaymentMethod.Wallet),!card);
+            Button(728,710,242,44,"EARN SGD",()=>game.StartAd(AdKind.Cash),false,game.Run.wallet<RunModel.WalletLimit);
         }
         private void VirtualCard(float x,float y,float w,float h)
         {
@@ -122,7 +122,8 @@ namespace JumpNotIncluded
             float x=1002;var step=game.checkoutStep;int cost=RunModel.PackCost(game.selectedPack);
             Box(x,249,454,490,line);Gradient(x+1,250,452,488,panel,ink);
             Text(1040,273,378,36,"Order summary",26,paper,true);
-            PaymentDetail(332,"Coin pack",Coins(RunModel.PackCoins(game.selectedPack))+" coins",paper);
+            Text(1041,332,174,29,"Coin pack",16,muted);
+            CoinAmount(1196,330,221,32,Coins(RunModel.PackCoins(game.selectedPack)),21,paper,TextAnchor.MiddleRight);
             PaymentDetail(373,"Processing fee","S$0.00",muted);
             Box(1040,418,378,1,line);
             Text(1040,440,100,34,"TOTAL",16,muted,true);
@@ -144,8 +145,9 @@ namespace JumpNotIncluded
             Box(144,256,826,482,line);Gradient(145,257,824,480,new Color(.075f,.19f,.20f),ink);
             Box(177,288,79,42,payGreen);Text(179,294,75,28,"PAID",19,ink,true,TextAnchor.MiddleCenter);
             Text(177,356,752,55,"Your advantage has arrived.",38,paper,true);
-            Text(177,431,752,71,"+"+Coins(receipt.coins)+" coins",51,gold,true);
-            Text(178,535,730,35,"BALANCE AFTER PAYMENT   "+Coins(receipt.balanceAfter)+" coins",20,paper,true);
+            CoinAmount(177,431,752,71,"+"+Coins(receipt.coins),51,gold);
+            Text(178,535,366,35,"BALANCE AFTER PAYMENT",19,paper,true);
+            CoinAmount(563,535,345,35,Coins(receipt.balanceAfter),22,gold);
             Text(178,598,730,30,receipt.createdAt,17,muted);
             Text(178,641,730,34,receipt.id,20,payGreen,true);
             Text(178,694,730,26,"SIMULATED PAYMENT / NO REAL MONEY CHARGED",13,muted);
@@ -180,7 +182,7 @@ namespace JumpNotIncluded
                 var order=orders[index];float y=363+row*60;
                 Box(144,y,1312,51,panel);
                 Text(162,y+12,286,29,order.createdAt,14,muted);
-                Text(457,y+10,209,32,"+"+Coins(order.coins)+" coins",20,paper,true);
+                CoinAmount(457,y+10,209,32,"+"+Coins(order.coins),20,paper);
                 Text(677,y+12,293,28,order.method==PaymentMethod.VirtualCard?"VIRTUAL CARD **** "+PaymentAccount.LastFour:"SGD WALLET",14,muted);
                 Text(976,y+10,205,32,Money(order.cents),20,gold,true,TextAnchor.MiddleRight);
                 Text(1205,y+14,78,24,"PAID",13,payGreen,true);

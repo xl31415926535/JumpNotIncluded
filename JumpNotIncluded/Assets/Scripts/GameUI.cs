@@ -11,12 +11,13 @@ namespace JumpNotIncluded
         private bool submit;
         private float navCooldown;
         private GUIStyle textStyle;
+#if UNITY_EDITOR
+        // Opt-in observer for the isolated presentation capture, stripped from players.
+        public static event Action<Rect,string,GUIStyle> ObserveText;
+#endif
         private GameEvents channel;
-        private static readonly string[] AdBrands={"MARIO POWER-UPS","SUTD / AI","SL CHEATER / CYBERWARE"};
-        private static readonly string[] AdHeadlines={"Gravity respects premium members.","The future called. It wants your brain.","The moon has been put on notice."};
-        private static readonly string[] AdCopy={"Conquer an entire new dimension. Own the sun. Make the laws of physics negotiate with your wallet.","Design the impossible. Command AI. Let yesterday's geniuses watch you prototype tomorrow.","WAR GOD REPLICA. STARFIELD CAMOUFLAGE. MOON KILLER. Accelerate to 1% light speed. Orbital authority for S$79.99."};
         private readonly Color ink=new Color(.025f,.055f,.10f),panel=new Color(.055f,.105f,.18f),
-            muted=new Color(.61f,.69f,.78f),paper=new Color(.95f,.95f,.92f),gold=new Color(.86f,.71f,.43f),
+            muted=new Color(.72f,.78f,.86f),paper=new Color(.98f,.97f,.93f),gold=new Color(1f,.79f,.25f),
             cyan=new Color(.53f,.79f,.94f),line=new Color(.22f,.31f,.43f);
         private bool Classic=>game.mode==ScreenMode.Menu||game.mode==ScreenMode.Loading||game.mode==ScreenMode.Pause||game.mode==ScreenMode.Playing;
         public void Init(SceneRoot root)
@@ -45,7 +46,7 @@ namespace JumpNotIncluded
             float scale=Mathf.Min(Screen.width/1600f,Screen.height/900f);
             Vector2 offset=new Vector2((Screen.width-1600*scale)*.5f,(Screen.height-900*scale)*.5f);
             GUI.matrix=Matrix4x4.TRS(offset,Quaternion.identity,new Vector3(scale,scale,1));
-            textStyle=new GUIStyle(GUI.skin.label){font=font,wordWrap=true};buttonIndex=0;
+            textStyle=new GUIStyle(GUI.skin.label){font=font,wordWrap=true,padding=new RectOffset(0,0,0,0)};buttonIndex=0;
             if(game.mode==ScreenMode.Menu)Menu();
             else if(game.mode==ScreenMode.Loading)Loading();
             else
@@ -64,11 +65,14 @@ namespace JumpNotIncluded
         }
         private void Box(float x,float y,float w,float h,Color color)
         {var prev=GUI.color;GUI.color=color;GUI.DrawTexture(new Rect(x,y,w,h),Texture2D.whiteTexture);GUI.color=prev;}
-        private void Text(float x,float y,float w,float h,string value,int size,Color color,bool bold=false,TextAnchor anchor=TextAnchor.UpperLeft,bool retro=false)
+        private void Text(float x,float y,float w,float h,string value,int size,Color color,bool bold=false,TextAnchor anchor=TextAnchor.UpperLeft,bool retro=false,bool wrap=true)
         {
             textStyle.font=retro?pixelFont:font;textStyle.fontSize=size;textStyle.normal.textColor=color;
-            textStyle.fontStyle=bold?FontStyle.Bold:FontStyle.Normal;textStyle.alignment=anchor;
+            textStyle.fontStyle=bold?FontStyle.Bold:FontStyle.Normal;textStyle.alignment=anchor;textStyle.wordWrap=wrap;
             GUI.Label(new Rect(x,y,w,h),value,textStyle);
+#if UNITY_EDITOR
+            ObserveText?.Invoke(new Rect(x,y,w,h),value,textStyle);
+#endif
         }
         private void Button(float x,float y,float w,float h,string label,Action action,bool primary=false,bool enabled=true,bool quiet=false)
         {
@@ -81,14 +85,15 @@ namespace JumpNotIncluded
                     Box(x,y+3,w,h,new Color(0,0,0,.25f));
                     Box(x,y,w,h,active?gold:enabled&&primary?gold:line);
                     Color fill=!enabled?panel:primary?gold:active?new Color(.13f,.24f,.37f):new Color(.08f,.16f,.26f);
-                    Gradient(x+1,y+1,w-2,h-2,fill,Color.Lerp(fill,ink,.15f));
-                    if(primary&&enabled)Box(x+2,y+2,w-4,1,new Color(1,.91f,.69f));
+                    Gradient(x+1,y+1,w-2,h-2,primary&&enabled?new Color(1,.88f,.43f):fill,
+                        primary&&enabled?new Color(1,.64f,.14f):Color.Lerp(fill,ink,.15f));
+                    if(primary&&enabled)Box(x+2,y+2,w-4,2,new Color(1,.96f,.71f));
                 }
                 else if(active)Box(x+14,y+h-3,w-28,1,gold);
-                if(focus==index&&enabled)Box(x-5,y+8,2,h-16,gold);
+                if(focus==index&&enabled){Box(x-5,y+5,3,h-10,cyan);Box(x+5,y-4,w-10,2,cyan);}
             }
             else if(focus==index||hover)Text(x-30,y,w,h,">",28,paper,true,TextAnchor.MiddleLeft,true);
-            Text(x+14,y+4,w-28,h-8,label,Classic?25:quiet?17:20,enabled?(!Classic&&primary&&!quiet?ink:paper):muted,true,TextAnchor.MiddleCenter,Classic&&game.mode!=ScreenMode.Pause);
+            Text(x+14,y+2,w-28,h-4,label,Classic?25:quiet?17:h<38?18:20,enabled?(!Classic&&primary&&!quiet?ink:paper):muted,true,TextAnchor.MiddleCenter,Classic&&game.mode!=ScreenMode.Pause);
             bool clicked=GUI.Button(rect,GUIContent.none,GUIStyle.none);
             bool selected=submit&&focus==index&&Event.current.type==EventType.Repaint;
             if(enabled&&(clicked||selected)){submit=false;action?.Invoke();}
@@ -117,48 +122,6 @@ namespace JumpNotIncluded
             var uv=new Rect(r.x/texture.width,r.y/texture.height,r.width/texture.width,r.height/texture.height);
             if(mario){uv.x+=uv.width;uv.width=-uv.width;}
             Graphics.DrawTexture(new Rect(x,y,w,h),texture,uv,0,0,0,0,Color.white,key=="wings"?null:mario?game.assets.blueKey:game.assets.greenKey);
-        }
-        private void HeroArt(float x,float y,float w,float h,bool fire=false)
-        {
-            Gradient(x,y,w,h,new Color(.12f,.27f,.42f),new Color(.045f,.095f,.16f));
-            Box(x+18,y+18,w-36,1,line);Box(x+18,y+h-19,w-36,1,line);
-            Text(x+24,y+28,w-48,28,fire?"THE SOLAR SOVEREIGN COLLECTION":"THE COMEBACK OF THE CENTURY",14,gold,true,TextAnchor.MiddleCenter);
-            Text(x+24,y+68,w-48,80,fire?"BECOME\nTHE SUN.":"RISE AGAIN.\nRULE AGAIN.",32,paper,true,TextAnchor.MiddleCenter);
-            float bob=Mathf.Sin(Time.unscaledTime*1.3f)*4;
-            SpriteImage("coin",x+43,y+h*.43f+bob,30,42);
-            SpriteImage(fire?"flower":"star",x+w-83,y+h*.37f-bob,46,46);
-            float height=h*.49f,width=fire?height*.5f:height*1.125f;
-            SpriteImage(fire?"fire-idle":"small-jump",x+(w-width)*.5f,y+h-height-70+bob,width,height,true);
-            for(int i=0;i<3;i++)SpriteImage(i==1?"question":"brick",x+w*.5f-72+i*48,y+h-70,48,48);
-        }
-        private void TechnologyAdArt(AdCampaign campaign,float x,float y,float w,float h)
-        {
-            bool campus=campaign==AdCampaign.SutdAI;
-            Box(x,y,w,h,Color.black);
-            if(campus&&game.adKind==AdKind.Cash)
-            {
-                Text(x+24,y+20,w-48,34,"SUTD / DESIGN + AI",25,paper,true,TextAnchor.MiddleCenter);
-                GUI.DrawTexture(new Rect(x+8,y+72,w-16,310),game.assets.sutdAIAd,ScaleMode.ScaleToFit,true);
-                Text(x+24,y+h-66,w-48,28,"DESIGN AND ARTIFICIAL INTELLIGENCE",17,cyan,true,TextAnchor.MiddleCenter);
-                Text(x+24,y+h-34,w-48,22,"sutd.edu.sg/dai",14,muted,false,TextAnchor.MiddleCenter);
-            }
-            else
-            {
-                GUI.DrawTexture(new Rect(x,y,w,h),campus?game.assets.sutdRobotAd:game.assets.slCheaterAd,ScaleMode.ScaleToFit,true);
-                if(!campus)
-                {
-                    Text(x+18,y+18,150,72,"SL\nCHEATER",26,paper,true);
-                    Text(x+18,y+105,150,100,"WAR GOD\nMOON KILLER\nEDITION",14,gold,true);
-                    Text(x+18,y+h-44,w-36,27,"STARFIELD CAMOUFLAGE. UNREASONABLE AUTHORITY.",16,paper,true,TextAnchor.MiddleCenter);
-                }
-            }
-        }
-        private void RewardTile(float x,float y,float w,string icon,string heading,string detail,bool earned=false)
-        {
-            Box(x,y,w,112,earned?gold:line);Gradient(x+1,y+1,w-2,110,earned?new Color(.22f,.26f,.25f):new Color(.10f,.19f,.30f),panel);
-            Text(x+5,y+9,w-10,25,heading,13,earned?gold:muted,true,TextAnchor.MiddleCenter);
-            SpriteImage(icon,x+(w-32)*.5f,y+36,32,32);
-            Text(x+4,y+81,w-8,26,detail,16,earned?gold:paper,true,TextAnchor.MiddleCenter);
         }
         private void Menu()
         {
@@ -189,14 +152,15 @@ namespace JumpNotIncluded
         private void Hud()
         {
             string[] values={"MARIO\n"+(game.world>0?displayedScore:0).ToString("000000"),
-                "\n"+"o x"+(game.world>0?game.Run.coins:0).ToString("00"),"WORLD\n1-"+Mathf.Max(game.world,1),
+                "","WORLD\n1-"+Mathf.Max(game.world,1),
                 "TIME\n"+(game.world>0?Mathf.Max(0,400-Mathf.FloorToInt(game.Run.playTime)).ToString("000"):"400")};
             for(int i=0;i<values.Length;i++)Text(120+i*360,32,300,90,values[i],29,paper,true,TextAnchor.UpperLeft,true);
+            CoinAmount(480,72,300,42,"x"+(game.world>0?game.Run.coins:0).ToString("00"),29,paper,retro:true);
         }
         private void Shop()
         {
             CommerceHeader("UPGRADE SHOP");
-            Gradient(176,184,1238,63,new Color(.13f,.29f,.45f),new Color(.065f,.14f,.24f));
+            Gradient(176,184,1238,63,promoRed,promoWine);
             Text(202,194,730,46,"WHY PLAY FAIR? PLAY PREMIUM.",28,gold,true);
             Button(960,194,432,43,"SL CHEATER MECH / S$79.99",game.OpenMechShowcase,true);
             float footer=178;
@@ -222,7 +186,8 @@ namespace JumpNotIncluded
                 Text(x+82,y+28,296,46,product.title,24,paper,true,TextAnchor.MiddleLeft);
                 Text(x+18,y+79,360,87,product.description,16,muted);
                 bool owns=game.Run.Owns(product.product),canBuy=!owns&&game.Run.coins>=product.price;
-                Button(x+16,y+173,364,33,owns?"OWNED":product.price+" COINS",()=>game.Buy(product.product),canBuy,canBuy);
+                if(owns)Button(x+16,y+173,364,33,"OWNED",null,false,false);
+                else CoinPriceButton(x+16,y+173,364,33,product.price,()=>game.Buy(product.product),canBuy);
             }
             Text(181,774,805,25,"Collect 1 coin per pickup. Upgrades last this run. All payments are simulated.",14,muted);
             Button(1014,725,400,56,game.ReviveRequired?"REVIVE - 2 SECOND AD":"BACK TO THE GAME",()=>
@@ -234,9 +199,7 @@ namespace JumpNotIncluded
             Gradient(140,80,1320,740,new Color(.09f,.18f,.29f),ink);
             Box(160,100,1280,1,line);Box(160,799,1280,1,line);
             Box(176,109,306,58,line);Gradient(177,110,304,56,new Color(.09f,.2f,.31f),panel);
-            SpriteImage("coin",194,122,23,32);
-            string balance=game.Run.coins.ToString("N0",System.Globalization.CultureInfo.InvariantCulture);
-            Text(230,113,178,49,balance,game.Run.coins<1000000?29:22,gold,true,TextAnchor.MiddleLeft);
+            CoinAmount(194,113,218,49,Coins(game.Run.coins),game.Run.coins<1000000?29:22,gold);
             Button(428,109,54,58,"+",game.OpenRecharge,true,!game.rechargeOpen);
             Text(526,111,488,50,title,29,paper,true,TextAnchor.MiddleCenter);
             if(game.rechargeOpen||game.mechShowcaseOpen)
@@ -246,68 +209,20 @@ namespace JumpNotIncluded
             }
             Button(1323,106,110,42,"BACK",game.CloseOverlay,false,true,true);
         }
-        private void CoinPile(float center,float baseline,int pack)
+        private void CoinPile(float center,float baseline,int pack,float scale=1)
         {
             int tiers=pack+2;
-            Box(center-96,baseline-4,192,5,new Color(0,0,0,.18f));
+            Box(center-96*scale,baseline-4*scale,192*scale,5*scale,new Color(0,0,0,.18f));
             for(int row=0;row<tiers;row++)
                 for(int coin=0;coin<tiers-row;coin++)
                 {
-                    float x=center-(tiers-row)*22+coin*44;
-                    SpriteImage("coin",x,baseline-52-row*24,37,52);
+                    float x=center-((tiers-row)*22-coin*44)*scale;
+                    SpriteImage("coin",x,baseline-(52+row*24)*scale,37*scale,52*scale);
                 }
         }
         private void Recharge(){PaymentCheckout();}
-        private void Advertisement()
-        {
-            bool revive=game.adKind==AdKind.Revive;
-            int campaign=(int)game.adCampaign;
-            Veil();Window(180,105,1240,690,AdBrands[campaign]+(revive?" / 2-SECOND REVIVE":" / WATCH & EARN"),AdHeadlines[campaign]);
-            Text(214,240,1140,30,AdCopy[campaign],17,muted);
-            if(game.adCampaign==AdCampaign.Mario)HeroArt(215,276,600,473,!revive);
-            else TechnologyAdArt(game.adCampaign,215,276,600,473);
-            Text(855,286,494,31,revive?"DEATH IS A NEGOTIABLE INCONVENIENCE":"YOUR ATTENTION MINTS DESTINY.",17,gold,true);
-            Text(852,330,497,77,revive?"BACK TO YOUR\nCHECKPOINT":"+"+Money(game.adEarned),revive?29:52,paper,true);
-            Text(855,419,494,51,revive?"Your legend refuses to end here.\nResurrection only. No cash reward.":"BALANCE  "+Money(game.Run.wallet)+" / S$99.00\n+S$1 EVERY FULL SECOND",17,muted);
-            if(revive)
-            {
-                RewardTile(855,488,152,"small-idle","WATCH 2 SECONDS","REVIVE");
-                Text(1030,496,319,58,"RECLAIM YOUR\nRIGHTFUL GLORY",21,gold,true);
-                Text(1030,561,319,39,"Returning in "+Mathf.Max(1,Mathf.CeilToInt(SceneRoot.ReviveAdDuration-game.adTime))+"...",23,paper);
-            }
-            else
-            {
-                int seconds=Mathf.FloorToInt(game.adTime),first=seconds/5*5;
-                for(int i=0;i<5;i++)RewardTile(855+i*100,488,94,"coin","SEC "+(first+i+1),seconds>first+i?"CLAIMED":"+S$1.00",seconds>first+i);
-            }
-            float progress=revive?game.adTime/SceneRoot.ReviveAdDuration:game.adTime-Mathf.Floor(game.adTime);
-            Box(855,620,494,5,line);Box(855,620,494*Mathf.Clamp01(progress),5,gold);
-            Text(855,640,494,40,revive?"Your game resumes when the ad finishes.":"Next S$1 in "+(1-progress).ToString("0.0",System.Globalization.CultureInfo.InvariantCulture)+"s. Stop any time; full seconds count.",16,muted);
-            if(revive)Text(855,695,494,49,"PREPARING YOUR COMEBACK...",18,gold,true,TextAnchor.MiddleCenter);
-            else
-            {
-                Button(855,695,494,49,"STOP & KEEP CASH",game.FinishAd,true);
-                Button(1351,130,42,42,"X",game.FinishAd,false,true,true);
-            }
-        }
-        private void Death()
-        {
-            Veil();Window(180,105,1240,690,"A SPECIAL OFFER FOR A VERY SPECIAL DEFEAT",game.Run.Owns(Product.Jump)?"You fell. Your benefits didn't.":"That jump would have cost 199 coins.");
-            HeroArt(215,276,360,473);
-            Text(624,283,720,31,"AN EXCLUSIVE INVITATION TO TRANSCEND MORTALITY",17,gold,true);
-            Text(624,332,720,58,game.deathReason,22,paper);
-            RewardTile(624,409,166,"small-jump","JUMP DLC","199 COINS");
-            RewardTile(806,409,166,"flower","FIRE FLOWER","299 COINS");
-            Text(1007,414,333,30,"THE NEXT STAGE OF EVOLUTION",16,gold,true);
-            Text(1007,455,333,67,"Transcend limits.\nEmbrace greatness.",25,paper,true);
-            Button(624,554,350,62,"REVIVE - 2 SECOND AD",()=>game.StartAd(AdKind.Revive),true);
-            Button(994,554,354,62,game.Run.wallet<RunModel.WalletLimit?"EARN S$1 / SEC":"BALANCE FULL - S$99",()=>game.StartAd(AdKind.Cash),false,game.Run.wallet<RunModel.WalletLimit);
-            Button(624,634,724,51,"VIEW ALL UPGRADES",game.OpenShop,false,true,true);
-            Box(624,704,724,1,line);
-            Text(624,721,300,27,"SCORE "+game.Run.score.ToString("000000")+"   DEATHS "+game.Run.deaths,15,muted);
-            Button(972,712,190,42,"RESTART RUN",game.NewGame,false,true,true);
-            Button(1170,712,178,42,"MAIN MENU",game.ToMenu,false,true,true);
-        }
+        private void Advertisement()=>PromotionAd();
+        private void Death()=>PromotionDeath();
         private void Pause()
         {
             Veil();Box(460,168,680,590,Color.black);
@@ -319,12 +234,13 @@ namespace JumpNotIncluded
             Button(530,607,540,53,"MAIN MENU",game.ToMenu);
             Text(485,697,630,52,game.Run.Owns(Product.Mech)?"A/D MOVE   HOLD SPACE ASCEND   RELEASE HOVER\nS / DOWN DESCEND   J LOCK-ON LASER   ESC PAUSE":"A/D MOVE   SPACE JUMP   J FIRE   ESC PAUSE",18,paper,false,TextAnchor.MiddleCenter);
         }
-        private void ReceiptMetric(float x,string label,string value,string detail,Color accent)
+        private void ReceiptMetric(float x,string label,string value,string detail,Color accent,bool coins=false)
         {
             Box(x,296,368,206,line);Gradient(x+1,297,366,204,new Color(.10f,.21f,.33f),panel);
             Box(x+1,297,366,3,accent);
             Text(x+18,315,332,30,label,18,accent,true,TextAnchor.MiddleCenter);
-            Text(x+18,351,332,76,value,value.Length>9?43:55,paper,true,TextAnchor.MiddleCenter);
+            if(coins)CoinAmount(x+18,351,332,76,value,value.Length>7?32:49,paper,TextAnchor.MiddleCenter);
+            else Text(x+18,351,332,76,value,value.Length>9?43:55,paper,true,TextAnchor.MiddleCenter);
             Text(x+18,441,332,50,detail,17,muted,false,TextAnchor.UpperCenter);
         }
         private void Results()
@@ -337,7 +253,7 @@ namespace JumpNotIncluded
                 game.world==1?"Level cleared. Receipt enclosed.":"VICTORY, ITEMIZED.");
             Text(216,245,1168,36,boughtPower?"You bought the advantage. The receipt remembers.":"No upgrades purchased. The receipt has nothing to hide.",23,gold);
             ReceiptMetric(216,"ADS WATCHED",Seconds(run.adWatchTime),run.ads+" rewarded ads.\nThank you for your attention.",gold);
-            ReceiptMetric(616,"COINS SPENT",Count(spent),"Refunded: "+Count(refunded)+"  |  Net: "+Count(spent-refunded)+"\nCard: "+Money(run.Payments.Total(PaymentMethod.VirtualCard))+"  |  Mech: "+Money(run.WalletPaidTotal()),gold);
+            ReceiptMetric(616,"COINS SPENT",Count(spent),"Refunded: "+Count(refunded)+"  |  Net: "+Count(spent-refunded)+"\nCard: "+Money(run.Payments.Total(PaymentMethod.VirtualCard))+"  |  Mech: "+Money(run.WalletPaidTotal()),gold,true);
             ReceiptMetric(1016,"YOU ACTUALLY PLAYED",Seconds(run.activeInputTime),"Move / jump / fly / fire held.\nIdle, menus and ads excluded.",cyan);
             float tracked=run.adWatchTime+run.playTime,denominator=Mathf.Max(.001f,tracked);
             float adShare=run.adWatchTime/denominator,inputShare=Mathf.Min(run.activeInputTime,run.playTime)/denominator;

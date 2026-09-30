@@ -175,8 +175,8 @@ PASS: continuous thrust stops at the visible upper flight boundary
 PASS: S lowers the mech deliberately without restoring gravity
 PASS: controlled mech descent counts toward actual hands-on time
 PASS: abyss safety restores stable hover above an unchanged gap instead of killing the mech
-PASS: rear auto-lock fixture is visible before firing (viewport=(-0.01, 0.19, 10.00), camera=(13.23, 4.70, -10.00), aspect=1.333333)
-PASS: one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots=0 -> 1, target=check.mech.near, defeated=True, camera=(11.96, 4.70, -10.00), nearViewport=(-0.01, 0.19, 10.00), player=(6.00, 3.50))
+PASS: rear auto-lock fixture is visible before firing (viewport=(0.10, 0.19, 10.00), camera=(11.19, 4.70, -10.00), aspect=1.333333)
+PASS: one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots=0 -> 1, target=check.mech.near, defeated=True, camera=(11.08, 4.70, -10.00), nearViewport=(0.10, 0.19, 10.00), player=(6.00, 3.50))
 PASS: one auto-locked laser instantly kills a full-health 18-hit Bowser
 PASS: mech J attack uses its laser rather than ordinary fireballs or Gatling bullets
 PASS: actual Goomba, Bowser, flame and poison contacts cannot damage the equipped mech

@@ -16,7 +16,7 @@ namespace JumpNotIncluded
             GUI.color=new Color(0,0,0,.4f);
             GUI.DrawTexture(new Rect(badge.x+9,badge.y+13,badge.width,badge.height),titleBurst);
             GUI.color=Color.white;GUI.DrawTexture(badge,titleBurst);
-            Text(1160,309,310,86,"FREE",68,new Color(.40f,.075f,.025f),true,TextAnchor.MiddleCenter);
+            Text(1160,305,310,94,"FREE",68,new Color(.40f,.075f,.025f),true,TextAnchor.MiddleCenter);
             Text(1160,390,310,59,"TO PLAY",42,new Color(.40f,.075f,.025f),true,TextAnchor.MiddleCenter);
             GUI.color=previousColor;GUI.matrix=previousMatrix;
         }

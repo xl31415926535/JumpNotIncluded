@@ -28,7 +28,7 @@ namespace JumpNotIncluded.EditorTools
         [MenuItem("Tools/Jump Not Included/Setup project")]
         public static void Setup()
         {
-            PlayerSettings.bundleVersion="1.14.1";
+            PlayerSettings.bundleVersion="1.15.0";
             var existing=AssetDatabase.LoadAssetAtPath<GameAssets>("Assets/Resources/GameAssets.asset");
             if(existing!=null)
             {

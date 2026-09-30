@@ -1,0 +1,109 @@
+STAGED PRESENTATION FIXTURES / real UI and Input System
+CAPTURED: 00-main-menu (1280x720)
+CAPTURED: 00-main-menu-small (960x540)
+CAPTURED: 00-main-menu-4x3 (1024x768)
+CAPTURED: 00-main-menu-1080p (1920x1080)
+PASS: UI resolves the actual 10x14 coin sprite
+CAPTURED: 01-gameplay-coins (1280x720)
+CAPTURED: 01-gameplay-coins-small (960x540)
+CAPTURED: 01-gameplay-coins-4x3 (1024x768)
+CAPTURED: 01-gameplay-coins-1080p (1920x1080)
+CAPTURED: 02-hud-1000 (1280x720)
+CAPTURED: 02-hud-1000-small (960x540)
+CAPTURED: 02-hud-1000-4x3 (1024x768)
+CAPTURED: 02-hud-1000-1080p (1920x1080)
+PASS: HUD renders 00 and 1000 unchanged as numeric text beside the coin sprite
+CAPTURED: 03-comeback-offer (1280x720)
+CAPTURED: 03-comeback-offer-small (960x540)
+CAPTURED: 03-comeback-offer-4x3 (1024x768)
+CAPTURED: 03-comeback-offer-1080p (1920x1080)
+PASS: Down-arrow navigation moves from revival to the cash-ad button
+PASS: Death-page earn button opens a cash ad
+PASS: One full ad second credits exactly S$1; fractional second adds nothing
+CAPTURED: 04-cash-Mario (1280x720)
+CAPTURED: 04-cash-Mario-small (960x540)
+CAPTURED: 04-cash-Mario-4x3 (1024x768)
+CAPTURED: 04-cash-Mario-1080p (1920x1080)
+CAPTURED: 04-cash-SutdAI (1280x720)
+CAPTURED: 04-cash-SutdAI-small (960x540)
+CAPTURED: 04-cash-SutdAI-4x3 (1024x768)
+CAPTURED: 04-cash-SutdAI-1080p (1920x1080)
+CAPTURED: 04-cash-SlCheater (1280x720)
+CAPTURED: 04-cash-SlCheater-small (960x540)
+CAPTURED: 04-cash-SlCheater-4x3 (1024x768)
+CAPTURED: 04-cash-SlCheater-1080p (1920x1080)
+PASS: Unfocused ad cannot advance time or rewards
+PASS: Collect button keeps banked cash and preserves revival requirement
+CAPTURED: 05-upgrade-shop (1280x720)
+CAPTURED: 05-upgrade-shop-small (960x540)
+CAPTURED: 05-upgrade-shop-4x3 (1024x768)
+CAPTURED: 05-upgrade-shop-1080p (1920x1080)
+PASS: Coin-price button buys Jump for exactly 199 coins
+PASS: Owned upgrade button cannot charge twice
+PASS: Insufficient coin balance keeps the purchase disabled
+PASS: Coin-balance plus button opens the pack chooser
+CAPTURED: 06-coin-packs (1280x720)
+CAPTURED: 06-coin-packs-small (960x540)
+CAPTURED: 06-coin-packs-4x3 (1024x768)
+CAPTURED: 06-coin-packs-1080p (1920x1080)
+PASS: First pack selects 100 coins for S$1.00
+PASS: Third pack selects 2000 coins for S$18.80
+PASS: Middle pack selects 1000 coins for S$9.80
+PASS: Continue opens virtual-card linking
+PASS: Link button reaches review without a charge
+CAPTURED: 07-checkout-review (1280x720)
+CAPTURED: 07-checkout-review-small (960x540)
+CAPTURED: 07-checkout-review-4x3 (1024x768)
+CAPTURED: 07-checkout-review-1080p (1920x1080)
+PASS: Pay button begins confirmation
+PASS: Cancel payment leaves coins and charges untouched
+PASS: Confirmed payment grants precisely 1000 coins once
+CAPTURED: 08-coin-receipt (1280x720)
+CAPTURED: 08-coin-receipt-small (960x540)
+CAPTURED: 08-coin-receipt-4x3 (1024x768)
+CAPTURED: 08-coin-receipt-1080p (1920x1080)
+PASS: Receipt opens payment activity
+CAPTURED: 09-payment-activity (1280x720)
+CAPTURED: 09-payment-activity-small (960x540)
+CAPTURED: 09-payment-activity-4x3 (1024x768)
+CAPTURED: 09-payment-activity-1080p (1920x1080)
+PASS: Activity receipt button reopens the original order
+PASS: Receipt back button returns to upgrades
+PASS: Shop Back returns to the mandatory death screen
+PASS: Primary comeback button starts a revival ad
+CAPTURED: 10-revive-Mario (1280x720)
+CAPTURED: 10-revive-Mario-small (960x540)
+CAPTURED: 10-revive-Mario-4x3 (1024x768)
+CAPTURED: 10-revive-Mario-1080p (1920x1080)
+CAPTURED: 10-revive-SutdAI (1280x720)
+CAPTURED: 10-revive-SutdAI-small (960x540)
+CAPTURED: 10-revive-SutdAI-4x3 (1024x768)
+CAPTURED: 10-revive-SutdAI-1080p (1920x1080)
+CAPTURED: 10-revive-SlCheater (1280x720)
+CAPTURED: 10-revive-SlCheater-small (960x540)
+CAPTURED: 10-revive-SlCheater-4x3 (1024x768)
+CAPTURED: 10-revive-SlCheater-1080p (1920x1080)
+PASS: Revival ad exposes no skip or collect button
+PASS: Revival still requires the full two seconds
+PASS: Completed revival returns to gameplay with purchased upgrade
+CAPTURED: 11-results-coins (1280x720)
+CAPTURED: 11-results-coins-small (960x540)
+CAPTURED: 11-results-coins-4x3 (1024x768)
+CAPTURED: 11-results-coins-1080p (1920x1080)
+PASS: Full-wallet earn button stays disabled at S$99.00
+CAPTURED: 12-wallet-full (1280x720)
+CAPTURED: 12-wallet-full-small (960x540)
+CAPTURED: 12-wallet-full-4x3 (1024x768)
+CAPTURED: 12-wallet-full-1080p (1920x1080)
+PASS: Cash ad stops automatically at the S$99 wallet cap
+CAPTURED: 13-large-balance (1280x720)
+CAPTURED: 13-large-balance-small (960x540)
+CAPTURED: 13-large-balance-4x3 (1024x768)
+CAPTURED: 13-large-balance-1080p (1920x1080)
+CAPTURED: 14-mech-showcase (1280x720)
+CAPTURED: 14-mech-showcase-small (960x540)
+CAPTURED: 14-mech-showcase-4x3 (1024x768)
+CAPTURED: 14-mech-showcase-1080p (1920x1080)
+PASS: All observed text fits its allocated layout rectangle at four window sizes
+PASS: Presentation interactions preserve the payment ledger
+ALL PROMOTION UI CHECKS PASSED
