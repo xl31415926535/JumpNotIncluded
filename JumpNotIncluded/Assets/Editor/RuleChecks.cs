@@ -53,7 +53,15 @@ namespace JumpNotIncluded.EditorTools
                 Check(premium.Buy(item)&&premium.Owns(item)&&!premium.Buy(item),item+" unlocks once with coins.");
             Check(premium.Owns(Product.Jump)&&!premium.Buy(Product.Jump),"Wings include basic jump and prevent a redundant purchase.");
             Check(premium.CanFire(Form.Small,Buff.None)&&premium.CanFire(Form.Super,Buff.None),"Gatling works without Fire Mario.");
-            Check(premium.coins==9003&&premium.wallet==0,"Premium upgrades deduct their exact coin prices.");
+            Check(RunModel.Price(Product.DoubleJump)==999&&RunModel.Price(Product.Gatling)==1999,"Wings and Gatling retain their reduced 999 and 1999 coin prices.");
+            Check(premium.coins==15003&&premium.wallet==0,"Premium upgrades deduct their exact reduced coin prices.");
+            var mech=new RunModel{coins=100000,wallet=RunModel.MechCost-1};
+            Check(RunModel.MechCost==7999&&!mech.BuyMech()&&!mech.Buy(Product.Mech,0)&&mech.wallet==7998&&mech.coins==100000&&!mech.Owns(Product.Mech),"Mech costs exactly SGD 79.99 and cannot substitute coins or underpay.");
+            mech.Credit(1);
+            Check(mech.BuyMech()&&mech.wallet==0&&mech.coins==100000&&mech.Owns(Product.Mech),"Mech purchase debits only the SGD wallet and grants ownership.");
+            Check(mech.WalletPaidTotal()==7999&&mech.PaidTotal()==0&&!mech.BuyMech()&&mech.WalletPaidTotal()==7999,"One mech receipt records cash separately without duplicate charging or coin-spend inflation.");
+            var newMechRun=new RunModel();
+            Check(!newMechRun.Owns(Product.Mech)&&newMechRun.WalletPaidTotal()==0,"A new run resets mech ownership and its direct-wallet receipt.");
             var rotation=new AdRotation(new Random(237));int previous=-1;
             for(int round=0;round<100;round++)
             {

@@ -1,0 +1,71 @@
+STAGED PROPULSION QA / real terrain, Input System controls and game camera
+PASS: fixture grants a paid replica independently of the arrival checks
+PASS: already deployed fixture starts normal control without changing the arrival gate
+PASS: ground fixture stands on the original ground surface
+PASS: the redrawn chassis atlas and pixel material resolve to a supported shader on this renderer
+PASS: the visible chassis actually uses the redrawn atlas and the supported pixel material
+PASS: the rendered chassis logical cells and exhaust pixels both have Mario's effective 16 PPU scale
+PASS: Ground idle stays grounded without flight or cruise
+PASS: Ground idle emits neither vertical nor horizontal exhaust
+PASS: Ground idle stops the engine loop
+PASS: Ground idle uses the redrawn idle pose 0 or walking poses 1 and 2 without flight trails
+CAPTURED: 01-ground-idle (1280x720)
+PASS: real D input walks the suit along the ground
+PASS: Ground walk stays grounded without flight or cruise
+PASS: Ground walk emits neither vertical nor horizontal exhaust
+PASS: Ground walk stops the engine loop
+PASS: Ground walk uses the redrawn idle pose 0 or walking poses 1 and 2 without flight trails
+CAPTURED: 02-ground-walk (1280x720)
+PASS: real Space input lifts the suit above the ground
+PASS: Vertical lift uses redrawn expanded-wing hover pose 3
+PASS: Vertical lift uses active independent exhaust pointing downward
+PASS: Vertical lift disables the horizontal cruising trail
+PASS: Vertical lift plays the flight engine loop
+CAPTURED: 03-lift (1280x720)
+PASS: releasing Space maintains altitude without continuing ascent
+PASS: Stationary hover uses redrawn expanded-wing hover pose 3
+PASS: Stationary hover uses active independent exhaust pointing downward
+PASS: Stationary hover disables the horizontal cruising trail
+PASS: Stationary hover plays the flight engine loop
+PASS: the live hover exhaust renders opaque one-sixteenth-unit squares in exactly three colors
+CAPTURED: 04-hover (1280x720)
+PASS: Right cruise uses redrawn cruising poses 4 and 5
+PASS: Right cruise faces and travels in the commanded direction
+PASS: Right cruise emits an active pixel trail opposite the direction of travel
+CAPTURED: 05-cruise-right (1280x720)
+PASS: Left cruise uses redrawn cruising poses 4 and 5
+PASS: Left cruise faces and travels in the commanded direction
+PASS: Left cruise emits an active pixel trail opposite the direction of travel
+CAPTURED: 06-cruise-left (1280x720)
+PASS: Hover after cruising uses redrawn expanded-wing hover pose 3
+PASS: Hover after cruising uses active independent exhaust pointing downward
+PASS: Hover after cruising disables the horizontal cruising trail
+PASS: Hover after cruising plays the flight engine loop
+PASS: real S input lands on ground instead of hovering at the abyss safety altitude
+PASS: Landed on ground stays grounded without flight or cruise
+PASS: Landed on ground emits neither vertical nor horizontal exhaust
+PASS: Landed on ground stops the engine loop
+PASS: Landed on ground uses the redrawn idle pose 0 or walking poses 1 and 2 without flight trails
+CAPTURED: 07-landed (1280x720)
+PASS: the original World 1 pipe remains in the fixture
+PASS: real S input lands on the original pipe top without removing terrain
+PASS: Landed on pipe stays grounded without flight or cruise
+PASS: Landed on pipe emits neither vertical nor horizontal exhaust
+PASS: Landed on pipe stops the engine loop
+PASS: Landed on pipe uses the redrawn idle pose 0 or walking poses 1 and 2 without flight trails
+CAPTURED: 08-pipe-landed (1280x720)
+PASS: the original abyss still activates hover protection without a new death
+PASS: abyss protection holds altitude after descent is released
+PASS: abyss protection leaves the original gap empty
+PASS: Abyss hover uses redrawn expanded-wing hover pose 3
+PASS: Abyss hover uses active independent exhaust pointing downward
+PASS: Abyss hover disables the horizontal cruising trail
+PASS: Abyss hover plays the flight engine loop
+CAPTURED: 09-abyss-hover (1280x720)
+PASS: Scale comparison ground idle stays grounded without flight or cruise
+PASS: Scale comparison ground idle emits neither vertical nor horizontal exhaust
+PASS: Scale comparison ground idle stops the engine loop
+PASS: Scale comparison ground idle uses the redrawn idle pose 0 or walking poses 1 and 2 without flight trails
+PASS: the comparison places the actual 16 PPU big Mario and grounded chassis on the same floor
+CAPTURED: 10-mario-scale (1280x720)
+ALL PROPULSION CHECKS PASSED

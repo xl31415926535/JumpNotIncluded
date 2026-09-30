@@ -28,23 +28,26 @@ namespace JumpNotIncluded.EditorTools
         [MenuItem("Tools/Jump Not Included/Setup project")]
         public static void Setup()
         {
+            PlayerSettings.bundleVersion="1.14.1";
             var existing=AssetDatabase.LoadAssetAtPath<GameAssets>("Assets/Resources/GameAssets.asset");
             if(existing!=null)
             {
-                if(existing.revision<9)
+                if(existing.revision<12||existing.mechPixelAtlas==null||existing.mechPixelMaterial==null)
                 {
                     if(existing.revision<6){CreateStates(existing);CreateAds(existing);}
-                    if(existing.revision<7)CreateProducts(existing);
-                    CreateSprites(existing);CreateSounds(existing);existing.revision=9;
+                    CreateProducts(existing);
+                    if(existing.revision<9){CreateSprites(existing);CreateSounds(existing);}
+                    CreateMech(existing);
+                    existing.revision=12;
                     EditorUtility.SetDirty(existing);AssetDatabase.SaveAssets();
-                    Debug.Log("JNI assets updated: red growth mushroom and Starman music.");
+                    Debug.Log("JNI assets updated: pixel War God and nine original chiptune sound effects.");
                 }
                 return;
             }
             foreach(string p in new[]{Data,Data+"/Sprites",Data+"/FSM",Data+"/Products","Assets/Scenes","Assets/Resources"})Directory.CreateDirectory(p);
             AssetDatabase.Refresh();
             PlayerSettings.companyName="Student Arcade";PlayerSettings.productName="Jump Not Included";
-            PlayerSettings.bundleVersion="1.11.2";PlayerSettings.colorSpace=ColorSpace.Gamma;
+            PlayerSettings.colorSpace=ColorSpace.Gamma;
             PlayerSettings.defaultScreenWidth=1280;PlayerSettings.defaultScreenHeight=720;
             PlayerSettings.fullScreenMode=FullScreenMode.Windowed;PlayerSettings.resizableWindow=true;
             PlayerSettings.runInBackground=false;
@@ -63,8 +66,8 @@ namespace JumpNotIncluded.EditorTools
             bank.blueKey=new Material(shader){name="Blue background key"};bank.blueKey.SetColor("_KeyColor",new Color(0,136/255f,1));
             bank.greenKey=new Material(shader){name="Green background key"};bank.greenKey.SetColor("_KeyColor",Color.green);
             AssetDatabase.CreateAsset(bank.blueKey,Data+"/BlueKey.mat");AssetDatabase.CreateAsset(bank.greenKey,Data+"/GreenKey.mat");
-            CreateSounds(bank);bank.revision=9;
-            CreateStates(bank);CreateProducts(bank);CreateAds(bank);CreateMixer(bank);
+            CreateSounds(bank);bank.revision=12;
+            CreateStates(bank);CreateProducts(bank);CreateAds(bank);CreateMech(bank);CreateMixer(bank);
             var session=ScriptableObject.CreateInstance<RunState>();session.NewRun();
             var events=ScriptableObject.CreateInstance<GameEvents>();
             AssetDatabase.CreateAsset(session,"Assets/Resources/RunState.asset");
@@ -161,6 +164,53 @@ namespace JumpNotIncluded.EditorTools
             bank.sutdRobotAd=Texture("Ads/sutd-school-for-innovators","jpg",FilterMode.Bilinear);
             bank.slCheaterAd=Texture("Ads/slcheater-war-god","png",FilterMode.Bilinear);
         }
+        private static void CreateMech(GameAssets bank)
+        {
+            void ImportSheet(string name)
+            {
+                string path="Assets/Art/Mech/"+name+".png";
+                var importer=(TextureImporter)AssetImporter.GetAtPath(path);
+                importer.textureType=TextureImporterType.Default;importer.textureShape=TextureImporterShape.Texture2D;
+                importer.filterMode=FilterMode.Point;
+                importer.alphaIsTransparency=true;importer.mipmapEnabled=false;
+                importer.textureCompression=TextureImporterCompression.Uncompressed;
+                importer.npotScale=TextureImporterNPOTScale.None;importer.maxTextureSize=4096;
+                importer.wrapMode=TextureWrapMode.Clamp;importer.SaveAndReimport();
+            }
+            foreach(string name in new[]{"war-god-portrait","war-god-flight-right","war-god-walk-right","war-god-8bit-v1"})ImportSheet(name);
+            const string pixelMaterialPath=Data+"/MechPixel.mat";
+            bank.mechPixelMaterial=AssetDatabase.LoadAssetAtPath<Material>(pixelMaterialPath);
+            if(bank.mechPixelMaterial==null)
+            {
+                var shader=Shader.Find("JumpNotIncluded/MechPixel");
+                if(shader==null)throw new Exception("Mech pixel shader was not imported.");
+                bank.mechPixelMaterial=new Material(shader){name="Mech / 16 PPU palette"};
+                AssetDatabase.CreateAsset(bank.mechPixelMaterial,pixelMaterialPath);
+            }
+            // Reimports can reload the resource bank: assign references after every import has finished.
+            Texture2D Sheet(string name)=>AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/Mech/"+name+".png");
+            bank.mechPortrait=Sheet("war-god-portrait");
+            bank.mechFlightTexture=Sheet("war-god-flight-right");
+            bank.mechWalkTexture=Sheet("war-god-walk-right");
+            bank.mechPixelAtlas=Sheet("war-god-8bit-v1");
+            string[] cues={"ignition","thrust-loop","laser","landing","shield","descent","uplink","ready","boost"};
+            foreach(string cue in cues)
+            {
+                string path="Assets/Art/Mech/Audio/"+cue+".wav";
+                var importer=AssetImporter.GetAtPath(path) as AudioImporter;
+                if(importer==null)throw new Exception("Missing mech audio: "+path);
+                var settings=importer.defaultSampleSettings;
+                settings.loadType=AudioClipLoadType.DecompressOnLoad;settings.compressionFormat=AudioCompressionFormat.PCM;
+                settings.sampleRateSetting=AudioSampleRateSetting.PreserveSampleRate;
+                settings.preloadAudioData=true;
+                importer.defaultSampleSettings=settings;importer.forceToMono=true;
+                importer.loadInBackground=false;importer.SaveAndReimport();
+            }
+            AudioClip Sound(string cue)=>AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Art/Mech/Audio/"+cue+".wav");
+            bank.mechIgnition=Sound("ignition");bank.mechThrustLoop=Sound("thrust-loop");bank.mechLaser=Sound("laser");
+            bank.mechLanding=Sound("landing");bank.mechShield=Sound("shield");bank.mechDescent=Sound("descent");
+            bank.mechUplink=Sound("uplink");bank.mechReady=Sound("ready");bank.mechBoost=Sound("boost");
+        }
         private static T Save<T>(T item,string file) where T:UnityEngine.Object
         {
             item.name=file;string path=Data+"/FSM/"+file+".asset";
@@ -201,14 +251,15 @@ namespace JumpNotIncluded.EditorTools
         }
         private static void CreateProducts(GameAssets bank)
         {
-            string[] title={"Jump DLC","Fire Flower","Mushroom ID","Master Guide","Monarch Wings","Gatling"};
+            string[] title={"Jump DLC","Fire Flower","Mushroom ID","Master Guide","Monarch Wings","Gatling","War God Replica"};
             string[] desc={
                 "A revolutionary new dimension! Escape the tyranny of flat ground and roam the glorious Z-axis. Gravity has finally met a paying customer.",
                 "Become the sun! The royal Fire Flower places an apocalypse at your fingertips. Let every Goomba kneel before your incandescent majesty.",
                 "Royal mycologists have abolished poison. One purchase rewrites nature: every treacherous mushroom becomes nourishment fit for a sovereign.",
                 "Seize the sight of a thousand grandmasters! Hidden bricks, buried stars, secret fortunes: all bow before your divine gaze.",
-                "A legendary relic of ancient Hallownest. Inherit the Pale King's divine legacy, unfurl Monarch Wings in the void, and command a second ascent.",
-                "Abolish the level itself. Imperial fire erases foes, secret traps and pipes, then paves every abyss. Hold J and advance: victory belongs to you."};
+                "Hallownest's royal inheritance, now yours. Unfurl the Pale King's wings for a second ascent. Every stomp crowns you with another airborne leap.",
+                "A royal decree, delivered at muzzle velocity. Hold J to erase monsters and treacherous bricks. Rivers, pipes and gravity remain outside our jurisdiction.",
+                "SL CHEATER's War God, reborn as the MOON KILLER replica. STARFIELD CAMOUFLAGE. Advertised acceleration to 1% light speed. Thrusters, auto-lock lasers and immunity to this world's primitive monsters: sovereignty has a price."};
             bank.products=new ProductDefinition[title.Length];
             for(int i=0;i<title.Length;i++)
             {
@@ -219,7 +270,9 @@ namespace JumpNotIncluded.EditorTools
                     p=ScriptableObject.CreateInstance<ProductDefinition>();p.product=(Product)i;p.price=RunModel.Price(p.product);
                     AssetDatabase.CreateAsset(p,path);
                 }
-                p.price=RunModel.Price(p.product);p.title=title[i];p.description=desc[i];EditorUtility.SetDirty(p);bank.products[i]=p;
+                p.product=(Product)i;p.currency=p.product==Product.Mech?ProductCurrency.Wallet:ProductCurrency.Coins;
+                p.price=p.product==Product.Mech?RunModel.MechCost:RunModel.Price(p.product);
+                p.title=title[i];p.description=desc[i];EditorUtility.SetDirty(p);bank.products[i]=p;
             }
         }
         private static object Call(object target,string name,params object[] args)
@@ -259,7 +312,12 @@ namespace JumpNotIncluded.EditorTools
             {
                 if(assets.formStates.Length!=6||assets.buffStates.Length!=3)throw new Exception("FSM resources incomplete.");
                 if(assets.sutdAIAd==null||assets.sutdRobotAd==null||assets.slCheaterAd==null)throw new Exception("Advertisement artwork missing.");
-                if(assets.products.Length!=6||assets.Sprite("wings")==assets.solid||assets.Sprite("bowser0")==assets.solid)throw new Exception("Premium upgrade resources incomplete.");
+                if(assets.products.Length!=7||assets.Sprite("wings")==assets.solid||assets.Sprite("bowser0")==assets.solid)throw new Exception("Premium upgrade resources incomplete.");
+                if(assets.mechPortrait==null||assets.mechPixelAtlas==null||assets.mechPixelMaterial==null||
+                    assets.mechIgnition==null||assets.mechThrustLoop==null||assets.mechLaser==null||
+                    assets.mechLanding==null||assets.mechShield==null||assets.mechDescent==null||
+                    assets.mechUplink==null||assets.mechReady==null||assets.mechBoost==null)
+                    throw new Exception("War God replica resources incomplete.");
                 foreach(var sound in assets.sounds)if(sound.clip==null)throw new Exception("Missing sound: "+sound.key);
                 if(assets.mixer==null||assets.musicGroup==null)throw new Exception("Mixer missing.");
                 foreach(var state in assets.formStates.Concat(assets.buffStates))

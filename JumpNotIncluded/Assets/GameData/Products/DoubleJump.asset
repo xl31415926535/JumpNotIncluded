@@ -15,6 +15,7 @@ MonoBehaviour:
   product: 4
   title: Monarch Wings
   subtitle: 
-  description: A legendary relic of ancient Hallownest. Inherit the Pale King's divine
-    legacy, unfurl Monarch Wings in the void, and command a second ascent.
-  price: 2999
+  description: Hallownest's royal inheritance, now yours. Unfurl the Pale King's
+    wings for a second ascent. Every stomp crowns you with another airborne leap.
+  price: 999
+  currency: 0

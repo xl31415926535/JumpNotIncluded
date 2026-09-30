@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace JumpNotIncluded
 {
-    public enum Product { Jump = 0, FireFlower = 1, Purify = 2, MasterGuide = 3, DoubleJump = 4, Gatling = 5 }
+    public enum Product { Jump = 0, FireFlower = 1, Purify = 2, MasterGuide = 3, DoubleJump = 4, Gatling = 5, Mech = 6 }
     public enum Form { Small, Super, Fire, Hurt, Dead, HurtSuper }
     public enum Buff { None, Star, VIP }
-    public enum ScreenMode { Playing, Shop, Ad, Dead, Pause, Results, Menu, Loading }
+    public enum ScreenMode { Playing, Shop, Ad, Dead, Pause, Results, Menu, Loading, Deployment }
     public enum ItemKind { Coin, Mushroom, Poison, Flower, Star }
     public enum AdKind { Revive, Cash }
     public enum AdCampaign { Mario, SutdAI, SlCheater }
@@ -37,6 +37,7 @@ namespace JumpNotIncluded
     {
         public Product product;
         public int coins;
+        public int walletCents;
         public bool refunded;
     }
 
@@ -45,10 +46,12 @@ namespace JumpNotIncluded
     public class RunModel
     {
         public const int WalletLimit=9900;
+        public const int MechCost=7999;
         public string runId = Guid.NewGuid().ToString("N");
         public int world = 1, score, coins, wallet, deaths, ads, refunds;
         public float playTime, adWatchTime, activeInputTime;
         public bool trialClaimed, trialPending, refundBonus;
+        public bool mechDeployed;
         public List<Product> owned = new List<Product>();
         public List<string> claimed = new List<string>();
         public List<Receipt> receipts = new List<Receipt>();
@@ -59,13 +62,13 @@ namespace JumpNotIncluded
         {
             switch(p)
             {case Product.Jump:return 199;case Product.FireFlower:return 299;case Product.Purify:return 1299;
-                case Product.MasterGuide:return 1999;case Product.DoubleJump:return 2999;case Product.Gatling:return 5999;default:return -1;}
+                case Product.MasterGuide:return 1999;case Product.DoubleJump:return 999;case Product.Gatling:return 1999;default:return -1;}
         }
         public static int PackCost(int pack)=>pack==0?100:pack==1?980:pack==2?1880:-1;
         public static int PackCoins(int pack)=>pack==0?100:pack==1?1000:pack==2?2000:0;
         public bool Owns(Product p) => owned.Contains(p)||p==Product.Jump&&owned.Contains(Product.DoubleJump);
         public bool CanCollect(ItemKind kind) => kind != ItemKind.Flower || Owns(Product.FireFlower);
-        public bool CanFire(Form form, Buff buff) => Owns(Product.Gatling)||buff == Buff.VIP || form == Form.Fire && Owns(Product.FireFlower);
+        public bool CanFire(Form form, Buff buff) => Owns(Product.Mech)||Owns(Product.Gatling)||buff == Buff.VIP || form == Form.Fire && Owns(Product.FireFlower);
         public bool ExchangeCash(int pack)
         {
             return Payments.Purchase(this,pack,PaymentMethod.Wallet,Guid.NewGuid().ToString("N"),out _);
@@ -92,6 +95,14 @@ namespace JumpNotIncluded
             { score += 500; refundBonus = true; }
             return true;
         }
+        public bool BuyMech()
+        {
+            // A separate wallet checkout prevents a configured coin price from buying the chassis.
+            if(Owns(Product.Mech)||wallet<MechCost)return false;
+            wallet-=MechCost;owned.Add(Product.Mech);
+            receipts.Add(new Receipt{product=Product.Mech,walletCents=MechCost});
+            return true;
+        }
         public bool RefundFireFlower()
         {
             if (world != 2 || !Owns(Product.FireFlower)) return false;
@@ -112,6 +123,8 @@ namespace JumpNotIncluded
         }
         public int PaidTotal()
         { int total=0; foreach (var r in receipts) total+=r.coins; return total; }
+        public int WalletPaidTotal()
+        { int total=0; foreach (var r in receipts) total+=r.walletCents; return total; }
         public int RefundedTotal()
         { int total=0; foreach (var r in receipts) if(r.refunded) total+=r.coins; return total; }
     }

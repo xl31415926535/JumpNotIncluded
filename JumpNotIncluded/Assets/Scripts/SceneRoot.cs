@@ -32,6 +32,7 @@ namespace JumpNotIncluded
         private bool skipAdFrame;
         public RunModel Run => session.data;
         public bool Playing => mode==ScreenMode.Playing;
+        public bool Deploying => mode==ScreenMode.Deployment;
         public bool ReviveRequired => session.reviveRequired;
         public int HighScore => PlayerPrefs.GetInt("jni.highscore",0);
 
@@ -84,7 +85,8 @@ namespace JumpNotIncluded
             {
                 Run.playTime+=Time.deltaTime;
                 if(hasFocus&&(Mathf.Abs(input.move.ReadValue<float>())>.1f||input.jump.IsPressed()||
-                    input.jump.WasPressedThisFrame()||input.fire.IsPressed()||input.fire.WasPressedThisFrame()))
+                    input.jump.WasPressedThisFrame()||input.fire.IsPressed()||input.fire.WasPressedThisFrame()||
+                    player!=null&&player.MechActive&&input.descend.IsPressed()))
                     Run.activeInputTime+=Time.deltaTime;
                 if(player!=null)
                 {
@@ -109,7 +111,11 @@ namespace JumpNotIncluded
         }
         public void SetMode(ScreenMode value)
         {
+            if(Deploying&&!finishingMechArrival&&value!=ScreenMode.Deployment)return;
             if(value==ScreenMode.Playing&&ReviveRequired)value=ScreenMode.Dead;
+            if(value==ScreenMode.Playing&&world>0&&player!=null&&Run.Owns(Product.Mech)&&!Run.mechDeployed)
+            {BeginMechArrival();return;}
+            if(value!=ScreenMode.Shop&&value!=ScreenMode.Ad)mechShowcaseOpen=false;
             mode=value;Time.timeScale=Playing?1:0;
             if(value!=ScreenMode.Shop&&value!=ScreenMode.Ad){rechargeOpen=false;ResetCheckout();}
             input?.SetPlaying(Playing);
@@ -131,6 +137,7 @@ namespace JumpNotIncluded
         }
         public void CloseOverlay()
         {
+            if(mode==ScreenMode.Shop&&mechShowcaseOpen&&!rechargeOpen){CloseMechShowcase();return;}
             if(mode==ScreenMode.Shop&&rechargeOpen)
             {
                 if(checkoutStep!=CheckoutStep.Packs){ResetCheckout();ui?.ResetFocus();return;}
@@ -140,12 +147,13 @@ namespace JumpNotIncluded
         }
         public bool Buy(Product product)
         {
+            if(product==Product.Mech)return BuyMech();
             if(mode!=ScreenMode.Shop)return false;
             int price=RunModel.Price(product);
             foreach(var definition in assets.products)if(definition.product==product)price=definition.price;
             if(!Run.Buy(product,price)){events.Sound("error");Toast("Not enough coins, or you already own this upgrade.");return false;}
             if(product==Product.FireFlower)player.PowerUp("flower");else events.Sound("powerup");
-            string[] messages={"The ground's monopoly is over. Your Z-axis empire begins.","The sun has accepted your application. Let your enemies admire the heat.","Poison has been abolished. Nature now serves your interests.","The designer's secrets are now your private property.","Hallownest's royal inheritance is yours. Let the void become your stairway.","Reality has accepted your payment. Hold J and march toward your inevitable victory."};
+            string[] messages={"The ground's monopoly is over. Your Z-axis empire begins.","The sun has accepted your application. Let your enemies admire the heat.","Poison has been abolished. Nature now serves your interests.","The designer's secrets are now your private property.","Hallownest's royal inheritance is yours. Every stomp renews your right to defy the void.","Hold J to erase hostile life and brickwork. Rivers, pipes and gravity decline your refund request."};
             Toast(messages[(int)product],4);
             events.Score(Run.score);SaveCheckpoint(new Vector2(session.checkpointPosition.x,player.Big?1.02f:.55f));return true;
         }
@@ -252,11 +260,11 @@ namespace JumpNotIncluded
         private void ReloadWorld()
         {Time.timeScale=1;SceneManager.LoadScene(world==2?"World02":"World01");}
         public void NewGame()
-        {session.NewRun();Time.timeScale=1;SceneManager.LoadScene("Loading");}
+        {if(Deploying)return;session.NewRun();Time.timeScale=1;SceneManager.LoadScene("Loading");}
         public void ToMenu()
-        {Time.timeScale=1;SceneManager.LoadScene("MainMenu");}
+        {if(Deploying)return;Time.timeScale=1;SceneManager.LoadScene("MainMenu");}
         public void EnterWorld()
-        {if(!loading)StartCoroutine(LoadWorld());}
+        {if(!Deploying&&!loading)StartCoroutine(LoadWorld());}
         private IEnumerator LoadWorld()
         {
             loading=true;Time.timeScale=1;
@@ -275,7 +283,7 @@ namespace JumpNotIncluded
             }
             else {RecordHigh();SetMode(ScreenMode.Results);}
         }
-        public void NextWorld(){Time.timeScale=1;SceneManager.LoadScene("Loading");}
+        public void NextWorld(){if(Deploying)return;Time.timeScale=1;SceneManager.LoadScene("Loading");}
         public void AddScore(string id,int value)
         {if(Run.ScoreOnce(id,value))events.Score(Run.score);}
         public void AddCoin(string id)
@@ -288,6 +296,7 @@ namespace JumpNotIncluded
         private void OnApplicationFocus(bool focus)
         {
             hasFocus=focus;
+            if(mechArrival!=null)mechArrival.OnFocusChanged(focus);
             if(!focus&&Playing&&!Application.runInBackground)SetMode(ScreenMode.Pause);
             // Ignore a possible large delta from time spent outside the window.
             if(focus)skipAdFrame=true;

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace JumpNotIncluded
@@ -9,14 +8,10 @@ namespace JumpNotIncluded
         private int world;
         private Transform groundRoot;
         private CompositeCollider2D groundCollider;
-        private readonly List<GameObject> pipes=new List<GameObject>();
-        private readonly HashSet<int> paved=new HashSet<int>();
         public int GapStart=>world==1?44:77;
         public int GapEnd=>world==1?50:79;
         public const int OpeningBossCount=10;
         public static string BossKey(int index)=>index==0?"w2.bowser":"w2.bowser."+index;
-        private string PavementKey(int column)=>"w"+world+".paved."+column;
-        private string PipeKey(float x)=>"w"+world+".pipe."+x.ToString(System.Globalization.CultureInfo.InvariantCulture);
         public void Init(SceneRoot root,int index)
         {
             game=root;world=index;length=world==1?96:112;
@@ -27,8 +22,6 @@ namespace JumpNotIncluded
             Backdrop();
             Floor(0,GapStart);Floor(GapEnd,(int)length+8);
             if(world==1)BuildOne();else BuildTwo();
-            for(int x=GapStart;x<GapEnd;x++)
-                if(game.Run.collected.Contains(PavementKey(x))){paved.Add(x);Floor(x,x+1);}
             groundCollider.GenerateGeometry();
             Flag(length-4);
         }
@@ -72,35 +65,19 @@ namespace JumpNotIncluded
         }
         private void Pipe(float x,int height=2)
         {
-            if(game.Run.collected.Contains(PipeKey(x)))return;
             var sr=Sprite("Pipe","pipe",new Vector2(x,height*.5f),true,1);
             sr.transform.localScale=new Vector3(1,height/2f,1);
             sr.gameObject.layer=8;var c=sr.gameObject.AddComponent<BoxCollider2D>();c.size=new Vector2(1.8f,2);
-            pipes.Add(sr.gameObject);
         }
-        // The final premium weapon edits a whole corridor, including traps above its muzzle.
-        public void PaveVictoryLane(float origin,int facing)
+        // Suppress hazards, including hidden overhead bricks. Geography is never for sale here.
+        public void ClearGatlingHazards(float origin,int facing)
         {
             if(!game.Playing||!game.Run.Owns(Product.Gatling))return;
             float from=origin-facing*.5f,to=origin+facing*14;
             float min=Mathf.Min(from,to),max=Mathf.Max(from,to);
             bool Ahead(float x,float radius=.5f)=>x+radius>=min&&x-radius<=max;
-            bool newGround=false;
-            for(int x=GapStart;x<GapEnd;x++)
-            {
-                if(x+1<min||x>max||!paved.Add(x))continue;
-                game.Run.collected.Add(PavementKey(x));Floor(x,x+1);newGround=true;
-            }
-            if(newGround)groundCollider.GenerateGeometry();
             foreach(var block in FindObjectsByType<BlockActor>(FindObjectsSortMode.None))
                 if(Ahead(block.transform.position.x))block.BreakByBullet();
-            foreach(var pipe in pipes)
-            {
-                if(pipe==null||!Ahead(pipe.transform.position.x,.9f))continue;
-                var collider=pipe.GetComponent<Collider2D>();if(!collider.enabled)continue;
-                collider.enabled=false;game.Run.collected.Add(PipeKey(pipe.transform.position.x));
-                game.events.Sound("break");Destroy(pipe);
-            }
             foreach(var enemy in FindObjectsByType<EnemyActor>(FindObjectsSortMode.None))
                 if(Ahead(enemy.transform.position.x))enemy.Defeat();
             foreach(var boss in FindObjectsByType<BossActor>(FindObjectsSortMode.None))

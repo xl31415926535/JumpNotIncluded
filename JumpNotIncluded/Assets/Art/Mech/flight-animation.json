@@ -1,0 +1,41 @@
+{
+  "frame_size": [
+    192,
+    192
+  ],
+  "columns": 8,
+  "footprint_rect": [
+    48,
+    48,
+    96,
+    96
+  ],
+  "collision_tiles": [
+    3,
+    3
+  ],
+  "directions": [
+    "front",
+    "left",
+    "right",
+    "back"
+  ],
+  "rig": "source/rig.json",
+  "version": 7,
+  "count": 40,
+  "deploy": {
+    "start": 0,
+    "count": 16,
+    "duration": 0.35
+  },
+  "boost": {
+    "start": 16,
+    "count": 8,
+    "fps": 16
+  },
+  "retract": {
+    "start": 24,
+    "count": 16,
+    "duration": 0.4
+  }
+}

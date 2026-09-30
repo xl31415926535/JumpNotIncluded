@@ -1,0 +1,57 @@
+STAGED PROPULSION QA / real terrain, Input System controls and game camera
+PASS: fixture grants a paid replica independently of the arrival checks
+PASS: already deployed fixture starts normal control without changing the arrival gate
+PASS: ground fixture stands on the original ground surface
+PASS: Ground idle stays grounded without flight or cruise
+PASS: Ground idle emits no independent exhaust
+PASS: Ground idle stops the engine loop
+PASS: Ground idle uses the ground pose or walking atlas without baked flight trails
+CAPTURED: 01-ground-idle (1280x720)
+PASS: real D input walks the suit along the ground
+PASS: Ground walk stays grounded without flight or cruise
+PASS: Ground walk emits no independent exhaust
+PASS: Ground walk stops the engine loop
+PASS: Ground walk uses the ground pose or walking atlas without baked flight trails
+CAPTURED: 02-ground-walk (1280x720)
+PASS: real Space input lifts the suit above the ground
+PASS: Vertical lift uses expanded-wing flight frame 15 without baked sideways trails
+PASS: Vertical lift uses active independent exhaust pointing downward
+PASS: Vertical lift plays the flight engine loop
+CAPTURED: 03-lift (1280x720)
+PASS: releasing Space maintains altitude without continuing ascent
+PASS: Stationary hover uses expanded-wing flight frame 15 without baked sideways trails
+PASS: Stationary hover uses active independent exhaust pointing downward
+PASS: Stationary hover plays the flight engine loop
+CAPTURED: 04-hover (1280x720)
+PASS: Right cruise uses cruising frames 16 through 23 with the original blue rear trail
+PASS: Right cruise faces and travels in the commanded direction
+PASS: Right cruise never directs supplementary exhaust into the direction of travel
+CAPTURED: 05-cruise-right (1280x720)
+PASS: Left cruise uses cruising frames 16 through 23 with the original blue rear trail
+PASS: Left cruise faces and travels in the commanded direction
+PASS: Left cruise never directs supplementary exhaust into the direction of travel
+CAPTURED: 06-cruise-left (1280x720)
+PASS: Hover after cruising uses expanded-wing flight frame 15 without baked sideways trails
+PASS: Hover after cruising uses active independent exhaust pointing downward
+PASS: Hover after cruising plays the flight engine loop
+PASS: real S input lands on ground instead of hovering at the abyss safety altitude
+PASS: Landed on ground stays grounded without flight or cruise
+PASS: Landed on ground emits no independent exhaust
+PASS: Landed on ground stops the engine loop
+PASS: Landed on ground uses the ground pose or walking atlas without baked flight trails
+CAPTURED: 07-landed (1280x720)
+PASS: the original World 1 pipe remains in the fixture
+PASS: real S input lands on the original pipe top without removing terrain
+PASS: Landed on pipe stays grounded without flight or cruise
+PASS: Landed on pipe emits no independent exhaust
+PASS: Landed on pipe stops the engine loop
+PASS: Landed on pipe uses the ground pose or walking atlas without baked flight trails
+CAPTURED: 08-pipe-landed (1280x720)
+PASS: the original abyss still activates hover protection without a new death
+PASS: abyss protection holds altitude after descent is released
+PASS: abyss protection leaves the original gap empty
+PASS: Abyss hover uses expanded-wing flight frame 15 without baked sideways trails
+PASS: Abyss hover uses active independent exhaust pointing downward
+PASS: Abyss hover plays the flight engine loop
+CAPTURED: 09-abyss-hover (1280x720)
+ALL PROPULSION CHECKS PASSED

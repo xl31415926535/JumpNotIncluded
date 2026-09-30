@@ -1,0 +1,1157 @@
+fileFormatVersion: 2
+guid: 86212e80d5bf06b43bc58f1cf1e0053f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2108150597041504238
+    second: war-god-flight-right_0
+  - first:
+      213: 3451733759674053785
+    second: war-god-flight-right_1
+  - first:
+      213: 8822109992223864719
+    second: war-god-flight-right_2
+  - first:
+      213: 5749521068968845741
+    second: war-god-flight-right_3
+  - first:
+      213: 8532508726358593340
+    second: war-god-flight-right_4
+  - first:
+      213: -6182675838004627889
+    second: war-god-flight-right_5
+  - first:
+      213: -5679414261195614104
+    second: war-god-flight-right_6
+  - first:
+      213: 1681581885160036754
+    second: war-god-flight-right_7
+  - first:
+      213: 670896860017764109
+    second: war-god-flight-right_8
+  - first:
+      213: -2513752976342944931
+    second: war-god-flight-right_9
+  - first:
+      213: 2626283357086422333
+    second: war-god-flight-right_10
+  - first:
+      213: -8586918476150132123
+    second: war-god-flight-right_11
+  - first:
+      213: 2964979048890670702
+    second: war-god-flight-right_12
+  - first:
+      213: -7988161143931483915
+    second: war-god-flight-right_13
+  - first:
+      213: 8132942990986274211
+    second: war-god-flight-right_14
+  - first:
+      213: -2843764407575498755
+    second: war-god-flight-right_15
+  - first:
+      213: 3823582139548651071
+    second: war-god-flight-right_16
+  - first:
+      213: 4953723788800849688
+    second: war-god-flight-right_17
+  - first:
+      213: 5384183010522016867
+    second: war-god-flight-right_18
+  - first:
+      213: -2349084157232649673
+    second: war-god-flight-right_19
+  - first:
+      213: 752589732510895
+    second: war-god-flight-right_20
+  - first:
+      213: 3555840960423926391
+    second: war-god-flight-right_21
+  - first:
+      213: 4815838769993085601
+    second: war-god-flight-right_22
+  - first:
+      213: -3280941851089248109
+    second: war-god-flight-right_23
+  - first:
+      213: 517927013387839828
+    second: war-god-flight-right_24
+  - first:
+      213: -357348304417201215
+    second: war-god-flight-right_25
+  - first:
+      213: 2956511085877533497
+    second: war-god-flight-right_26
+  - first:
+      213: 153778256110299485
+    second: war-god-flight-right_27
+  - first:
+      213: -2135810941386632363
+    second: war-god-flight-right_28
+  - first:
+      213: 1856962812855341889
+    second: war-god-flight-right_29
+  - first:
+      213: 7568003618794634864
+    second: war-god-flight-right_30
+  - first:
+      213: 3995452594308574566
+    second: war-god-flight-right_31
+  - first:
+      213: -7947085929325317246
+    second: war-god-flight-right_32
+  - first:
+      213: 6258389048772749087
+    second: war-god-flight-right_33
+  - first:
+      213: -8215568406774641503
+    second: war-god-flight-right_34
+  - first:
+      213: -8112288831843106167
+    second: war-god-flight-right_35
+  - first:
+      213: 1095370866502114979
+    second: war-god-flight-right_36
+  - first:
+      213: 7433281054859275268
+    second: war-god-flight-right_37
+  - first:
+      213: -2924454587428046572
+    second: war-god-flight-right_38
+  - first:
+      213: -286465442568649115
+    second: war-god-flight-right_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: war-god-flight-right_0
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 820
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 210405293385eb2e0800000000000000
+      internalID: -2108150597041504238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_1
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 820
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 994789cf09507ef20800000000000000
+      internalID: 3451733759674053785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_2
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 820
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f877defdb4e6e6a70800000000000000
+      internalID: 8822109992223864719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_3
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 820
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da1238033f66acf40800000000000000
+      internalID: 5749521068968845741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_4
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 821
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3f468dba7f896670800000000000000
+      internalID: 8532508726358593340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_5
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 820
+        width: 49
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f46f7522519b23aa0800000000000000
+      internalID: -6182675838004627889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_6
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 820
+        width: 50
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 868d52df1daae21b0800000000000000
+      internalID: -5679414261195614104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_7
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 820
+        width: 56
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29912bda0dd265710800000000000000
+      internalID: 1681581885160036754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_8
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 629
+        width: 65
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d07a84eb3218f4900800000000000000
+      internalID: 670896860017764109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_9
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 629
+        width: 74
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d537ff78cfa5d1dd0800000000000000
+      internalID: -2513752976342944931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_10
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 629
+        width: 81
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3518a27cce627420800000000000000
+      internalID: 2626283357086422333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_11
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 628
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56235d1342325d880800000000000000
+      internalID: -8586918476150132123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_12
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 629
+        width: 92
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6e9a9f5cb8b52920800000000000000
+      internalID: 2964979048890670702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_13
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 629
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f8c26f33c9542190800000000000000
+      internalID: -7988161143931483915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_14
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 629
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a56d346f840ed070800000000000000
+      internalID: 8132942990986274211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_15
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 629
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dff2095965be888d0800000000000000
+      internalID: -2843764407575498755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_16
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 437
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3e435d92b7101530800000000000000
+      internalID: 3823582139548651071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_17
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 437
+        width: 103
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81770ea3a892fb440800000000000000
+      internalID: 4953723788800849688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_18
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 437
+        width: 115
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36cabd3ebe578ba40800000000000000
+      internalID: 5384183010522016867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_19
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 437
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73a66aca760666fd0800000000000000
+      internalID: -2349084157232649673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_20
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 437
+        width: 99
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: facfaa3f97ca20000800000000000000
+      internalID: 752589732510895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_21
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 437
+        width: 105
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77a1adb8382e85130800000000000000
+      internalID: 3555840960423926391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_22
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 437
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a2fdfc88db45d240800000000000000
+      internalID: 4815838769993085601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_23
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 437
+        width: 96
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 390ec1505c0c772d0800000000000000
+      internalID: -3280941851089248109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_24
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 245
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 459af84efdb003700800000000000000
+      internalID: 517927013387839828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_25
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 245
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c3ef164c917a0bf0800000000000000
+      internalID: -357348304417201215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_26
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 245
+        width: 94
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93b1c381b23a70920800000000000000
+      internalID: 2956511085877533497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_27
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 245
+        width: 92
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5922a95284522200800000000000000
+      internalID: 153778256110299485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_28
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 244
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 553d14bc3431c52e0800000000000000
+      internalID: -2135810941386632363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_29
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 245
+        width: 81
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1435a55f6d145c910800000000000000
+      internalID: 1856962812855341889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_30
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 245
+        width: 74
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07eff1db133f60960800000000000000
+      internalID: 7568003618794634864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_31
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 245
+        width: 65
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66deca837f2b27730800000000000000
+      internalID: 3995452594308574566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_32
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 52
+        width: 56
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2833f07e37746b190800000000000000
+      internalID: -7947085929325317246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_33
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 52
+        width: 50
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f176b467ea34ad650800000000000000
+      internalID: 6258389048772749087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_34
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 52
+        width: 49
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ac864edf007cfd80800000000000000
+      internalID: -8215568406774641503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_35
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 53
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9828f96c94c5b6f80800000000000000
+      internalID: -8112288831843106167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_36
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 52
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae9b23eff9833f00800000000000000
+      internalID: 1095370866502114979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_37
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 52
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40c27867cb1582760800000000000000
+      internalID: 7433281054859275268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_38
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 52
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419f6921c004a67d0800000000000000
+      internalID: -2924454587428046572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-flight-right_39
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 52
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 566454f9235460cf0800000000000000
+      internalID: -286465442568649115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      war-god-flight-right_0: -2108150597041504238
+      war-god-flight-right_1: 3451733759674053785
+      war-god-flight-right_10: 2626283357086422333
+      war-god-flight-right_11: -8586918476150132123
+      war-god-flight-right_12: 2964979048890670702
+      war-god-flight-right_13: -7988161143931483915
+      war-god-flight-right_14: 8132942990986274211
+      war-god-flight-right_15: -2843764407575498755
+      war-god-flight-right_16: 3823582139548651071
+      war-god-flight-right_17: 4953723788800849688
+      war-god-flight-right_18: 5384183010522016867
+      war-god-flight-right_19: -2349084157232649673
+      war-god-flight-right_2: 8822109992223864719
+      war-god-flight-right_20: 752589732510895
+      war-god-flight-right_21: 3555840960423926391
+      war-god-flight-right_22: 4815838769993085601
+      war-god-flight-right_23: -3280941851089248109
+      war-god-flight-right_24: 517927013387839828
+      war-god-flight-right_25: -357348304417201215
+      war-god-flight-right_26: 2956511085877533497
+      war-god-flight-right_27: 153778256110299485
+      war-god-flight-right_28: -2135810941386632363
+      war-god-flight-right_29: 1856962812855341889
+      war-god-flight-right_3: 5749521068968845741
+      war-god-flight-right_30: 7568003618794634864
+      war-god-flight-right_31: 3995452594308574566
+      war-god-flight-right_32: -7947085929325317246
+      war-god-flight-right_33: 6258389048772749087
+      war-god-flight-right_34: -8215568406774641503
+      war-god-flight-right_35: -8112288831843106167
+      war-god-flight-right_36: 1095370866502114979
+      war-god-flight-right_37: 7433281054859275268
+      war-god-flight-right_38: -2924454587428046572
+      war-god-flight-right_39: -286465442568649115
+      war-god-flight-right_4: 8532508726358593340
+      war-god-flight-right_5: -6182675838004627889
+      war-god-flight-right_6: -5679414261195614104
+      war-god-flight-right_7: 1681581885160036754
+      war-god-flight-right_8: 670896860017764109
+      war-god-flight-right_9: -2513752976342944931
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

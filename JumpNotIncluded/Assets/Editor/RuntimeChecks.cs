@@ -22,16 +22,23 @@ namespace JumpNotIncluded.EditorTools
         private static InputSettings testInputSettings,originalInputSettings;
         private static readonly List<string> passed=new List<string>();
         private static double deadline;
-        private static string Output=>Path.GetFullPath("../work/unity-runtime-checks.txt");
+        private static string Output=>Path.GetFullPath(SessionState.GetBool("jni.checks.arrivalOnly",false)?"../work/arrival-runtime-checks.txt":SessionState.GetBool("jni.checks.mechOnly",false)?"../work/mech-runtime-checks.txt":"../work/unity-runtime-checks.txt");
         private static SceneRoot Game=>UnityEngine.Object.FindFirstObjectByType<SceneRoot>();
         static RuntimeChecks()
         {
             EditorApplication.playModeStateChanged+=OnPlayMode;
         }
         [MenuItem("Tools/Jump Not Included/Run runtime checks")]
-        public static void Start()
+        public static void Start(){StartInternal(false);}
+        [MenuItem("Tools/Jump Not Included/Run mech and rebalance checks")]
+        public static void StartMech(){StartInternal(true);}
+        [MenuItem("Tools/Jump Not Included/Run mech arrival checks")]
+        public static void StartArrival(){StartInternal(false,true);}
+        private static void StartInternal(bool mechOnly,bool arrivalOnly=false)
         {
             if(sequence!=null)return;
+            SessionState.SetBool("jni.checks.mechOnly",mechOnly);
+            SessionState.SetBool("jni.checks.arrivalOnly",arrivalOnly);
             ProjectSetup.Setup();ProjectSetup.Validate();
             hadHigh=PlayerPrefs.HasKey("jni.highscore");oldHigh=PlayerPrefs.GetInt("jni.highscore");
             oldBackground=Application.runInBackground;Application.runInBackground=true;
@@ -61,7 +68,9 @@ namespace JumpNotIncluded.EditorTools
             testInputSettings.editorInputBehaviorInPlayMode=InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
             InputSystem.settings=testInputSettings;
             keyboard=InputSystem.AddDevice<Keyboard>("JNI regression keyboard");
-            sequence=CheckGame();deadline=EditorApplication.timeSinceStartup+180;lastFrame=-1;
+            bool mechOnly=SessionState.GetBool("jni.checks.mechOnly",false);
+            bool arrivalOnly=SessionState.GetBool("jni.checks.arrivalOnly",false);
+            sequence=arrivalOnly?CheckArrival():mechOnly?CheckPaidVictory():CheckGame();deadline=EditorApplication.timeSinceStartup+(arrivalOnly?60:mechOnly?150:240);lastFrame=-1;
             EditorApplication.update+=Tick;
         }
         private static void Tick()
@@ -462,7 +471,7 @@ namespace JumpNotIncluded.EditorTools
             g.Run.coins=20000;g.Run.Credit(1880);g.SaveCheckpoint(g.session.checkpointPosition);
             g.KillPlayer("Premium purchase checks.");g.OpenShop();yield return Wait(.3f);g=Game;p=g.player;
             Check(g.ExchangeCash(2)&&g.Run.wallet==0&&g.Run.coins==22000,"largest cash pack credits 2000 coins inside the shop");
-            Check(g.Buy(Product.MasterGuide)&&g.Buy(Product.DoubleJump)&&g.Buy(Product.Gatling)&&g.Run.coins==11003,"all three premium upgrades purchase through the real death shop");
+            Check(g.Buy(Product.MasterGuide)&&g.Buy(Product.DoubleJump)&&g.Buy(Product.Gatling)&&g.Run.coins==17003,"all three premium upgrades purchase through the real death shop at reduced Wings and Gatling prices");
             Check(g.Run.Owns(Product.Jump)&&!g.Buy(Product.Jump),"buying wings includes jumping and blocks a redundant jump purchase");
             Resume(g);yield return Wait(.1f);
             hidden=Array.Find(UnityEngine.Object.FindObjectsByType<BlockActor>(FindObjectsSortMode.None),b=>b.hidden&&!b.revealed);
@@ -473,6 +482,12 @@ namespace JumpNotIncluded.EditorTools
             Keys();yield return Wait(.08f);Keys(Key.Space);yield return Wait(.08f);Keys();
             Check(p.airJumpUsed&&p.body.linearVelocity.y<10,"a third press cannot grant another midair jump");
             yield return Wait(.2f); // Let the unused jump buffer expire before the landing fixture.
+            p.enabled=false;
+            var stompTarget=new GameObject("Wings refresh stomp check").AddComponent<EnemyActor>();stompTarget.Init(g,"check.wings.stomp",5);
+            Place(p,5,2.1f,new Vector2(0,-6));yield return Wait(.2f);
+            Check(stompTarget.dead&&!p.airJumpUsed&&p.body.linearVelocity.y>0,"actual Goomba stomp replenishes an already spent Monarch Wings jump");
+            p.enabled=true;Keys(Key.Space);yield return Wait(.1f);Keys();
+            Check(p.airJumpUsed&&p.body.linearVelocity.y>10&&p.wings.enabled,"Space after a stomp launches the restored air jump and plays the Wings animation");
             Place(p,2,.53f,Vector2.zero,3.2f);yield return Wait(.2f);
             Check(p.grounded&&!p.airJumpUsed,"landing recharges the single air jump");
             Keys(Key.J);yield return Wait(.48f);Keys();
@@ -526,45 +541,191 @@ namespace JumpNotIncluded.EditorTools
         }
         private static IEnumerator CheckPaidVictory()
         {
+            var arrivalChecks=CheckArrival();while(arrivalChecks.MoveNext())yield return arrivalChecks.Current;
             var g=Game;g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;var p=g.player;
             g.Run.owned.Add(Product.Gatling);p.enabled=false;Place(p,43,.55f,Vector2.zero);p.facing=-1;
-            var shot=new GameObject("Backward terraforming check").AddComponent<Fireball>();shot.Init(g,p,true);yield return Wait(.1f);
+            var shot=new GameObject("Backward hazard check").AddComponent<Fireball>();shot.Init(g,p,true);yield return Wait(.1f);
             Check(Physics2D.OverlapPoint(new Vector2(45,-.05f),1<<8)==null&&Array.Exists(UnityEngine.Object.FindObjectsByType<BlockActor>(FindObjectsSortMode.None),b=>b.hidden&&b.transform.position.x==44.5f),"firing backward leaves the cliff and forward traps intact");
-            p.facing=1;shot=new GameObject("Forward terraforming check").AddComponent<Fireball>();shot.Init(g,p,true);yield return Wait(.1f);
-            bool solid=true;for(int x=44;x<50;x++)solid&=Physics2D.OverlapPoint(new Vector2(x+.5f,-.05f),1<<8)!=null;
-            Check(solid&&!Array.Exists(UnityEngine.Object.FindObjectsByType<BlockActor>(FindObjectsSortMode.None),b=>b.hidden&&b.transform.position.x>=44&&b.transform.position.x<50),"forward Gatling fire fills all six gap tiles and destroys both tiers of hidden bricks above the muzzle");
-            Check(Physics2D.OverlapPoint(new Vector2(56,1),1<<8)==null&&!Array.Exists(UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None),item=>item.IsPoison&&item.transform.position.x<57),"Gatling clears the forward pipe and poisonous ground hazards");
+            g.level.Pickup("check.safe.coin",ItemKind.Coin,new Vector2(52,5));g.level.Pickup("check.safe.mushroom",ItemKind.Mushroom,new Vector2(54,5));
+            p.facing=1;shot=new GameObject("Forward hazard check").AddComponent<Fireball>();shot.Init(g,p,true);yield return Wait(.1f);
+            bool gap=true;for(int x=44;x<50;x++)gap&=Physics2D.OverlapPoint(new Vector2(x+.5f,-.05f),1<<8)==null;
+            Check(gap&&!Array.Exists(UnityEngine.Object.FindObjectsByType<BlockActor>(FindObjectsSortMode.None),b=>b.hidden&&b.transform.position.x>=44&&b.transform.position.x<50),"forward Gatling fire removes both tiers of hidden bricks but leaves all six gap tiles empty");
+            Check(Physics2D.OverlapPoint(new Vector2(56,1),1<<8)!=null&&!Array.Exists(UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None),item=>item.IsPoison&&item.transform.position.x>=43&&item.transform.position.x<57),"Gatling clears poisonous ground hazards while preserving the pipe collider");
+            Check(Array.Exists(UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None),item=>item.id=="check.safe.coin")&&Array.Exists(UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None),item=>item.id=="check.safe.mushroom"),"Gatling preserves beneficial coins and real mushrooms in its firing corridor");
             int coins=g.Run.coins,score=g.Run.score;
-            shot=new GameObject("Repeated terraforming check").AddComponent<Fireball>();shot.Init(g,p,true);yield return Wait(.1f);
-            Check(g.Run.coins==coins&&g.Run.score==score,"repeated paving cannot farm hidden rewards or destruction scores");
-            g.SaveCheckpoint(new Vector2(47,.55f));g.KillPlayer("Paved checkpoint check.");WatchRevive(g);yield return Wait(.4f);g=Game;
-            Check(g.Playing&&g.player.grounded&&g.player.body.position.y>.4f&&Physics2D.OverlapPoint(new Vector2(47,-.05f),1<<8)!=null&&Physics2D.OverlapPoint(new Vector2(56,1),1<<8)==null,"a checkpoint inside the former abyss restores paved ground and demolished pipes before the player spawns");
+            shot=new GameObject("Repeated hazard check").AddComponent<Fireball>();shot.Init(g,p,true);yield return Wait(.1f);
+            Check(g.Run.coins==coins&&g.Run.score==score,"repeated Gatling clearing cannot farm hidden rewards or destruction scores");
+            g.SaveCheckpoint(new Vector2(43,.55f));g.KillPlayer("Terrain persistence check.");WatchRevive(g);yield return Wait(.4f);g=Game;
+            Check(g.Playing&&g.player.grounded&&Physics2D.OverlapPoint(new Vector2(47,-.05f),1<<8)==null&&Physics2D.OverlapPoint(new Vector2(56,1),1<<8)!=null,"checkpoint retry keeps the natural cliff and pipe intact after Gatling use");
 
-            g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
-            g.KillPlayer("A premium victory awaits.");g.StartAd(AdKind.Cash);g.hasFocus=true;g.AdvanceAd(57);g.FinishAd();yield return Wait(.3f);g=Game;
-            Check(g.ExchangeCash(2)&&g.ExchangeCash(2)&&g.ExchangeCash(2)&&g.Buy(Product.Gatling)&&g.Run.coins==1&&g.Run.wallet==60&&!g.Run.Owns(Product.Jump)&&!g.Run.Owns(Product.Purify),"ad cash funds Gatling alone through three real coin-pack purchases");
-            Resume(g);int deaths=g.Run.deaths;Keys(Key.D,Key.J);
+            var mechChecks=CheckMech();while(mechChecks.MoveNext())yield return mechChecks.Current;
+
+            g=Game;g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
+            g.KillPlayer("A moon killer victory awaits.");g.StartAd(AdKind.Cash);g.hasFocus=true;g.AdvanceAd(80);g.FinishAd();yield return Wait(.3f);g=Game;
+            Check(g.BuyMech()&&g.Run.coins==0&&g.Run.wallet==1&&!g.Run.Owns(Product.Jump)&&!g.Run.Owns(Product.Gatling),"eighty seconds of ad cash buy the SGD 79.99 mech directly without exchanging coins or buying other abilities");
+            Resume(g);var arrival=AwaitArrival();while(arrival.MoveNext())yield return arrival.Current;
+            g=Game;int deaths=g.Run.deaths;Keys(Key.Space);yield return Wait(1.2f);Keys(Key.D,Key.J);
             double until=Time.realtimeSinceStartupAsDouble+25;
             while(g.Playing&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.2f);
             Keys();
-            Check(g.mode==ScreenMode.Results&&g.Run.deaths==deaths&&g.player.body.position.x>91,"paid route clears all of World 1 by holding right and fire, with no jumps or extra deaths (position="+g.player.body.position+", mode="+g.mode+")");
+            Check(g.mode==ScreenMode.Results&&g.Run.deaths==deaths&&g.player.body.position.x>91&&Physics2D.OverlapPoint(new Vector2(47,-.05f),1<<8)==null,"mech flight and auto-lock clear World 1 above unchanged pipes and cliffs with no extra deaths (position="+g.player.body.position+", mode="+g.mode+")");
             float hands=g.Run.activeInputTime,watched=g.Run.adWatchTime;
-            Check(Mathf.Abs(watched-59)<.001f&&hands>15&&hands<=g.Run.playTime&&g.Run.PaidTotal()==5999,
-                "first-world receipt contains actual ad seconds, held-control seconds and the Gatling coin receipt");
+            Check(Mathf.Abs(watched-82)<.001f&&hands>8&&hands<=g.Run.playTime&&g.Run.PaidTotal()==0&&g.Run.WalletPaidTotal()==7999,
+                "first-world receipt contains actual ad seconds, control time and a separate SGD mech purchase with zero coins spent");
             yield return Wait(.2f);
             Check(g.Run.activeInputTime==hands&&g.Run.adWatchTime==watched,"result screen freezes both receipt timers");
             g.NextWorld();yield return Wait(.3f);g=Game;g.EnterWorld();
             until=Time.realtimeSinceStartupAsDouble+5;
             while(Game.world!=2&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.1f);
-            g=Game;Check(g.world==2&&g.Playing&&g.Run.Owns(Product.Gatling),"Gatling carries through the actual loading scene into World 2");
+            g=Game;Check(g.world==2&&g.Playing&&g.Run.Owns(Product.Mech)&&g.player.mech.Active,"mech ownership and equipped flight carry through the actual loading scene into World 2");
             Check(g.Run.activeInputTime==hands&&g.Run.adWatchTime==watched,"ad and hands-on totals carry through the loading scene without adding menu time");
-            Keys(Key.D,Key.J);until=Time.realtimeSinceStartupAsDouble+25;
+            Keys(Key.Space);yield return Wait(1.2f);Keys(Key.D,Key.J);until=Time.realtimeSinceStartupAsDouble+25;
             while(g.Playing&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.2f);
             Keys();
             bool armyDefeated=true;for(int i=0;i<WorldBuilder.OpeningBossCount;i++)armyDefeated&=g.Run.collected.Contains(WorldBuilder.BossKey(i));
-            Check(g.mode==ScreenMode.Results&&g.Run.deaths==deaths&&armyDefeated&&g.player.body.position.x>107,"paid route clears all ten Bowsers and World 2 by holding right and fire, with no jumps or extra deaths (position="+g.player.body.position+", mode="+g.mode+")");
-            Check(g.Run.activeInputTime>hands+17&&g.Run.adWatchTime==watched&&g.Run.PaidTotal()==5999,"final receipt totals both worlds while keeping the original viewing and purchase amounts");
-            g.session.NewRun();Check(g.Run.adWatchTime==0&&g.Run.activeInputTime==0&&g.Run.playTime==0&&g.Run.ads==0,"a new run clears all receipt telemetry");
+            Check(g.mode==ScreenMode.Results&&g.Run.deaths==deaths&&armyDefeated&&g.player.body.position.x>107,"mech auto-lock destroys all ten Bowsers and clears World 2 without extra deaths (position="+g.player.body.position+", mode="+g.mode+")");
+            Check(g.Run.activeInputTime>hands+10&&g.Run.adWatchTime==watched&&g.Run.PaidTotal()==0&&g.Run.WalletPaidTotal()==7999,"final receipt totals both worlds while preserving the direct SGD purchase and original ad viewing time");
+            g.session.NewRun();Check(g.Run.adWatchTime==0&&g.Run.activeInputTime==0&&g.Run.playTime==0&&g.Run.ads==0&&!g.Run.Owns(Product.Mech)&&!g.Run.mechDeployed&&g.Run.WalletPaidTotal()==0,"a new run clears receipt telemetry, mech ownership, completed deployment and cash purchases");
+        }
+        private static IEnumerator AwaitArrival()
+        {
+            double until=Time.realtimeSinceStartupAsDouble+MechArrival.Duration+2;
+            while(Game.mode==ScreenMode.Deployment&&Time.realtimeSinceStartupAsDouble<until)yield return Wait(.02f);
+            Check(Game.Playing&&Game.Run.mechDeployed&&Game.player.mech.Active,
+                "real-time deployment finishes before control and mech equipment become available");
+        }
+        private static IEnumerator CheckArrival()
+        {
+            var session=Resources.Load<RunState>("RunState");session.NewRun();
+            SceneManager.LoadScene("World01");yield return Wait(.3f);
+            var g=Game;var p=g.player;
+            Check(!g.Run.mechDeployed&&g.mechArrival==null&&!p.MechActive,
+                "fresh runs have no arrival sequence or pre-equipped mech");
+            g.Run.Credit(RunModel.MechCost);g.Run.coins=123;g.SaveCheckpoint(g.session.checkpointPosition);
+            g.KillPlayer("Arrival regression fixture.");g.OpenShop();yield return Wait(.3f);g=Game;p=g.player;
+            Check(g.BuyMech()&&g.Run.Owns(Product.Mech)&&!g.Run.mechDeployed&&!p.MechActive&&g.mode==ScreenMode.Shop,
+                "the purchased replica remains pending while the defeated player is in the shop");
+            g.Retry();g.hasFocus=true;g.AdvanceAd(SceneRoot.ReviveAdDuration-.05f);
+            Check(g.mode==ScreenMode.Ad&&!g.Run.mechDeployed&&g.mechArrival==null,
+                "an incomplete revival ad cannot launch or bypass mech arrival");
+            double arrivalStarted=Time.realtimeSinceStartupAsDouble;
+            g.AdvanceAd(.05f);yield return Wait(.08f);
+            Check(g.mode==ScreenMode.Deployment&&g.mechArrival!=null&&!g.mechArrival.Finished&&!g.Playing&&Time.timeScale==0,
+                "finishing the revival ad enters the mandatory cinematic and freezes the world");
+            var deliverySources=g.mechArrival.GetComponentsInChildren<AudioSource>();
+            Check(deliverySources.Length==3&&Array.TrueForAll(deliverySources,source=>source.outputAudioMixerGroup==g.assets.worldGroup)&&
+                Array.Exists(deliverySources,source=>source.loop&&source.clip!=null&&source.isPlaying)&&!g.audioDirector.music.isPlaying,
+                "delivery's three audio sources route to World SFX, the braking engine loop plays, and ordinary BGM stays paused");
+            Check(!g.Run.mechDeployed&&!p.MechActive&&!g.ReviveRequired,
+                "the revival gate is satisfied but the suit remains unequipped until consciousness transfer finishes");
+            float play=g.Run.playTime,hands=g.Run.activeInputTime,ad=g.Run.adWatchTime;
+            int wallet=g.Run.wallet,coins=g.Run.coins,deaths=g.Run.deaths,shots=p.mech.ShotsFired;
+            var enemy=UnityEngine.Object.FindFirstObjectByType<EnemyActor>();var enemyPosition=enemy.transform.position;
+            Keys(Key.Escape,Key.Space,Key.J,Key.Enter,Key.D);yield return Wait(.35f);Keys();
+            Check(g.mode==ScreenMode.Deployment&&!p.MechActive&&p.mech.ShotsFired==shots,
+                "Escape, Space, J, Enter and movement inputs cannot skip arrival, equip early or fire");
+            Check(enemy.transform.position==enemyPosition&&g.Run.playTime==play&&g.Run.activeInputTime==hands&&g.Run.adWatchTime==ad,
+                "arrival freezes enemies and does not count as gameplay, player control or ad viewing");
+            g.CloseOverlay();g.ToMenu();g.NewGame();g.NextWorld();g.EnterWorld();g.CompleteWorld();g.Retry();g.SetMode(ScreenMode.Playing);
+            yield return Wait(.08f);
+            Check(Game==g&&g.mode==ScreenMode.Deployment&&!g.loading&&g.Run.wallet==wallet&&g.Run.coins==coins&&g.Run.deaths==deaths,
+                "menu, restart, scene travel, finish, retry and direct Playing-mode callbacks cannot escape the mandatory cinematic");
+            g.hasFocus=false;float elapsed=g.mechArrival.Elapsed;yield return Wait(.3f);
+            Check(g.mechArrival.Elapsed==elapsed&&g.mode==ScreenMode.Deployment,
+                "losing focus pauses arrival time instead of silently completing it in the background");
+            bool arrivalAudioSilent=true;
+            foreach(var source in g.mechArrival.GetComponentsInChildren<AudioSource>())arrivalAudioSilent&=!source.isPlaying;
+            Check(arrivalAudioSilent,"losing focus pauses the cinematic's dedicated sound sources");
+            g.hasFocus=true;yield return Wait(.2f);
+            Check(g.mechArrival.Elapsed>elapsed&&!g.Run.mechDeployed,"regaining focus continues the pending cinematic without granting early control");
+            var landing=g.mechArrival.LandingPosition;
+            var arrival=AwaitArrival();while(arrival.MoveNext())yield return arrival.Current;
+            Check((g.mechArrival==null||g.mechArrival.Finished)&&Time.realtimeSinceStartupAsDouble-arrivalStarted>=MechArrival.Duration&&Vector2.Distance(p.body.position,landing)<.15f,
+                "the complete landing and consciousness-transfer sequence hands control to the suit at its landing position");
+            Check(g.Run.wallet==wallet&&g.Run.coins==coins&&g.Run.WalletPaidTotal()==RunModel.MechCost&&g.Run.deaths==deaths,
+                "deployment neither charges twice nor changes currency or death totals");
+            Check(!string.IsNullOrEmpty(g.session.checkpointJson)&&JsonUtility.FromJson<RunModel>(g.session.checkpointJson).mechDeployed,
+                "completed deployment is saved to the existing checkpoint together with ownership");
+            g.SetMode(ScreenMode.Pause);g.CloseOverlay();yield return Wait(.08f);
+            Check(g.Playing&&g.Run.mechDeployed&&(g.mechArrival==null||g.mechArrival.Finished),
+                "pausing and resuming an equipped mech does not replay the introduction");
+            g.session.Restore();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
+            Check(g.Playing&&g.Run.mechDeployed&&g.player.MechActive&&g.mechArrival==null,
+                "checkpoint reload preserves completed deployment without starting another cinematic");
+            g.session.checkpointJson="";g.session.restoreCheckpoint=false;SceneManager.LoadScene("World02");yield return Wait(.3f);g=Game;
+            Check(g.Playing&&g.Run.mechDeployed&&g.player.MechActive&&g.mechArrival==null,
+                "the equipped mech enters the next world without replaying arrival");
+            // A pending deployment also survives a scene interruption; it cannot become equipped via reload.
+            g.session.NewRun();g.Run.owned.Add(Product.Mech);g.session.Capture(new Vector2(2,.6f),Form.Small);
+            SceneManager.LoadScene("World01");yield return Wait(.25f);g=Game;
+            Check(g.mode==ScreenMode.Deployment&&!g.Run.mechDeployed&&!g.player.MechActive,
+                "loading a purchased but undeployed save starts the full arrival sequence");
+            g.session.Restore();SceneManager.LoadScene("World01");yield return Wait(.25f);g=Game;
+            Check(g.mode==ScreenMode.Deployment&&g.mechArrival.Elapsed<1&&!g.Run.mechDeployed,
+                "reloading during arrival restarts the mandatory sequence rather than bypassing it");
+            arrival=AwaitArrival();while(arrival.MoveNext())yield return arrival.Current;
+            g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;
+            Check(g.Playing&&!g.Run.Owns(Product.Mech)&&!g.Run.mechDeployed&&g.mechArrival==null&&!g.player.MechActive,
+                "new runs reset both ownership and deployment completion for the next purchase");
+        }
+        private static IEnumerator CheckMech()
+        {
+            var g=Game;g.session.NewRun();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;var p=g.player;
+            g.Run.Credit(RunModel.MechCost);g.Run.coins=321;g.SaveCheckpoint(g.session.checkpointPosition);
+            Check(!g.BuyMech()&&g.Run.wallet==7999,"mech cannot be purchased during ordinary gameplay");
+            g.KillPlayer("Mech integration check.");g.OpenShop();yield return Wait(.3f);g=Game;p=g.player;
+            Check(g.BuyMech()&&!g.BuyMech()&&g.Run.wallet==0&&g.Run.coins==321&&g.Run.WalletPaidTotal()==7999&&g.Run.PaidTotal()==0,"real shop orders one mech and debits exactly SGD 79.99 while preserving coin balance");
+            Check(g.ReviveRequired&&g.mode==ScreenMode.Shop&&!g.Playing&&!p.mech.Active&&!g.Run.mechDeployed,"buying the mech schedules deployment without equipping it or skipping the required revive advertisement");
+            Keys(Key.Space,Key.J);yield return Wait(.15f);
+            Check(p.mech.ShotsFired==0&&!p.mech.ThrusterSource.isPlaying,"shop pause blocks mech propulsion audio and weapons");
+            Keys();Resume(g);var arrival=AwaitArrival();while(arrival.MoveNext())yield return arrival.Current;
+            yield return Wait(.15f);g=Game;p=g.player;
+            foreach(var e in UnityEngine.Object.FindObjectsByType<EnemyActor>(FindObjectsSortMode.None))UnityEngine.Object.Destroy(e.gameObject);
+            float y=p.body.position.y;Keys(Key.Space);yield return Wait(.6f);
+            Check(p.mech.IsThrusting&&p.body.position.y>y+2&&p.body.linearVelocity.y>0&&p.body.gravityScale==0,"holding Space continuously propels the mech upward with gravity disabled");
+            Check(p.mech.ThrusterSource.isPlaying&&p.mech.ThrusterSource.loop&&p.mech.ThrusterSource.outputAudioMixerGroup==g.audioDirector.world.outputAudioMixerGroup,"mech propulsion has its own looping audio source routed through World SFX");
+            Keys();yield return Wait(.12f);y=p.body.position.y;yield return Wait(.4f);
+            Check(!p.mech.IsThrusting&&Mathf.Abs(p.body.position.y-y)<.08f&&Mathf.Abs(p.body.linearVelocity.y)<.01f,"releasing Space holds altitude instead of triggering a jump fall");
+            Keys(Key.Space);yield return Wait(1.5f);Keys();yield return Wait(.1f);
+            Check(p.body.position.y<=MechSuit.MaxAltitude+.05f&&p.body.position.y>=MechSuit.MaxAltitude-.1f,"continuous thrust stops at the visible upper flight boundary");
+            y=p.body.position.y;float controlTime=g.Run.activeInputTime;Keys(Key.S);yield return Wait(.35f);Keys();yield return Wait(.1f);
+            Check(p.body.position.y<y-.5f&&p.body.position.y>=MechSuit.MinAltitude,"S lowers the mech deliberately without restoring gravity");
+            Check(g.Run.activeInputTime>controlTime+.2f,"controlled mech descent counts toward actual hands-on time");
+            Place(p,47,-6,new Vector2(0,-20));yield return Wait(.15f);
+            Check(g.Playing&&p.body.position.y>=MechSuit.MinAltitude-.05f&&Mathf.Abs(p.body.linearVelocity.y)<.01f&&Physics2D.OverlapPoint(new Vector2(47,-.05f),1<<8)==null,"abyss safety restores stable hover above an unchanged gap instead of killing the mech");
+            Place(p,6,3.5f,Vector2.zero);
+            // This fixture teleports back from the pit; settle the camera too so the rear
+            // target is visible, matching the auto-lock's real viewport requirement.
+            g.cameraView.transform.position=new Vector3(11,4.7f,-10);yield return Wait(.1f);
+            var nearby=new GameObject("Mech rear lock target").AddComponent<EnemyActor>();nearby.Init(g,"check.mech.near",4);nearby.enabled=false;
+            var boss=new GameObject("Mech armored lock target").AddComponent<BossActor>();boss.Init(g,"check.mech.boss",10,9.5f,10.5f);boss.enabled=false;
+            Physics2D.SyncTransforms();
+            var nearViewport=g.cameraView.WorldToViewportPoint(nearby.GetComponent<Collider2D>().bounds.center);
+            Check(nearViewport.x>=-.03f&&nearViewport.x<=1.03f&&nearViewport.y>=0&&nearViewport.y<=1,"rear auto-lock fixture is visible before firing (viewport="+nearViewport+", camera="+g.cameraView.transform.position+", aspect="+g.cameraView.aspect+")");
+            p.facing=1;int shots=p.mech.ShotsFired;Keys(Key.J);yield return Wait(.12f);Keys();
+            Check(p.mech.ShotsFired==shots+1&&p.mech.LastTarget=="check.mech.near"&&nearby.dead,"one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots="+shots+" -> "+p.mech.ShotsFired+", target="+p.mech.LastTarget+", defeated="+nearby.dead+", camera="+g.cameraView.transform.position+", nearViewport="+nearViewport+", player="+p.body.position+")");
+            yield return Wait(.3f);Keys(Key.J);yield return Wait(.12f);Keys();
+            Check(boss==null&&g.Run.collected.Contains("check.mech.boss"),"one auto-locked laser instantly kills a full-health 18-hit Bowser");
+            Check(UnityEngine.Object.FindObjectsByType<Fireball>(FindObjectsSortMode.None).Length==0,"mech J attack uses its laser rather than ordinary fireballs or Gatling bullets");
+            int deaths=g.Run.deaths;var form=p.forms.Value;
+            Place(p,6,MechSuit.MinAltitude,Vector2.zero);yield return Wait(.1f);
+            var toucher=new GameObject("Mech immunity Goomba").AddComponent<EnemyActor>();toucher.Init(g,"check.mech.touch",6);toucher.enabled=false;
+            var bossTouch=new GameObject("Mech immunity Bowser").AddComponent<BossActor>();bossTouch.Init(g,"check.mech.boss.touch",6,5.5f,6.5f);bossTouch.enabled=false;
+            new GameObject("Mech immunity flame").AddComponent<BossFlame>().Init(g,p.body.position,Vector2.zero);
+            g.level.Pickup("check.mech.poison",ItemKind.Poison,p.body.position);yield return Wait(.5f);p.Hit();p.Hit(true);
+            Check(p.Protected&&g.Playing&&g.Run.deaths==deaths&&p.forms.Value==form,"actual Goomba, Bowser, flame and poison contacts cannot damage the equipped mech");
+            // Remove the immunity actors directly before firing: killing the Bowser here
+            // would drop a coin inside the hull and pollute the purchase-balance fixture.
+            UnityEngine.Object.Destroy(toucher.gameObject);UnityEngine.Object.Destroy(bossTouch.gameObject);
+            foreach(var item in UnityEngine.Object.FindObjectsByType<PickupActor>(FindObjectsSortMode.None))
+                if(item.id=="check.mech.poison")UnityEngine.Object.Destroy(item.gameObject);
+            yield return Wait(.05f);
+            Keys(Key.Space,Key.J);yield return Wait(.1f);g.SetMode(ScreenMode.Pause);yield return Wait(.1f);
+            var position=p.body.position;shots=p.mech.ShotsFired;yield return Wait(.3f);
+            Check(p.body.position==position&&p.mech.ShotsFired==shots&&!p.mech.ThrusterSource.isPlaying,"pause freezes flight and laser attacks and silences propulsion");
+            Keys();Resume(g);yield return Wait(.1f);
+            g.SaveCheckpoint(new Vector2(2,.55f));g.session.Restore();SceneManager.LoadScene("World01");yield return Wait(.3f);g=Game;p=g.player;
+            Check(p.mech.Active&&p.Protected&&g.Run.wallet==0&&g.Run.coins==321&&g.Run.WalletPaidTotal()==7999,"checkpoint reload preserves equipped mech, immunity, coin balance and one direct-wallet receipt");
         }
         private static void Finish(string error)
         {

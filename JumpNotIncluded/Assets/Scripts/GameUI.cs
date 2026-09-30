@@ -13,8 +13,8 @@ namespace JumpNotIncluded
         private GUIStyle textStyle;
         private GameEvents channel;
         private static readonly string[] AdBrands={"MARIO POWER-UPS","SUTD / AI","SL CHEATER / CYBERWARE"};
-        private static readonly string[] AdHeadlines={"Gravity respects premium members.","The future called. It wants your brain.","Mortality is an outdated specification."};
-        private static readonly string[] AdCopy={"Conquer an entire new dimension. Own the sun. Make the laws of physics negotiate with your wallet.","Design the impossible. Command AI. Let yesterday's geniuses watch you prototype tomorrow.","The War God chassis: trade your biological limitations for orbital authority. Become the final boss."};
+        private static readonly string[] AdHeadlines={"Gravity respects premium members.","The future called. It wants your brain.","The moon has been put on notice."};
+        private static readonly string[] AdCopy={"Conquer an entire new dimension. Own the sun. Make the laws of physics negotiate with your wallet.","Design the impossible. Command AI. Let yesterday's geniuses watch you prototype tomorrow.","WAR GOD REPLICA. STARFIELD CAMOUFLAGE. MOON KILLER. Accelerate to 1% light speed. Orbital authority for S$79.99."};
         private readonly Color ink=new Color(.025f,.055f,.10f),panel=new Color(.055f,.105f,.18f),
             muted=new Color(.61f,.69f,.78f),paper=new Color(.95f,.95f,.92f),gold=new Color(.86f,.71f,.43f),
             cyan=new Color(.53f,.79f,.94f),line=new Color(.22f,.31f,.43f);
@@ -32,6 +32,7 @@ namespace JumpNotIncluded
         public void ResetFocus(){focus=0;submit=false;paymentFocusPending=true;}
         private void Update()
         {
+            if(game.Deploying){submit=false;return;}
             navCooldown-=Time.unscaledDeltaTime;
             float n=game.input.navigate.ReadValue<float>();
             if(Mathf.Abs(n)>.5f&&navCooldown<=0)
@@ -40,7 +41,7 @@ namespace JumpNotIncluded
         }
         private void OnGUI()
         {
-            if(game==null||font==null)return;
+            if(game==null||font==null||game.Deploying)return;
             float scale=Mathf.Min(Screen.width/1600f,Screen.height/900f);
             Vector2 offset=new Vector2((Screen.width-1600*scale)*.5f,(Screen.height-900*scale)*.5f);
             GUI.matrix=Matrix4x4.TRS(offset,Quaternion.identity,new Vector3(scale,scale,1));
@@ -50,7 +51,7 @@ namespace JumpNotIncluded
             else
             {
                 Hud();
-                if(game.mode==ScreenMode.Shop){if(game.rechargeOpen)Recharge();else Shop();}
+                if(game.mode==ScreenMode.Shop){if(game.rechargeOpen)Recharge();else if(game.mechShowcaseOpen)MechShowcase();else Shop();}
                 else if(game.mode==ScreenMode.Ad)Advertisement();
                 else if(game.mode==ScreenMode.Dead)Death();
                 else if(game.mode==ScreenMode.Pause)Pause();
@@ -147,8 +148,8 @@ namespace JumpNotIncluded
                 if(!campus)
                 {
                     Text(x+18,y+18,150,72,"SL\nCHEATER",26,paper,true);
-                    Text(x+18,y+105,120,100,"WAR GOD\nORBITAL\nASSAULT",14,gold,true);
-                    Text(x+18,y+h-44,w-36,27,"FLESH IS OPTIONAL. DOMINANCE IS NOT.",17,paper,true,TextAnchor.MiddleCenter);
+                    Text(x+18,y+105,150,100,"WAR GOD\nMOON KILLER\nEDITION",14,gold,true);
+                    Text(x+18,y+h-44,w-36,27,"STARFIELD CAMOUFLAGE. UNREASONABLE AUTHORITY.",16,paper,true,TextAnchor.MiddleCenter);
                 }
             }
         }
@@ -196,17 +197,20 @@ namespace JumpNotIncluded
         {
             CommerceHeader("UPGRADE SHOP");
             Gradient(176,184,1238,63,new Color(.13f,.29f,.45f),new Color(.065f,.14f,.24f));
-            Text(202,194,1160,46,"WHY PLAY FAIR WHEN YOU CAN PLAY PREMIUM?",31,gold,true);
+            Text(202,194,730,46,"WHY PLAY FAIR? PLAY PREMIUM.",28,gold,true);
+            Button(960,194,432,43,"SL CHEATER MECH / S$79.99",game.OpenMechShowcase,true);
             float footer=178;
             if(game.world==2&&game.Run.Owns(Product.FireFlower))
             {Button(footer,721,257,42,"REFUND FIRE FLOWER",game.Refund,false,true,true);footer+=263;}
             if(game.world==2&&(!game.Run.trialClaimed||game.Run.trialPending))
             {Button(footer,721,279,42,"FREE 8-SECOND VIP TRIAL",game.StartTrial,false,true,true);}
             string[] icons={"small-jump","flower","mushroom","question","wings","solid"};
-            string[] badges={"BREAK THE FLAT-EARTH MONOPOLY","BECOME THE SUN","NATURE NOW WORKS FOR YOU","OMNISCIENCE, NOW ON SALE","THE PALE KING'S INHERITANCE","PURCHASE YOUR INEVITABLE VICTORY"};
+            string[] badges={"BREAK THE FLAT-EARTH MONOPOLY","BECOME THE SUN","NATURE NOW WORKS FOR YOU","OMNISCIENCE, NOW ON SALE","THE PALE KING'S INHERITANCE","TURN RESISTANCE INTO CONFETTI"};
+            int card=0;
             for(int i=0;i<game.assets.products.Length;i++)
             {
-                var product=game.assets.products[i];float x=176+i%3*420,y=262+i/3*226;
+                var product=game.assets.products[i];if(product.product==Product.Mech)continue;
+                float x=176+card%3*420,y=262+card/3*226;card++;
                 Box(x,y,396,216,line);Gradient(x+1,y+1,394,214,new Color(.12f,.22f,.34f),panel);
                 Text(x+12,y+6,372,21,badges[(int)product.product],12,gold,true,TextAnchor.MiddleCenter);
                 if(product.product==Product.Gatling)
@@ -235,10 +239,10 @@ namespace JumpNotIncluded
             Text(230,113,178,49,balance,game.Run.coins<1000000?29:22,gold,true,TextAnchor.MiddleLeft);
             Button(428,109,54,58,"+",game.OpenRecharge,true,!game.rechargeOpen);
             Text(526,111,488,50,title,29,paper,true,TextAnchor.MiddleCenter);
-            if(game.rechargeOpen)
+            if(game.rechargeOpen||game.mechShowcaseOpen)
             {
-                Text(1086,110,263,24,"SGD WALLET",13,muted,true,TextAnchor.MiddleRight);
-                Text(1086,134,263,38,Money(game.Run.wallet),26,gold,true,TextAnchor.MiddleRight);
+                Text(1030,110,270,24,"SGD WALLET",13,muted,true,TextAnchor.MiddleRight);
+                Text(1030,134,270,38,Money(game.Run.wallet),26,gold,true,TextAnchor.MiddleRight);
             }
             Button(1323,106,110,42,"BACK",game.CloseOverlay,false,true,true);
         }
@@ -313,7 +317,7 @@ namespace JumpNotIncluded
             Button(530,465,540,53,"SOUND: "+(game.audioDirector.EffectsEnabled?"ON":"OFF"),game.audioDirector.ToggleEffects);
             Button(530,536,540,53,"RESTART RUN",game.NewGame);
             Button(530,607,540,53,"MAIN MENU",game.ToMenu);
-            Text(485,705,630,32,"A/D MOVE   SPACE JUMP   J FIRE   ESC PAUSE",18,paper,false,TextAnchor.MiddleCenter);
+            Text(485,697,630,52,game.Run.Owns(Product.Mech)?"A/D MOVE   HOLD SPACE ASCEND   RELEASE HOVER\nS / DOWN DESCEND   J LOCK-ON LASER   ESC PAUSE":"A/D MOVE   SPACE JUMP   J FIRE   ESC PAUSE",18,paper,false,TextAnchor.MiddleCenter);
         }
         private void ReceiptMetric(float x,string label,string value,string detail,Color accent)
         {
@@ -328,13 +332,13 @@ namespace JumpNotIncluded
             var run=game.Run;var culture=System.Globalization.CultureInfo.InvariantCulture;
             string Count(int n)=>n.ToString("N0",culture);
             string Seconds(float n)=>n.ToString("0.0",culture)+" s";
-            int spent=run.PaidTotal(),refunded=run.RefundedTotal();
+            int spent=run.PaidTotal(),refunded=run.RefundedTotal();bool boughtPower=spent>0||run.WalletPaidTotal()>0;
             Veil();Window(180,80,1240,744,game.world==1?"WORLD 1-1 / YOUR RUN SO FAR":"WORLD 1-2 / FINAL RECEIPT",
                 game.world==1?"Level cleared. Receipt enclosed.":"VICTORY, ITEMIZED.");
-            Text(216,245,1168,36,spent>0?"You bought the advantage. The receipt remembers.":"No upgrades purchased. The receipt has nothing to hide.",23,gold);
+            Text(216,245,1168,36,boughtPower?"You bought the advantage. The receipt remembers.":"No upgrades purchased. The receipt has nothing to hide.",23,gold);
             ReceiptMetric(216,"ADS WATCHED",Seconds(run.adWatchTime),run.ads+" rewarded ads.\nThank you for your attention.",gold);
-            ReceiptMetric(616,"COINS SPENT",Count(spent),"Refunded: "+Count(refunded)+"  |  Net: "+Count(spent-refunded)+"\nCard paid: "+Money(run.Payments.Total(PaymentMethod.VirtualCard))+" SGD",gold);
-            ReceiptMetric(1016,"YOU ACTUALLY PLAYED",Seconds(run.activeInputTime),"Move / jump / fire held.\nIdle, menus and ads excluded.",cyan);
+            ReceiptMetric(616,"COINS SPENT",Count(spent),"Refunded: "+Count(refunded)+"  |  Net: "+Count(spent-refunded)+"\nCard: "+Money(run.Payments.Total(PaymentMethod.VirtualCard))+"  |  Mech: "+Money(run.WalletPaidTotal()),gold);
+            ReceiptMetric(1016,"YOU ACTUALLY PLAYED",Seconds(run.activeInputTime),"Move / jump / fly / fire held.\nIdle, menus and ads excluded.",cyan);
             float tracked=run.adWatchTime+run.playTime,denominator=Mathf.Max(.001f,tracked);
             float adShare=run.adWatchTime/denominator,inputShare=Mathf.Min(run.activeInputTime,run.playTime)/denominator;
             float idleShare=Mathf.Max(0,run.playTime-run.activeInputTime)/denominator;
@@ -346,7 +350,7 @@ namespace JumpNotIncluded
             Text(1016,577,368,29,(idleShare*100).ToString("0",culture)+"% IDLE IN LEVEL",18,muted,true,TextAnchor.MiddleCenter);
             Text(216,626,1168,35,"SCORE  "+Count(run.score)+"     BEST  "+Count(game.HighScore)+"     DEATHS  "+run.deaths,23,paper,true,TextAnchor.MiddleCenter);
             Text(216,668,1168,30,game.world==1?"Next: World 1-2. Clear bonus: up to S$4.00. Your purchases follow you.":
-                spent>0?"Congratulations. Your purchasing power has defeated the game.":"No purchases. No premium rescue. This victory belongs to you.",20,gold,false,TextAnchor.MiddleCenter);
+                boughtPower?"Congratulations. Your purchasing power has defeated the game.":"No purchases. No premium rescue. This victory belongs to you.",20,gold,false,TextAnchor.MiddleCenter);
             if(game.world==1)Button(216,718,1168,55,"NEXT WORLD",game.NextWorld,true);
             else
             {

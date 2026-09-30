@@ -10,6 +10,7 @@ PASS: Purify product text is English after asset migration
 PASS: MasterGuide product text is English after asset migration
 PASS: DoubleJump product text is English after asset migration
 PASS: Gatling product text is English after asset migration
+PASS: Mech product text is English after asset migration
 PASS: idle state machines remain stable after asset reload
 PASS: Goomba sprite and collider feet align with floor
 PASS: Goomba frames include all 16 pixels, including feet
@@ -110,11 +111,13 @@ PASS: opening has no hidden blocks and the six-tile cliff conceals eight traps
 PASS: ordinary cliff-edge jump hits the hidden trap and falls (position=(47.24, -4.24), mode=Dead)
 PASS: early first-visit jump also hits the upper ambush and falls into the wider gap
 PASS: largest cash pack credits 2000 coins inside the shop
-PASS: all three premium upgrades purchase through the real death shop
+PASS: all three premium upgrades purchase through the real death shop at reduced Wings and Gatling prices
 PASS: buying wings includes jumping and blocks a redundant jump purchase
 PASS: Master Guide reveals four outline edges and a reward icon without activating the block
 PASS: second jump restores ascent and displays Monarch Wings through actual input
 PASS: a third press cannot grant another midair jump
+PASS: actual Goomba stomp replenishes an already spent Monarch Wings jump
+PASS: Space after a stomp launches the restored air jump and plays the Wings animation
 PASS: landing recharges the single air jump
 PASS: holding J fires more than three straight Gatling bullets without Fire Mario
 PASS: one Gatling bullet destroys a brick and the enemy behind it
@@ -131,20 +134,64 @@ PASS: Gatling defeats each boss in range without erasing the distant survivors
 PASS: checkpoint retry preserves every boss defeat and leaves the surviving Bowsers alive
 PASS: star music respects the muted music channel in World 2
 PASS: star expiry restores World 2's own track and preserves music mute
+PASS: fresh runs have no arrival sequence or pre-equipped mech
+PASS: the purchased replica remains pending while the defeated player is in the shop
+PASS: an incomplete revival ad cannot launch or bypass mech arrival
+PASS: finishing the revival ad enters the mandatory cinematic and freezes the world
+PASS: delivery's three audio sources route to World SFX, the braking engine loop plays, and ordinary BGM stays paused
+PASS: the revival gate is satisfied but the suit remains unequipped until consciousness transfer finishes
+PASS: Escape, Space, J, Enter and movement inputs cannot skip arrival, equip early or fire
+PASS: arrival freezes enemies and does not count as gameplay, player control or ad viewing
+PASS: menu, restart, scene travel, finish, retry and direct Playing-mode callbacks cannot escape the mandatory cinematic
+PASS: losing focus pauses arrival time instead of silently completing it in the background
+PASS: losing focus pauses the cinematic's dedicated sound sources
+PASS: regaining focus continues the pending cinematic without granting early control
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: the complete landing and consciousness-transfer sequence hands control to the suit at its landing position
+PASS: deployment neither charges twice nor changes currency or death totals
+PASS: completed deployment is saved to the existing checkpoint together with ownership
+PASS: pausing and resuming an equipped mech does not replay the introduction
+PASS: checkpoint reload preserves completed deployment without starting another cinematic
+PASS: the equipped mech enters the next world without replaying arrival
+PASS: loading a purchased but undeployed save starts the full arrival sequence
+PASS: reloading during arrival restarts the mandatory sequence rather than bypassing it
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: new runs reset both ownership and deployment completion for the next purchase
 PASS: firing backward leaves the cliff and forward traps intact
-PASS: forward Gatling fire fills all six gap tiles and destroys both tiers of hidden bricks above the muzzle
-PASS: Gatling clears the forward pipe and poisonous ground hazards
-PASS: repeated paving cannot farm hidden rewards or destruction scores
-PASS: a checkpoint inside the former abyss restores paved ground and demolished pipes before the player spawns
-PASS: ad cash funds Gatling alone through three real coin-pack purchases
-PASS: paid route clears all of World 1 by holding right and fire, with no jumps or extra deaths (position=(92.09, 0.94), mode=Results)
-PASS: first-world receipt contains actual ad seconds, held-control seconds and the Gatling coin receipt
+PASS: forward Gatling fire removes both tiers of hidden bricks but leaves all six gap tiles empty
+PASS: Gatling clears poisonous ground hazards while preserving the pipe collider
+PASS: Gatling preserves beneficial coins and real mushrooms in its firing corridor
+PASS: repeated Gatling clearing cannot farm hidden rewards or destruction scores
+PASS: checkpoint retry keeps the natural cliff and pipe intact after Gatling use
+PASS: mech cannot be purchased during ordinary gameplay
+PASS: real shop orders one mech and debits exactly SGD 79.99 while preserving coin balance
+PASS: buying the mech schedules deployment without equipping it or skipping the required revive advertisement
+PASS: shop pause blocks mech propulsion audio and weapons
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: holding Space continuously propels the mech upward with gravity disabled
+PASS: mech propulsion has its own looping audio source routed through World SFX
+PASS: releasing Space holds altitude instead of triggering a jump fall
+PASS: continuous thrust stops at the visible upper flight boundary
+PASS: S lowers the mech deliberately without restoring gravity
+PASS: controlled mech descent counts toward actual hands-on time
+PASS: abyss safety restores stable hover above an unchanged gap instead of killing the mech
+PASS: rear auto-lock fixture is visible before firing (viewport=(0.10, 0.19, 10.00), camera=(11.19, 4.70, -10.00), aspect=1.333333)
+PASS: one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots=0 -> 1, target=check.mech.near, defeated=True, camera=(11.08, 4.70, -10.00), nearViewport=(0.10, 0.19, 10.00), player=(6.00, 3.50))
+PASS: one auto-locked laser instantly kills a full-health 18-hit Bowser
+PASS: mech J attack uses its laser rather than ordinary fireballs or Gatling bullets
+PASS: actual Goomba, Bowser, flame and poison contacts cannot damage the equipped mech
+PASS: pause freezes flight and laser attacks and silences propulsion
+PASS: checkpoint reload preserves equipped mech, immunity, coin balance and one direct-wallet receipt
+PASS: eighty seconds of ad cash buy the SGD 79.99 mech directly without exchanging coins or buying other abilities
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: mech flight and auto-lock clear World 1 above unchanged pipes and cliffs with no extra deaths (position=(92.12, 7.80), mode=Results)
+PASS: first-world receipt contains actual ad seconds, control time and a separate SGD mech purchase with zero coins spent
 PASS: result screen freezes both receipt timers
-PASS: Gatling carries through the actual loading scene into World 2
+PASS: mech ownership and equipped flight carry through the actual loading scene into World 2
 PASS: ad and hands-on totals carry through the loading scene without adding menu time
-PASS: paid route clears all ten Bowsers and World 2 by holding right and fire, with no jumps or extra deaths (position=(108.04, 0.94), mode=Results)
-PASS: final receipt totals both worlds while keeping the original viewing and purchase amounts
-PASS: a new run clears all receipt telemetry
+PASS: mech auto-lock destroys all ten Bowsers and clears World 2 without extra deaths (position=(108.02, 7.80), mode=Results)
+PASS: final receipt totals both worlds while preserving the direct SGD purchase and original ad viewing time
+PASS: a new run clears receipt telemetry, mech ownership, completed deployment and cash purchases
 PASS: checkout cannot open or submit during normal gameplay
 PASS: SGD checkout requires linking a card while the world stays paused
 PASS: linking the virtual card is saved without charging it

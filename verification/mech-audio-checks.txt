@@ -1,0 +1,47 @@
+MECH AUDIO QA / Unity AudioRenderer main-output PCM / fixed 30 FPS
+PASS: Unity audio device accepts the stereo capture configuration
+PASS: AudioRenderer enters actual main-output capture mode
+PASS: audio fixture owns a paid suit
+PASS: 8-bit cue is loaded: ignition
+PASS: 8-bit cue is loaded: thrust-loop
+PASS: 8-bit cue is loaded: laser
+PASS: 8-bit cue is loaded: landing
+PASS: 8-bit cue is loaded: shield
+PASS: 8-bit cue is loaded: descent
+PASS: 8-bit cue is loaded: uplink
+PASS: 8-bit cue is loaded: ready
+PASS: 8-bit cue is loaded: boost
+PASS: all nine mech cues are independently authored clips
+PASS: mech audio routes through World SFX independently of background music
+PASS: a grounded suit starts without looping engine sound
+PASS: takeoff triggers ignition once and starts the continuous engine loop
+PASS: hover engine playhead advances continuously rather than restarting every frame
+PASS: holding flight then releasing thrust does not repeat the ignition cue
+PASS: pause silences the engine source
+PASS: pause preserves the engine sample position
+PASS: resume continues flight without another ignition
+PASS: lost window focus pauses mech audio even when background simulation is enabled
+PASS: lost focus does not rewind or advance the paused loop
+PASS: regaining focus resumes the same flight without replaying ignition
+PASS: entering horizontal cruise triggers one boost cue
+PASS: sustained cruise keeps its loop and does not spam boost cues
+PASS: an absorbed monster hit triggers the shield cue
+PASS: the effects control mutes all continuous and one-shot mech channels
+PASS: muting effects leaves real background music audible and on its own source
+PASS: muting music and effects produces actual near-silent Unity mixer PCM
+PASS: restoring only effects makes the real engine audible while music remains muted
+PASS: touching real ground plays the landing cue once
+PASS: remaining on the ground neither loops landing nor leaves the engine running
+PASS: fresh audio presentation fixture purchases its replica through the real shop
+PASS: arrival focus loss silences its dedicated audio sources
+PASS: arrival focus loss freezes both cinematic time and actual audio playhead
+PASS: arrival focus recovery resumes picture and audio together
+PASS: the audio interruption fixture completes through the real arrival callback
+PASS: fresh audio presentation fixture purchases its replica through the real shop
+PASS: continuous AV capture starts at the actual first arrival frame
+PASS: the recorded sequence reaches control through normal gameplay state updates
+PASS: actual audio samples and cinematic clock remain aligned within one capture-frame margin (duration=6.2293, drift=0.0293)
+PASS: the real mixed output contains the full 6.2-second arrival interval
+PASS: the recorded arrival mix is audible and does not clip
+CAPTURED: arrival-mix.wav / 48000 Hz stereo / 6.2 s / 188 referenced frames
+ALL MECH AUDIO CHECKS PASSED

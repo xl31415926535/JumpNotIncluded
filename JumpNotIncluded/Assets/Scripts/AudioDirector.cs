@@ -50,7 +50,7 @@ namespace JumpNotIncluded
         private void Update()
         {
             if(game==null) return;
-            bool paused=game.mode==ScreenMode.Pause||game.mode==ScreenMode.Dead||game.mode==ScreenMode.Results;
+            bool paused=game.mode==ScreenMode.Pause||game.mode==ScreenMode.Dead||game.mode==ScreenMode.Results||game.Deploying;
             bool invincible=game.player!=null&&game.player.buffs.Value==Buff.Star;
             var wanted=invincible&&starMusic!=null?starMusic:levelMusic;
             if(wanted!=null&&music.clip!=wanted)

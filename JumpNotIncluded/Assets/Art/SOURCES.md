@@ -17,3 +17,7 @@ Mario, Bowser, terrain and audio come from the user-provided course package `lab
 
 See `Ads/SOURCES.md` for the official SUTD material and the user's SL Cheater artwork.
 
+
+## Playable War God replica
+
+The original SL CHEATER portrait, flight and walking atlases, and propulsion/laser audio are reused at the user's request. See `Mech/SOURCES.md` for the exact source files and unchanged-copy provenance.

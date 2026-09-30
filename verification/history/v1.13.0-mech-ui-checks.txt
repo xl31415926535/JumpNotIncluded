@@ -1,0 +1,32 @@
+STAGED PRESENTATION FIXTURES / real UI and Input System
+CAPTURED: 01-upgrade-shop (1280x720)
+CAPTURED: 01-upgrade-shop-small (960x540)
+CAPTURED: 01-upgrade-shop-4x3 (1024x768)
+CAPTURED: 02-mech-insufficient (1280x720)
+CAPTURED: 02-mech-insufficient-small (960x540)
+CAPTURED: 02-mech-insufficient-4x3 (1024x768)
+PASS: Mech showcase exposes the expected five navigation targets
+PASS: Disabled insufficient-funds button leaves ownership and balances unchanged
+CAPTURED: 03-mech-affordable (1280x720)
+CAPTURED: 03-mech-affordable-small (960x540)
+CAPTURED: 03-mech-affordable-4x3 (1024x768)
+PASS: Mech showcase exposes the expected five navigation targets
+PASS: Rendered buy button installs the replica and charges SGD 79.99 without spending coins
+PASS: Mech purchase preserves the mandatory revival gate
+PASS: Repeated purchase is rejected without a second charge
+CAPTURED: 04-mech-owned (1280x720)
+CAPTURED: 04-mech-owned-small (960x540)
+CAPTURED: 04-mech-owned-4x3 (1024x768)
+PASS: Mech showcase exposes the expected five navigation targets
+PASS: Owned deploy button starts the required revival ad without charging again
+PASS: Completing the revival ad starts the mandatory orbital arrival before equipment activation
+PASS: Completing the full arrival deploys the purchased replica
+PASS: Real SPACE input engages animated ascent beside World 2 enemies
+CAPTURED: 05-mech-flight (1280x720)
+PASS: Releasing SPACE holds the flight altitude
+PASS: Real J input fires an automatic laser at a live World 2 enemy
+CAPTURED: 06-mech-auto-lock-laser (1280x720)
+PASS: Presentation flight and laser do not introduce a new death
+ALL MECH UI CHECKS PASSED
+
+BUILD: Windows x64 v1.13.0 succeeded.

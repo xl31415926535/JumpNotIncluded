@@ -1,0 +1,30 @@
+{
+  "version": 5,
+  "frame_size": [
+    192,
+    192
+  ],
+  "columns": 8,
+  "phase_frames": 24,
+  "strength_levels": 5,
+  "frame_count": 120,
+  "footprint_rect": [
+    48,
+    48,
+    96,
+    96
+  ],
+  "collision_tiles": [
+    3,
+    3
+  ],
+  "stride_tiles": 1.25,
+  "source": "war-god-four-view-v03",
+  "directions": [
+    "front",
+    "left",
+    "right",
+    "back"
+  ],
+  "notes": "Distance-driven cutout rig. Strength blocks interpolate joint poses into idle; no opacity crossfade. The head, torso and folded wings are a fixed part. Boost remains the existing v04 atlas."
+}

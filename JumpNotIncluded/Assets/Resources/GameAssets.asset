@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031806ba164f5f247a492b3f2d4a6047, type: 3}
   m_Name: GameAssets
   m_EditorClassIdentifier: Assembly-CSharp::JumpNotIncluded.GameAssets
-  revision: 9
+  revision: 12
   sprites:
   - key: small-idle
     sprite: {fileID: 21300000, guid: 1aa4aaf1acf6acb409599c2db8216880, type: 2}
@@ -129,6 +129,20 @@ MonoBehaviour:
   sutdAIAd: {fileID: 2800000, guid: bb93ba8f4436a554c8a088309761620a, type: 3}
   sutdRobotAd: {fileID: 2800000, guid: e2de759968f3a6d4e84c4fbbc4ead403, type: 3}
   slCheaterAd: {fileID: 2800000, guid: 565cd56985c4ca342af5d2b67b3e9d3c, type: 3}
+  mechPortrait: {fileID: 2800000, guid: ae4b82d4e11fd1345959189a939de109, type: 3}
+  mechFlightTexture: {fileID: 2800000, guid: 86212e80d5bf06b43bc58f1cf1e0053f, type: 3}
+  mechWalkTexture: {fileID: 2800000, guid: 0d808600b336ae545adc8a5a3fc3f05e, type: 3}
+  mechPixelAtlas: {fileID: 2800000, guid: 36fc3bfbb39d475a9e24a22c2b381958, type: 3}
+  mechPixelMaterial: {fileID: 2100000, guid: 63646a7ab8c5b314db8cd16156638ae5, type: 2}
+  mechIgnition: {fileID: 8300000, guid: cade7ab48f75e114b8ad475b32b564ee, type: 3}
+  mechThrustLoop: {fileID: 8300000, guid: f0dea72168600194faec9a15112461a5, type: 3}
+  mechLaser: {fileID: 8300000, guid: 6f1b3a8b2c48aa84fb74f44d0109c484, type: 3}
+  mechLanding: {fileID: 8300000, guid: 38ac9a44d7892d744bfd62ce0ab38ede, type: 3}
+  mechShield: {fileID: 8300000, guid: 810fe3888e0e9594eb4fa076a7ede87a, type: 3}
+  mechDescent: {fileID: 8300000, guid: 22277376d3cdd76498b14791497349c0, type: 3}
+  mechUplink: {fileID: 8300000, guid: 496e67b75ca5dcd4cb7f1e8c7b236b0a, type: 3}
+  mechReady: {fileID: 8300000, guid: 0fb3ee25bb43b1f4da07e91ede56e2d2, type: 3}
+  mechBoost: {fileID: 8300000, guid: a865f030968573e419e41ffada312fb8, type: 3}
   formStates:
   - {fileID: 11400000, guid: f72b3e5086adcff439a6a5c1e5bbe7ad, type: 2}
   - {fileID: 11400000, guid: 0979a5f285eb8d7439ae79f8d3d42c00, type: 2}
@@ -147,6 +161,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9445aeb43d6a6f54c912d97f9a161d9b, type: 2}
   - {fileID: 11400000, guid: d65a10dbb79141149ad64be81af784d7, type: 2}
   - {fileID: 11400000, guid: 83db66f857da53343b89957b004e08e6, type: 2}
+  - {fileID: 11400000, guid: 66bd806035107ff4c86168c33035711c, type: 2}
   mixer: {fileID: 24100000, guid: 605ff84cf2f89d745beed239f2a90f4a, type: 2}
   musicGroup: {fileID: -783317064275163643, guid: 605ff84cf2f89d745beed239f2a90f4a, type: 2}
   worldGroup: {fileID: -6102583907308804098, guid: 605ff84cf2f89d745beed239f2a90f4a, type: 2}

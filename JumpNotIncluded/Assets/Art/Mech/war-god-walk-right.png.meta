@@ -1,0 +1,3237 @@
+fileFormatVersion: 2
+guid: 0d808600b336ae545adc8a5a3fc3f05e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3876060586121992389
+    second: war-god-walk-right_0
+  - first:
+      213: -2768125467586936958
+    second: war-god-walk-right_1
+  - first:
+      213: 1452732037040963118
+    second: war-god-walk-right_2
+  - first:
+      213: -6243025752301338782
+    second: war-god-walk-right_3
+  - first:
+      213: 3762655484936283287
+    second: war-god-walk-right_4
+  - first:
+      213: 8273748710614694093
+    second: war-god-walk-right_5
+  - first:
+      213: -4443408980543620644
+    second: war-god-walk-right_6
+  - first:
+      213: -5272802249969503582
+    second: war-god-walk-right_7
+  - first:
+      213: -1239508689209597612
+    second: war-god-walk-right_8
+  - first:
+      213: -5027619830977602614
+    second: war-god-walk-right_9
+  - first:
+      213: -6185981391456524331
+    second: war-god-walk-right_10
+  - first:
+      213: 7291991343574270066
+    second: war-god-walk-right_11
+  - first:
+      213: 7877844112342091514
+    second: war-god-walk-right_12
+  - first:
+      213: 271529209057646267
+    second: war-god-walk-right_13
+  - first:
+      213: -8219670695080380538
+    second: war-god-walk-right_14
+  - first:
+      213: 9169031862571165993
+    second: war-god-walk-right_15
+  - first:
+      213: 7006477746548876649
+    second: war-god-walk-right_16
+  - first:
+      213: 1405486325659824374
+    second: war-god-walk-right_17
+  - first:
+      213: -4876379364109868826
+    second: war-god-walk-right_18
+  - first:
+      213: 1808737030905304560
+    second: war-god-walk-right_19
+  - first:
+      213: -8211827413351175490
+    second: war-god-walk-right_20
+  - first:
+      213: -6849629837888218631
+    second: war-god-walk-right_21
+  - first:
+      213: -7964360241019945189
+    second: war-god-walk-right_22
+  - first:
+      213: 4686409415311633856
+    second: war-god-walk-right_23
+  - first:
+      213: 2472919661096820392
+    second: war-god-walk-right_24
+  - first:
+      213: -693874558998434326
+    second: war-god-walk-right_25
+  - first:
+      213: 5957618080445982147
+    second: war-god-walk-right_26
+  - first:
+      213: -614482687482635717
+    second: war-god-walk-right_27
+  - first:
+      213: 2035802203675891248
+    second: war-god-walk-right_28
+  - first:
+      213: 5871080932997106276
+    second: war-god-walk-right_29
+  - first:
+      213: -1509047516749672433
+    second: war-god-walk-right_30
+  - first:
+      213: -4643570134527678470
+    second: war-god-walk-right_31
+  - first:
+      213: -5743564980033430161
+    second: war-god-walk-right_32
+  - first:
+      213: -8484357567978752657
+    second: war-god-walk-right_33
+  - first:
+      213: -1084125951421865155
+    second: war-god-walk-right_34
+  - first:
+      213: 5074950362443329710
+    second: war-god-walk-right_35
+  - first:
+      213: 1477214176489299222
+    second: war-god-walk-right_36
+  - first:
+      213: -3709018145654338637
+    second: war-god-walk-right_37
+  - first:
+      213: 4145392634090525342
+    second: war-god-walk-right_38
+  - first:
+      213: 2402345365947733070
+    second: war-god-walk-right_39
+  - first:
+      213: 3836368978928681221
+    second: war-god-walk-right_40
+  - first:
+      213: -392545004617938656
+    second: war-god-walk-right_41
+  - first:
+      213: 6617770015837709470
+    second: war-god-walk-right_42
+  - first:
+      213: 9217653759893337548
+    second: war-god-walk-right_43
+  - first:
+      213: -2741120110333808271
+    second: war-god-walk-right_44
+  - first:
+      213: 3928309641090825308
+    second: war-god-walk-right_45
+  - first:
+      213: -4082408265920122414
+    second: war-god-walk-right_46
+  - first:
+      213: 2325592627845377733
+    second: war-god-walk-right_47
+  - first:
+      213: -6713473436617551981
+    second: war-god-walk-right_48
+  - first:
+      213: 1124601438713041114
+    second: war-god-walk-right_49
+  - first:
+      213: 9098129891427797776
+    second: war-god-walk-right_50
+  - first:
+      213: 5551168313197433520
+    second: war-god-walk-right_51
+  - first:
+      213: 1727441336436161210
+    second: war-god-walk-right_52
+  - first:
+      213: 3734419749143970626
+    second: war-god-walk-right_53
+  - first:
+      213: -9166530850705198993
+    second: war-god-walk-right_54
+  - first:
+      213: -5973110591837520730
+    second: war-god-walk-right_55
+  - first:
+      213: -8586859024659048790
+    second: war-god-walk-right_56
+  - first:
+      213: -369520648755417072
+    second: war-god-walk-right_57
+  - first:
+      213: -3730779983651145601
+    second: war-god-walk-right_58
+  - first:
+      213: -414003283974196647
+    second: war-god-walk-right_59
+  - first:
+      213: -5014437448456015685
+    second: war-god-walk-right_60
+  - first:
+      213: 773213099264885768
+    second: war-god-walk-right_61
+  - first:
+      213: -1893782536475713158
+    second: war-god-walk-right_62
+  - first:
+      213: -1222117826033373386
+    second: war-god-walk-right_63
+  - first:
+      213: 6656664548536934714
+    second: war-god-walk-right_64
+  - first:
+      213: -8570475566983368713
+    second: war-god-walk-right_65
+  - first:
+      213: 3472106043204046460
+    second: war-god-walk-right_66
+  - first:
+      213: -3074759041147394355
+    second: war-god-walk-right_67
+  - first:
+      213: -1175547003606653351
+    second: war-god-walk-right_68
+  - first:
+      213: 2699230066944449719
+    second: war-god-walk-right_69
+  - first:
+      213: 7614111593013339260
+    second: war-god-walk-right_70
+  - first:
+      213: -7871803118653730034
+    second: war-god-walk-right_71
+  - first:
+      213: -615376476843564028
+    second: war-god-walk-right_72
+  - first:
+      213: -656718253213018007
+    second: war-god-walk-right_73
+  - first:
+      213: 2218124813841625041
+    second: war-god-walk-right_74
+  - first:
+      213: 2934839440256757900
+    second: war-god-walk-right_75
+  - first:
+      213: -1056334303671331186
+    second: war-god-walk-right_76
+  - first:
+      213: 8184042330669047729
+    second: war-god-walk-right_77
+  - first:
+      213: 2470179487133006025
+    second: war-god-walk-right_78
+  - first:
+      213: -7428670250347170048
+    second: war-god-walk-right_79
+  - first:
+      213: -3305170785923592425
+    second: war-god-walk-right_80
+  - first:
+      213: -7213700389001734836
+    second: war-god-walk-right_81
+  - first:
+      213: -2757711027031790506
+    second: war-god-walk-right_82
+  - first:
+      213: -6179022984311352053
+    second: war-god-walk-right_83
+  - first:
+      213: -2433718649511140105
+    second: war-god-walk-right_84
+  - first:
+      213: 2009606832136728555
+    second: war-god-walk-right_85
+  - first:
+      213: -3533808137223411191
+    second: war-god-walk-right_86
+  - first:
+      213: 7342996884109846589
+    second: war-god-walk-right_87
+  - first:
+      213: -3946324928272198973
+    second: war-god-walk-right_88
+  - first:
+      213: 4712869659908853486
+    second: war-god-walk-right_89
+  - first:
+      213: 6903188766285966344
+    second: war-god-walk-right_90
+  - first:
+      213: -5614157922073391945
+    second: war-god-walk-right_91
+  - first:
+      213: -3528822603115611043
+    second: war-god-walk-right_92
+  - first:
+      213: 5878532661771967645
+    second: war-god-walk-right_93
+  - first:
+      213: 8704489301352811463
+    second: war-god-walk-right_94
+  - first:
+      213: -6909959263043477341
+    second: war-god-walk-right_95
+  - first:
+      213: -2775287008236056976
+    second: war-god-walk-right_96
+  - first:
+      213: -6300763092547827035
+    second: war-god-walk-right_97
+  - first:
+      213: 5840896265478634774
+    second: war-god-walk-right_98
+  - first:
+      213: 2369845414552177361
+    second: war-god-walk-right_99
+  - first:
+      213: 2703124172454950438
+    second: war-god-walk-right_100
+  - first:
+      213: -8740264437187330016
+    second: war-god-walk-right_101
+  - first:
+      213: -728689909560324998
+    second: war-god-walk-right_102
+  - first:
+      213: 3560639304422081106
+    second: war-god-walk-right_103
+  - first:
+      213: 280374111769634259
+    second: war-god-walk-right_104
+  - first:
+      213: -7533937497659846481
+    second: war-god-walk-right_105
+  - first:
+      213: -1883152179378479587
+    second: war-god-walk-right_106
+  - first:
+      213: -7873760765107822938
+    second: war-god-walk-right_107
+  - first:
+      213: -1029598502755836529
+    second: war-god-walk-right_108
+  - first:
+      213: 439037846194893972
+    second: war-god-walk-right_109
+  - first:
+      213: 832090043419803535
+    second: war-god-walk-right_110
+  - first:
+      213: 7236523126320886812
+    second: war-god-walk-right_111
+  - first:
+      213: 2134808906544724260
+    second: war-god-walk-right_112
+  - first:
+      213: 3032560574454062802
+    second: war-god-walk-right_113
+  - first:
+      213: 5214003535659657874
+    second: war-god-walk-right_114
+  - first:
+      213: -5009101086316324075
+    second: war-god-walk-right_115
+  - first:
+      213: 751387463379653636
+    second: war-god-walk-right_116
+  - first:
+      213: -2776300265016253530
+    second: war-god-walk-right_117
+  - first:
+      213: 5295285274676096286
+    second: war-god-walk-right_118
+  - first:
+      213: 3822290660955498233
+    second: war-god-walk-right_119
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: war-god-walk-right_0
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c891bb11988ac530800000000000000
+      internalID: 3876060586121992389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_1
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28fb4caad84a599d0800000000000000
+      internalID: -2768125467586936958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_2
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2ef7ad3714292410800000000000000
+      internalID: 1452732037040963118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_3
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26f767eb7215c59a0800000000000000
+      internalID: -6243025752301338782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_4
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7946dc76a33a73430800000000000000
+      internalID: 3762655484936283287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_5
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc8f809bd9242d270800000000000000
+      internalID: 8273748710614694093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_6
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd9baea0317d552c0800000000000000
+      internalID: -4443408980543620644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_7
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 2740
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a2ffa74a4e33d6b0800000000000000
+      internalID: -5272802249969503582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_8
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 451e6a31a616ccee0800000000000000
+      internalID: -1239508689209597612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_9
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acbded4b66e4a3ab0800000000000000
+      internalID: -5027619830977602614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_10
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d7ae0ff2baf62aa0800000000000000
+      internalID: -6185981391456524331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_11
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270c7fa0e7b523560800000000000000
+      internalID: 7291991343574270066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_12
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af68d084b79b35d60800000000000000
+      internalID: 7877844112342091514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_13
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb61604806aa4c300800000000000000
+      internalID: 271529209057646267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_14
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 687bb017d0ddded80800000000000000
+      internalID: -8219670695080380538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_15
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 2548
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 929eace36e1fe3f70800000000000000
+      internalID: 9169031862571165993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_16
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 965a9b973620c3160800000000000000
+      internalID: 7006477746548876649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_17
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f07f99dd5a418310800000000000000
+      internalID: 1405486325659824374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_18
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e0af24fdce935cb0800000000000000
+      internalID: -4876379364109868826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_19
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f5943b1fbce91910800000000000000
+      internalID: 1808737030905304560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_20
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eba6366c97ab90e80800000000000000
+      internalID: -8211827413351175490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_21
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f991cd04f931f0a0800000000000000
+      internalID: -6849629837888218631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_22
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1ff2cace88e87190800000000000000
+      internalID: -7964360241019945189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_23
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 2356
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd22b79888790140800000000000000
+      internalID: 4686409415311633856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_24
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ae51c56453915220800000000000000
+      internalID: 2472919661096820392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_25
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeda730d3ccde56f0800000000000000
+      internalID: -693874558998434326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_26
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c56d605416bda250800000000000000
+      internalID: 5957618080445982147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_27
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3a58fb504be877f0800000000000000
+      internalID: -614482687482635717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_28
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0361f0f615f904c10800000000000000
+      internalID: 2035802203675891248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_29
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46a8cd290054a7150800000000000000
+      internalID: 5871080932997106276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_30
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0053fe5749ce0be0800000000000000
+      internalID: -1509047516749672433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_31
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 2164
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af76dd9b099be8fb0800000000000000
+      internalID: -4643570134527678470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_32
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1972
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6ddbb4d412ca40b0800000000000000
+      internalID: -5743564980033430161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_33
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1972
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f65ba357eb1814a80800000000000000
+      internalID: -8484357567978752657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_34
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1972
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33a7bde03964f0f0800000000000000
+      internalID: -1084125951421865155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_35
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1972
+        width: 49
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea0bc266778dd6640800000000000000
+      internalID: 5074950362443329710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_36
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 1972
+        width: 49
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61dd0d6877e108410800000000000000
+      internalID: 1477214176489299222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_37
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1972
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bb8bc2d5abe68cc0800000000000000
+      internalID: -3709018145654338637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_38
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1972
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e929c7133a4678930800000000000000
+      internalID: 4145392634090525342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_39
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 1972
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e44de15d168d65120800000000000000
+      internalID: 2402345365947733070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_40
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1780
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5014f58a2458d3530800000000000000
+      internalID: 3836368978928681221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_41
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1781
+        width: 47
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 029c469e5666d8af0800000000000000
+      internalID: -392545004617938656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_42
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1781
+        width: 47
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e94ec3754ca07db50800000000000000
+      internalID: 6617770015837709470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_43
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1781
+        width: 47
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc57cf4e14fabef70800000000000000
+      internalID: 9217653759893337548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_44
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 1780
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 171bfd068c595f9d0800000000000000
+      internalID: -2741120110333808271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_45
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1780
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5cf5f43ec8248630800000000000000
+      internalID: 3928309641090825308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_46
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1780
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d176b9cf4f5857c0800000000000000
+      internalID: -4082408265920122414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_47
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 1780
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ceadfa6c2a264020800000000000000
+      internalID: 2325592627845377733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_48
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1587
+        width: 46
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39fc3699a73f4d2a0800000000000000
+      internalID: -6713473436617551981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_49
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1587
+        width: 45
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad05264dc036b9f00800000000000000
+      internalID: 1124601438713041114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_50
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1587
+        width: 45
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01bcaeaaeec034e70800000000000000
+      internalID: 9098129891427797776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_51
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1587
+        width: 45
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b299846b26b90d40800000000000000
+      internalID: 5551168313197433520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_52
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 1587
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aba7a9c3eba19f710800000000000000
+      internalID: 1727441336436161210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_53
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1587
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2430eedd9f253d330800000000000000
+      internalID: 3734419749143970626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_54
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1587
+        width: 46
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f60be05f1c0f9c080800000000000000
+      internalID: -9166530850705198993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_55
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 1587
+        width: 46
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6acb669409f3b1da0800000000000000
+      internalID: -5973110591837520730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_56
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1395
+        width: 46
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa617d2563955d880800000000000000
+      internalID: -8586859024659048790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_57
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1395
+        width: 47
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 010f2c18de23fdaf0800000000000000
+      internalID: -369520648755417072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_58
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1395
+        width: 48
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f78f5531f5b993cc0800000000000000
+      internalID: -3730779983651145601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_59
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1395
+        width: 49
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9527fdae43a214af0800000000000000
+      internalID: -414003283974196647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_60
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 1395
+        width: 50
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb0fc5055b3296ab0800000000000000
+      internalID: -5014437448456015685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_61
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1396
+        width: 49
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 804cc5597310bba00800000000000000
+      internalID: 773213099264885768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_62
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1396
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a71e68711dee7b5e0800000000000000
+      internalID: -1893782536475713158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_63
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 1397
+        width: 47
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63fab91ff4a2a0fe0800000000000000
+      internalID: -1222117826033373386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_64
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1205
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a31ea7c6329316c50800000000000000
+      internalID: 6656664548536934714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_65
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1205
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ffaac151ed8f0980800000000000000
+      internalID: -8570475566983368713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_66
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1205
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7e0aafdc066f2030800000000000000
+      internalID: 3472106043204046460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_67
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1205
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc62d7e51f24455d0800000000000000
+      internalID: -3074759041147394355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_68
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 1205
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95620418a3e9fafe0800000000000000
+      internalID: -1175547003606653351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_69
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1205
+        width: 46
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc174bd177957520800000000000000
+      internalID: 2699230066944449719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_70
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1204
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c746ebd0722caa960800000000000000
+      internalID: 7614111593013339260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_71
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 1204
+        width: 45
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0315da25ccb1c290800000000000000
+      internalID: -7871803118653730034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_72
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1011
+        width: 48
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 404ab9eca5eb577f0800000000000000
+      internalID: -615376476843564028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_73
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 1011
+        width: 47
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96819b76a3ed2e6f0800000000000000
+      internalID: -656718253213018007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_74
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1011
+        width: 46
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1df628c14cc58ce10800000000000000
+      internalID: 2218124813841625041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_75
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1011
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c807f45ebe4aab820800000000000000
+      internalID: 2934839440256757900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_76
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 1011
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e865c992c852751f0800000000000000
+      internalID: -1056334303671331186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_77
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1011
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bfd94a832f839170800000000000000
+      internalID: 8184042330669047729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_78
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1011
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c8f40ee727d74220800000000000000
+      internalID: 2470179487133006025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_79
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 1011
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0077b8e14cf08e890800000000000000
+      internalID: -7428670250347170048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_80
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 819
+        width: 45
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71f86078eaca122d0800000000000000
+      internalID: -3305170785923592425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_81
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 819
+        width: 47
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c45547d47b9c3eb90800000000000000
+      internalID: -7213700389001734836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_82
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 819
+        width: 49
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65ca7909e64aab9d0800000000000000
+      internalID: -2757711027031790506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_83
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 819
+        width: 50
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b05d5296553bf3aa0800000000000000
+      internalID: -6179022984311352053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_84
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 819
+        width: 50
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f425ac58c1b93ed0800000000000000
+      internalID: -2433718649511140105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_85
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 819
+        width: 49
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bef25b734ce83eb10800000000000000
+      internalID: 2009606832136728555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_86
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 820
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ae96cd83465fec0800000000000000
+      internalID: -3533808137223411191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_87
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 821
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d38ea20e2c097e560800000000000000
+      internalID: 7342996884109846589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_88
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 629
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c21112e266db39c0800000000000000
+      internalID: -3946324928272198973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_89
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 630
+        width: 47
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee459f5cf9776140800000000000000
+      internalID: 4712869659908853486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_90
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 630
+        width: 47
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c21f7bb9d0dcf50800000000000000
+      internalID: 6903188766285966344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_91
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 630
+        width: 47
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bccedd6d118612b0800000000000000
+      internalID: -5614157922073391945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_92
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 629
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5cbce9f98a170fc0800000000000000
+      internalID: -3528822603115611043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_93
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 629
+        width: 46
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9c13716f4eb49150800000000000000
+      internalID: 5878532661771967645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_94
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 628
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb8256b6ee8cc870800000000000000
+      internalID: 8704489301352811463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_95
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 627
+        width: 48
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a0afd929a4ea10a0800000000000000
+      internalID: -6909959263043477341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_96
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 434
+        width: 51
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07e455c8b233c79d0800000000000000
+      internalID: -2775287008236056976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_97
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 434
+        width: 49
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5aa8bc6a9513f88a0800000000000000
+      internalID: -6300763092547827035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_98
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 434
+        width: 48
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d72c105380f0150800000000000000
+      internalID: 5840896265478634774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_99
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 434
+        width: 46
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1da88fa39d163e020800000000000000
+      internalID: 2369845414552177361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_100
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 434
+        width: 45
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 626f2f2fc1d638520800000000000000
+      internalID: 2703124172454950438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_101
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 434
+        width: 45
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02048726dc754b680800000000000000
+      internalID: -8740264437187330016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_102
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 434
+        width: 45
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7cce35536c23e5f0800000000000000
+      internalID: -728689909560324998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_103
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 434
+        width: 45
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2524f51159ee96130800000000000000
+      internalID: 3560639304422081106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_104
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 242
+        width: 45
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d5ae38e4c614e300800000000000000
+      internalID: 280374111769634259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_105
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 242
+        width: 47
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa05dfb23c3127790800000000000000
+      internalID: -7533937497659846481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_106
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 242
+        width: 49
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1e942af113bdd5e0800000000000000
+      internalID: -1883152179378479587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_107
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 242
+        width: 50
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ae17551d48cab290800000000000000
+      internalID: -7873760765107822938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_108
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 242
+        width: 51
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8dd6f5ed9126b1f0800000000000000
+      internalID: -1029598502755836529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_109
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 243
+        width: 49
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49436615896c71600800000000000000
+      internalID: 439037846194893972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_110
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 244
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8f3d236c7d2c8b00800000000000000
+      internalID: 832090043419803535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_111
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 245
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c147141517b4d6460800000000000000
+      internalID: 7236523126320886812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_112
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 53
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42930f9c36d50ad10800000000000000
+      internalID: 2134808906544724260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_113
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 53
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2de503876c1d51a20800000000000000
+      internalID: 3032560574454062802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_114
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 53
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29aef98379cdb5840800000000000000
+      internalID: 5214003535659657874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_115
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 53
+        width: 48
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51b9712f9191c7ab0800000000000000
+      internalID: -5009101086316324075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_116
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 53
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4041d6bbae67d6a00800000000000000
+      internalID: 751387463379653636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_117
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 53
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a322e15e999879d0800000000000000
+      internalID: -2776300265016253530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_118
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 52
+        width: 49
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1dec65d6e1ac7940800000000000000
+      internalID: 5295285274676096286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: war-god-walk-right_119
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 51
+        width: 50
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f6ab82da118b0530800000000000000
+      internalID: 3822290660955498233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      war-god-walk-right_0: 3876060586121992389
+      war-god-walk-right_1: -2768125467586936958
+      war-god-walk-right_10: -6185981391456524331
+      war-god-walk-right_100: 2703124172454950438
+      war-god-walk-right_101: -8740264437187330016
+      war-god-walk-right_102: -728689909560324998
+      war-god-walk-right_103: 3560639304422081106
+      war-god-walk-right_104: 280374111769634259
+      war-god-walk-right_105: -7533937497659846481
+      war-god-walk-right_106: -1883152179378479587
+      war-god-walk-right_107: -7873760765107822938
+      war-god-walk-right_108: -1029598502755836529
+      war-god-walk-right_109: 439037846194893972
+      war-god-walk-right_11: 7291991343574270066
+      war-god-walk-right_110: 832090043419803535
+      war-god-walk-right_111: 7236523126320886812
+      war-god-walk-right_112: 2134808906544724260
+      war-god-walk-right_113: 3032560574454062802
+      war-god-walk-right_114: 5214003535659657874
+      war-god-walk-right_115: -5009101086316324075
+      war-god-walk-right_116: 751387463379653636
+      war-god-walk-right_117: -2776300265016253530
+      war-god-walk-right_118: 5295285274676096286
+      war-god-walk-right_119: 3822290660955498233
+      war-god-walk-right_12: 7877844112342091514
+      war-god-walk-right_13: 271529209057646267
+      war-god-walk-right_14: -8219670695080380538
+      war-god-walk-right_15: 9169031862571165993
+      war-god-walk-right_16: 7006477746548876649
+      war-god-walk-right_17: 1405486325659824374
+      war-god-walk-right_18: -4876379364109868826
+      war-god-walk-right_19: 1808737030905304560
+      war-god-walk-right_2: 1452732037040963118
+      war-god-walk-right_20: -8211827413351175490
+      war-god-walk-right_21: -6849629837888218631
+      war-god-walk-right_22: -7964360241019945189
+      war-god-walk-right_23: 4686409415311633856
+      war-god-walk-right_24: 2472919661096820392
+      war-god-walk-right_25: -693874558998434326
+      war-god-walk-right_26: 5957618080445982147
+      war-god-walk-right_27: -614482687482635717
+      war-god-walk-right_28: 2035802203675891248
+      war-god-walk-right_29: 5871080932997106276
+      war-god-walk-right_3: -6243025752301338782
+      war-god-walk-right_30: -1509047516749672433
+      war-god-walk-right_31: -4643570134527678470
+      war-god-walk-right_32: -5743564980033430161
+      war-god-walk-right_33: -8484357567978752657
+      war-god-walk-right_34: -1084125951421865155
+      war-god-walk-right_35: 5074950362443329710
+      war-god-walk-right_36: 1477214176489299222
+      war-god-walk-right_37: -3709018145654338637
+      war-god-walk-right_38: 4145392634090525342
+      war-god-walk-right_39: 2402345365947733070
+      war-god-walk-right_4: 3762655484936283287
+      war-god-walk-right_40: 3836368978928681221
+      war-god-walk-right_41: -392545004617938656
+      war-god-walk-right_42: 6617770015837709470
+      war-god-walk-right_43: 9217653759893337548
+      war-god-walk-right_44: -2741120110333808271
+      war-god-walk-right_45: 3928309641090825308
+      war-god-walk-right_46: -4082408265920122414
+      war-god-walk-right_47: 2325592627845377733
+      war-god-walk-right_48: -6713473436617551981
+      war-god-walk-right_49: 1124601438713041114
+      war-god-walk-right_5: 8273748710614694093
+      war-god-walk-right_50: 9098129891427797776
+      war-god-walk-right_51: 5551168313197433520
+      war-god-walk-right_52: 1727441336436161210
+      war-god-walk-right_53: 3734419749143970626
+      war-god-walk-right_54: -9166530850705198993
+      war-god-walk-right_55: -5973110591837520730
+      war-god-walk-right_56: -8586859024659048790
+      war-god-walk-right_57: -369520648755417072
+      war-god-walk-right_58: -3730779983651145601
+      war-god-walk-right_59: -414003283974196647
+      war-god-walk-right_6: -4443408980543620644
+      war-god-walk-right_60: -5014437448456015685
+      war-god-walk-right_61: 773213099264885768
+      war-god-walk-right_62: -1893782536475713158
+      war-god-walk-right_63: -1222117826033373386
+      war-god-walk-right_64: 6656664548536934714
+      war-god-walk-right_65: -8570475566983368713
+      war-god-walk-right_66: 3472106043204046460
+      war-god-walk-right_67: -3074759041147394355
+      war-god-walk-right_68: -1175547003606653351
+      war-god-walk-right_69: 2699230066944449719
+      war-god-walk-right_7: -5272802249969503582
+      war-god-walk-right_70: 7614111593013339260
+      war-god-walk-right_71: -7871803118653730034
+      war-god-walk-right_72: -615376476843564028
+      war-god-walk-right_73: -656718253213018007
+      war-god-walk-right_74: 2218124813841625041
+      war-god-walk-right_75: 2934839440256757900
+      war-god-walk-right_76: -1056334303671331186
+      war-god-walk-right_77: 8184042330669047729
+      war-god-walk-right_78: 2470179487133006025
+      war-god-walk-right_79: -7428670250347170048
+      war-god-walk-right_8: -1239508689209597612
+      war-god-walk-right_80: -3305170785923592425
+      war-god-walk-right_81: -7213700389001734836
+      war-god-walk-right_82: -2757711027031790506
+      war-god-walk-right_83: -6179022984311352053
+      war-god-walk-right_84: -2433718649511140105
+      war-god-walk-right_85: 2009606832136728555
+      war-god-walk-right_86: -3533808137223411191
+      war-god-walk-right_87: 7342996884109846589
+      war-god-walk-right_88: -3946324928272198973
+      war-god-walk-right_89: 4712869659908853486
+      war-god-walk-right_9: -5027619830977602614
+      war-god-walk-right_90: 6903188766285966344
+      war-god-walk-right_91: -5614157922073391945
+      war-god-walk-right_92: -3528822603115611043
+      war-god-walk-right_93: 5878532661771967645
+      war-god-walk-right_94: 8704489301352811463
+      war-god-walk-right_95: -6909959263043477341
+      war-god-walk-right_96: -2775287008236056976
+      war-god-walk-right_97: -6300763092547827035
+      war-god-walk-right_98: 5840896265478634774
+      war-god-walk-right_99: 2369845414552177361
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

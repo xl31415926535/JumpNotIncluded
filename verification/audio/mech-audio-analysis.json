@@ -1,0 +1,211 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "seed": 20260928,
+  "generation": "Original offline procedural synthesis; no external audio samples or model calls.",
+  "checks": "PCM16 mono 44100 Hz; peak <= 0.85; abs(DC) < 0.0001; zero one-shot endpoints; loop seam <= adjacent delta RMS.",
+  "sounds": {
+    "ignition": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/ignition.wav",
+      "seconds": 0.4,
+      "frames": 17640,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.79998779296875,
+      "rms": 0.1875224778783552,
+      "dc": 2.2490278663548754e-08,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.009219416156467708,
+      "sha256": "cee2599d0e6e907f2a131eb39656377a839f61a5e9a336294fb913cd976cd0cc"
+    },
+    "thrust-loop": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/thrust-loop.wav",
+      "seconds": 1.0,
+      "frames": 44100,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.67999267578125,
+      "rms": 0.2358390449890198,
+      "dc": 1.6262201495181406e-07,
+      "first_sample": 2888,
+      "last_sample": 2888,
+      "loop": true,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.007803490145789159,
+      "sha256": "fcccca40e936c37fef0c0a14ff5c484ecbec4eb007c9e31ff1ef4a846f23d2e0"
+    },
+    "laser": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/laser.wav",
+      "seconds": 0.18,
+      "frames": 7938,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.79998779296875,
+      "rms": 0.22448196174941237,
+      "dc": -1.9991358812043335e-07,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.023817882785532995,
+      "sha256": "3206e95d806d911ee834450996bb629dee4287875b8dc7e66bab499d0f19773b"
+    },
+    "landing": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/landing.wav",
+      "seconds": 0.22,
+      "frames": 9702,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.79998779296875,
+      "rms": 0.23445054621916225,
+      "dc": -3.5229527417027417e-07,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.0048803433316931474,
+      "sha256": "f06030242fc6364b31f09b32fd12c9a6328fe644bc6b0826abf8665f3a5ca0b0"
+    },
+    "shield": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/shield.wav",
+      "seconds": 0.12,
+      "frames": 5292,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.739990234375,
+      "rms": 0.1848642102893395,
+      "dc": 1.5570192920918366e-07,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.014806150289354109,
+      "sha256": "000d64a720bd877b2b93cb5fec04ae62a2a4820ca442982bba57e2c1501c459f"
+    },
+    "descent": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/descent.wav",
+      "seconds": 1.8,
+      "frames": 79380,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.79998779296875,
+      "rms": 0.24516312814737326,
+      "dc": -5.40151137133094e-07,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.01239771015284654,
+      "sha256": "504599fe379d8d5b19838764f0761eb307b67c2c44a20c55c10b33b2bbdfa135"
+    },
+    "uplink": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/uplink.wav",
+      "seconds": 1.7,
+      "frames": 74970,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.759979248046875,
+      "rms": 0.2809853506409509,
+      "dc": -3.822329713135254e-07,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.014074978506868297,
+      "sha256": "49fa42245bdaac31da6b56dfd1c715d127895b33340a01460dca8f98da4ff4b0"
+    },
+    "ready": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/ready.wav",
+      "seconds": 0.78,
+      "frames": 34398,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.77996826171875,
+      "rms": 0.24284196874612332,
+      "dc": -1.6856619116663758e-08,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.012453081912661142,
+      "sha256": "d49b75905ecf0f48ef877a8522cc1f695f5cb5ae63dc1866b53523234fd1df85"
+    },
+    "boost": {
+      "file": "JumpNotIncluded/Assets/Art/Mech/Audio/boost.wav",
+      "seconds": 0.15,
+      "frames": 6615,
+      "sample_rate": 44100,
+      "channels": 1,
+      "encoding": "PCM16",
+      "peak": 0.77996826171875,
+      "rms": 0.21744292930277068,
+      "dc": 1.1072137188208617e-07,
+      "first_sample": 0,
+      "last_sample": 0,
+      "loop": false,
+      "loop_seam_delta": 0.0,
+      "adjacent_delta_rms": 0.012427213095498515,
+      "sha256": "2fa9491078b65a9ade32cb98c35bb0a2a6cd1ca99bfb7226f515098047bcd633"
+    }
+  },
+  "preview_order": [
+    {
+      "sound": "ignition",
+      "start_seconds": 0.0,
+      "seconds": 0.4
+    },
+    {
+      "sound": "thrust-loop",
+      "start_seconds": 0.75,
+      "seconds": 3.0
+    },
+    {
+      "sound": "laser",
+      "start_seconds": 4.1,
+      "seconds": 0.18
+    },
+    {
+      "sound": "landing",
+      "start_seconds": 4.63,
+      "seconds": 0.22
+    },
+    {
+      "sound": "shield",
+      "start_seconds": 5.2,
+      "seconds": 0.12
+    },
+    {
+      "sound": "descent",
+      "start_seconds": 5.67,
+      "seconds": 1.8
+    },
+    {
+      "sound": "uplink",
+      "start_seconds": 7.82,
+      "seconds": 1.7
+    },
+    {
+      "sound": "ready",
+      "start_seconds": 9.87,
+      "seconds": 0.78
+    },
+    {
+      "sound": "boost",
+      "start_seconds": 11.0,
+      "seconds": 0.15
+    }
+  ],
+  "preview": "artifacts/mech-audio-preview.wav",
+  "preview_seconds": 11.5
+}

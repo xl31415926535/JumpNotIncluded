@@ -1,0 +1,52 @@
+STAGED ARRIVAL QA / actual game camera and real elapsed cinematic time
+PASS: staged purchase orders the replica without equipping before arrival
+PASS: the completed revival ad starts the non-interactive arrival sequence
+CAPTURED: 01-descent (1280x720)
+CAPTURED: 01-descent-small (960x540)
+CAPTURED: 01-descent-4x3 (1024x768)
+PASS: 01-descent remains mandatory and cannot grant control early
+PASS: 01-descent keeps gameplay input disabled throughout the cinematic
+CAPTURED: 02-braking-burn (1280x720)
+CAPTURED: 02-braking-burn-small (960x540)
+CAPTURED: 02-braking-burn-4x3 (1024x768)
+PASS: 02-braking-burn remains mandatory and cannot grant control early
+PASS: 02-braking-burn keeps gameplay input disabled throughout the cinematic
+CAPTURED: 03-landing (1280x720)
+CAPTURED: 03-landing-small (960x540)
+CAPTURED: 03-landing-4x3 (1024x768)
+PASS: 03-landing remains mandatory and cannot grant control early
+PASS: 03-landing keeps gameplay input disabled throughout the cinematic
+CAPTURED: 04-consciousness-light (1280x720)
+CAPTURED: 04-consciousness-light-small (960x540)
+CAPTURED: 04-consciousness-light-4x3 (1024x768)
+PASS: 04-consciousness-light remains mandatory and cannot grant control early
+PASS: 04-consciousness-light keeps gameplay input disabled throughout the cinematic
+CAPTURED: 05-neural-link (1280x720)
+CAPTURED: 05-neural-link-small (960x540)
+CAPTURED: 05-neural-link-4x3 (1024x768)
+PASS: 05-neural-link remains mandatory and cannot grant control early
+PASS: 05-neural-link keeps gameplay input disabled throughout the cinematic
+CAPTURED: 06-synchronization (1280x720)
+CAPTURED: 06-synchronization-small (960x540)
+CAPTURED: 06-synchronization-4x3 (1024x768)
+PASS: 06-synchronization remains mandatory and cannot grant control early
+PASS: 06-synchronization keeps gameplay input disabled throughout the cinematic
+PASS: real-time arrival renders all six stages and a usable preview frame sequence
+PASS: consciousness synchronization equips the suit and returns normal control
+PASS: the arrival footage does not inflate gameplay, control or ad counters
+CAPTURED: 07-control-restored (1280x720)
+CAPTURED: 07-control-restored-small (960x540)
+CAPTURED: 07-control-restored-4x3 (1024x768)
+PASS: elevated framing fixture restores small Mario at the World 2 x=80 checkpoint
+PASS: elevated fixture purchases a fresh, undeployed replica
+PASS: World 2 brickwork raises the real delivery position above five world units
+PASS: elevated fixture reaches the consciousness transfer using only real cinematic time
+CAPTURED: 08-elevated-uplink (1280x720)
+PASS: 08-elevated-uplink keeps Mario's center and the elevated hull top inside the letterbox (Mario=(0.37, 0.24, 10.00), hull=(0.50, 0.78, 10.00))
+CAPTURED: 08-elevated-uplink-small (960x540)
+PASS: 08-elevated-uplink-small keeps Mario's center and the elevated hull top inside the letterbox (Mario=(0.37, 0.24, 10.00), hull=(0.50, 0.78, 10.00))
+CAPTURED: 08-elevated-uplink-4x3 (1024x768)
+PASS: 08-elevated-uplink-4x3 keeps Mario's center and the elevated hull top inside the letterbox (Mario=(0.32, 0.24, 10.00), hull=(0.50, 0.78, 10.00))
+ALL ARRIVAL UI CHECKS PASSED
+
+BUILD: Windows x64 v1.13.1 succeeded.

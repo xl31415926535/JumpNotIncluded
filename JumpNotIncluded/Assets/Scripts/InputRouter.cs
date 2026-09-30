@@ -6,7 +6,7 @@ namespace JumpNotIncluded
     public class InputRouter : MonoBehaviour
     {
         public InputActionAsset actions;
-        public InputAction move,jump,fire,pause,navigate,submit;
+        public InputAction move,jump,fire,descend,pause,navigate,submit;
         private InputActionMap gameplay,ui;
         public void Init()
         {
@@ -19,6 +19,8 @@ namespace JumpNotIncluded
             jump=gameplay.AddAction("Jump",InputActionType.Button,"<Keyboard>/space");
             jump.AddBinding("<Keyboard>/w");
             fire=gameplay.AddAction("Fire",InputActionType.Button,"<Keyboard>/j");
+            descend=gameplay.AddAction("Descend",InputActionType.Button,"<Keyboard>/s");
+            descend.AddBinding("<Keyboard>/downArrow");
             pause=ui.AddAction("Pause",InputActionType.Button,"<Keyboard>/escape");
             submit=ui.AddAction("Submit",InputActionType.Button,"<Keyboard>/enter");
             navigate=ui.AddAction("Navigate",InputActionType.Value);

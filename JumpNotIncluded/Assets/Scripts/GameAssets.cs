@@ -14,6 +14,11 @@ namespace JumpNotIncluded
         public Material blueKey, greenKey;
         public Sprite solid;
         public Texture2D sutdAIAd,sutdRobotAd,slCheaterAd;
+        public Texture2D mechPortrait,mechFlightTexture,mechWalkTexture;
+        public Texture2D mechPixelAtlas;
+        public Material mechPixelMaterial;
+        public AudioClip mechIgnition,mechThrustLoop,mechLaser;
+        public AudioClip mechLanding,mechShield,mechDescent,mechUplink,mechReady,mechBoost;
         public StateDefinition[] formStates, buffStates;
         public ProductDefinition[] products;
         public AudioMixer mixer;

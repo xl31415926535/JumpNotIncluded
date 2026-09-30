@@ -15,6 +15,7 @@ MonoBehaviour:
   product: 5
   title: Gatling
   subtitle: 
-  description: 'Abolish the level itself. Imperial fire erases foes, secret traps
-    and pipes, then paves every abyss. Hold J and advance: victory belongs to you.'
-  price: 5999
+  description: A royal decree, delivered at muzzle velocity. Hold J to erase monsters
+    and treacherous bricks. Rivers, pipes and gravity remain outside our jurisdiction.
+  price: 1999
+  currency: 0

@@ -18,3 +18,4 @@ MonoBehaviour:
   description: 'Royal mycologists have abolished poison. One purchase rewrites nature:
     every treacherous mushroom becomes nourishment fit for a sovereign.'
   price: 1299
+  currency: 0

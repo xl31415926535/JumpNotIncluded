@@ -11,11 +11,13 @@ namespace JumpNotIncluded
         public SpriteRenderer wings,gun;
         public PlayerFormController forms;
         public BuffStateController buffs;
+        public MechSuit mech;
         public bool grounded;
         public int facing=1;
         public bool Big=>forms.Value==Form.Super||forms.Value==Form.Fire;
         public const float HurtDuration=1.5f;
-        public bool Protected=>buffs.Value!=Buff.None||forms.IsHurt||grace>0;
+        public bool MechActive=>game!=null&&game.Run.Owns(Product.Mech)&&game.Run.mechDeployed;
+        public bool Protected=>MechActive||buffs.Value!=Buff.None||forms.IsHurt||grace>0;
         public bool airJumpUsed;
         private float coyote,jumpBuffer,fireCooldown,stepTime,height=1,grace=1,errorCooldown,wingTime;
         public void Init(SceneRoot root,Vector2 position,Form form)
@@ -42,16 +44,19 @@ namespace JumpNotIncluded
             var buffObject=new GameObject("Buff state machine");buffObject.transform.SetParent(transform,false);
             buffs=buffObject.AddComponent<BuffStateController>();buffs.states=game.assets.buffStates;buffs.events=game.events;buffs.Set(0,true);
             height=Big?1.9f:1;box.size=new Vector2(.7f,height-.05f);
-            ApplyHeight(); UpdateSprite();
+            mech=gameObject.AddComponent<MechSuit>();mech.Init(this);
+            RefreshEquipment();
         }
         private void Update()
         {
             if(game==null||!game.Playing)return;
             float dt=Time.deltaTime;stepTime+=dt;fireCooldown-=dt;grace-=dt;errorCooldown-=dt;wingTime-=dt;
             forms.Tick(dt);buffs.Tick(dt);
+            mech.RefreshEquipment();
             grounded=Physics2D.OverlapBox(body.position+Vector2.down*(height*.5f+.06f),new Vector2(.57f,.14f),0,1<<8)!=null;
             bool landed=grounded&&body.linearVelocity.y<=.1f;
             if(landed)airJumpUsed=false;
+            if(MechActive){jumpBuffer=0;coyote=0;ApplyHeight();UpdateSprite();return;}
             coyote=landed?.12f:coyote-dt;jumpBuffer-=dt;
             if(game.input.jump.WasPressedThisFrame())
             {
@@ -75,6 +80,7 @@ namespace JumpNotIncluded
             if(game==null||!game.Playing)return;
             float movement=game.input.move.ReadValue<float>();
             if(Mathf.Abs(movement)>.1f)facing=movement>0?1:-1;
+            if(MechActive){mech.FixedFlight(movement,game.input.jump.IsPressed(),game.input.descend.IsPressed());return;}
             var velocity=body.linearVelocity;
             if(!forms.IsHurt||forms.elapsed>=.18f)velocity.x=movement*5.5f*(buffs.Value==Buff.VIP?1.25f:1);
             if(jumpBuffer>0&&(coyote>0||game.Run.Owns(Product.DoubleJump)&&!airJumpUsed))
@@ -86,7 +92,9 @@ namespace JumpNotIncluded
         }
         public void Hit(bool poison=false,string reason=null)
         {
-            if(!game.Playing||Protected)return;
+            if(!game.Playing)return;
+            if(MechActive){mech.AbsorbHit();return;}
+            if(Protected)return;
             if(forms.Value==Form.Small)
                 game.KillPlayer(reason??(poison?"Purple mushrooms are poisonous. Mind what you pick up.":"A Goomba has ended your free trial."));
             else
@@ -97,19 +105,28 @@ namespace JumpNotIncluded
         }
         public void PowerUp(string signal)
         {forms.Signal(signal);ApplyHeight();UpdateSprite();}
-        public void Bounce(){body.linearVelocity=new Vector2(body.linearVelocity.x,10.5f);}
+        public void Bounce()
+        {
+            // A stomp is a fresh launch: even previously spent wings can flap again.
+            airJumpUsed=false;coyote=0;jumpBuffer=0;
+            if(!MechActive)body.linearVelocity=new Vector2(body.linearVelocity.x,10.5f);
+        }
+        public void RefreshEquipment()
+        {mech?.RefreshEquipment();ApplyHeight();UpdateSprite();}
         private void ApplyHeight()
         {
-            float wanted=Big?1.9f:1;
+            float wanted=MechActive?MechSuit.HullHeight:Big?1.9f:1;
             if(Mathf.Abs(wanted-height)>.1f)
             {
                 // Rigidbody interpolation can leave transform.position one frame behind physics.
-                body.position+=Vector2.up*(wanted-height)*.5f;height=wanted;box.size=new Vector2(.7f,height-.05f);
+                body.position+=Vector2.up*(wanted-height)*.5f;height=wanted;
             }
+            box.size=new Vector2(MechActive?1:.7f,height-.05f);
             visual.transform.localPosition=new Vector3(0,-height*.5f,0);
         }
         private void UpdateSprite()
         {
+            if(MechActive){visual.enabled=false;wings.enabled=false;gun.gameObject.SetActive(false);return;}
             string prefix=forms.Value==Form.Fire?"fire":Big?"big":"small";
             string pose=!grounded?"jump":Mathf.Abs(body.linearVelocity.x)>.1f?"walk"+(Mathf.FloorToInt(stepTime*10)%3):"idle";
             // The course atlas stores the left-facing frames.

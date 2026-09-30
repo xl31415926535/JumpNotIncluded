@@ -1,0 +1,35 @@
+RUNNING
+PASS: firing backward leaves the cliff and forward traps intact
+PASS: forward Gatling fire removes both tiers of hidden bricks but leaves all six gap tiles empty
+PASS: Gatling clears poisonous ground hazards while preserving the pipe collider
+PASS: Gatling preserves beneficial coins and real mushrooms in its firing corridor
+PASS: repeated Gatling clearing cannot farm hidden rewards or destruction scores
+PASS: checkpoint retry keeps the natural cliff and pipe intact after Gatling use
+PASS: mech cannot be purchased during ordinary gameplay
+PASS: real shop equips one mech and debits exactly SGD 79.99 while preserving coin balance
+PASS: buying the mech equips it without skipping the required revive advertisement
+PASS: shop pause blocks mech propulsion audio and weapons
+PASS: holding Space continuously propels the mech upward with gravity disabled
+PASS: mech propulsion has its own looping audio source routed through World SFX
+PASS: releasing Space holds altitude instead of triggering a jump fall
+PASS: continuous thrust stops at the visible upper flight boundary
+PASS: S lowers the mech deliberately without restoring gravity
+PASS: controlled mech descent counts toward actual hands-on time
+PASS: abyss safety restores stable hover above an unchanged gap instead of killing the mech
+PASS: rear auto-lock fixture is visible before firing (viewport=(0.10, 0.19, 10.00), camera=(11.28, 4.70, -10.00), aspect=1.333333)
+PASS: one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots=0 -> 1, target=check.mech.near, defeated=True, camera=(11.12, 4.70, -10.00), nearViewport=(0.10, 0.19, 10.00), player=(6.00, 3.50))
+PASS: one auto-locked laser instantly kills a full-health 18-hit Bowser
+PASS: mech J attack uses its laser rather than ordinary fireballs or Gatling bullets
+PASS: actual Goomba, Bowser, flame and poison contacts cannot damage the equipped mech
+PASS: pause freezes flight and laser attacks and silences propulsion
+PASS: checkpoint reload preserves equipped mech, immunity, coin balance and one direct-wallet receipt
+PASS: eighty seconds of ad cash buy the SGD 79.99 mech directly without exchanging coins or buying other abilities
+PASS: mech flight and auto-lock clear World 1 above unchanged pipes and cliffs with no extra deaths (position=(92.18, 7.80), mode=Results)
+PASS: first-world receipt contains actual ad seconds, control time and a separate SGD mech purchase with zero coins spent
+PASS: result screen freezes both receipt timers
+PASS: mech ownership and equipped flight carry through the actual loading scene into World 2
+PASS: ad and hands-on totals carry through the loading scene without adding menu time
+PASS: mech auto-lock destroys all ten Bowsers and clears World 2 without extra deaths (position=(108.02, 7.80), mode=Results)
+PASS: final receipt totals both worlds while preserving the direct SGD purchase and original ad viewing time
+PASS: a new run clears receipt telemetry, mech ownership and cash purchases
+ALL RUNTIME CHECKS PASSED

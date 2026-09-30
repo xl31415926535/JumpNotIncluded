@@ -16,7 +16,7 @@ namespace JumpNotIncluded
             body=gameObject.AddComponent<Rigidbody2D>();body.gravityScale=bullet?0:1;body.collisionDetectionMode=CollisionDetectionMode2D.Continuous;
             c.isTrigger=bullet;
             body.linearVelocity=bullet?new Vector2(facing*25,0):new Vector2(facing*11,1);
-            if(bullet)game.level.PaveVictoryLane(player.body.position.x,facing);
+            if(bullet)game.level.ClearGatlingHazards(player.body.position.x,facing);
         }
         private void Update(){if(game.Playing){age+=Time.deltaTime;if(age>2.5f)Destroy(gameObject);}}
         private void OnCollisionEnter2D(Collision2D collision)

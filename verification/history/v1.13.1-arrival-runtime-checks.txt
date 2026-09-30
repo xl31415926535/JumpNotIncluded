@@ -1,0 +1,26 @@
+ARRIVAL SECTION EXTRACTED FROM THE COMPLETED v1.13.1 FULL RUNTIME RUN
+These 23 checks are included in the 226 total, not additional.
+PASS: fresh runs have no arrival sequence or pre-equipped mech
+PASS: the purchased replica remains pending while the defeated player is in the shop
+PASS: an incomplete revival ad cannot launch or bypass mech arrival
+PASS: finishing the revival ad enters the mandatory cinematic and freezes the world
+PASS: delivery's three audio sources route to World SFX, the braking engine loop plays, and ordinary BGM stays paused
+PASS: the revival gate is satisfied but the suit remains unequipped until consciousness transfer finishes
+PASS: Escape, Space, J, Enter and movement inputs cannot skip arrival, equip early or fire
+PASS: arrival freezes enemies and does not count as gameplay, player control or ad viewing
+PASS: menu, restart, scene travel, finish, retry and direct Playing-mode callbacks cannot escape the mandatory cinematic
+PASS: losing focus pauses arrival time instead of silently completing it in the background
+PASS: losing focus pauses the cinematic's dedicated sound sources
+PASS: regaining focus continues the pending cinematic without granting early control
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: the complete landing and consciousness-transfer sequence hands control to the suit at its landing position
+PASS: deployment neither charges twice nor changes currency or death totals
+PASS: completed deployment is saved to the existing checkpoint together with ownership
+PASS: pausing and resuming an equipped mech does not replay the introduction
+PASS: checkpoint reload preserves completed deployment without starting another cinematic
+PASS: the equipped mech enters the next world without replaying arrival
+PASS: loading a purchased but undeployed save starts the full arrival sequence
+PASS: reloading during arrival restarts the mandatory sequence rather than bypassing it
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: new runs reset both ownership and deployment completion for the next purchase
+ALL RUNTIME CHECKS PASSED
