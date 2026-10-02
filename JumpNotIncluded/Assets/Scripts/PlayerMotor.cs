@@ -53,7 +53,13 @@ namespace JumpNotIncluded
             float dt=Time.deltaTime;stepTime+=dt;fireCooldown-=dt;grace-=dt;errorCooldown-=dt;wingTime-=dt;
             forms.Tick(dt);buffs.Tick(dt);
             mech.RefreshEquipment();
-            grounded=Physics2D.OverlapBox(body.position+Vector2.down*(height*.5f+.06f),new Vector2(.57f,.14f),0,1<<8)!=null;
+            grounded=false;
+            float foot=body.position.y-box.size.y*.5f;
+            // A wall beside the feet or a one-way ledge overhead is not a landing.
+            // Reject start-inside hits, whose synthetic normal would otherwise allow wall climbing.
+            foreach(var hit in Physics2D.BoxCastAll(new Vector2(body.position.x,foot+.08f),new Vector2(.57f,.04f),0,Vector2.down,.16f,1<<8))
+                if(hit.collider!=null&&hit.distance>.0001f&&hit.normal.y>.6f&&hit.point.y<=foot+.05f)
+                {grounded=true;break;}
             bool landed=grounded&&body.linearVelocity.y<=.1f;
             if(landed)airJumpUsed=false;
             if(MechActive){jumpBuffer=0;coyote=0;ApplyHeight();UpdateSprite();return;}

@@ -16,7 +16,7 @@ namespace JumpNotIncluded.EditorTools
     public static class ProjectSetup
     {
         private const string Data="Assets/GameData";
-        private static readonly string[] SceneNames={"MainMenu","Loading","World01","World02"};
+        private static readonly string[] SceneNames={"MainMenu","Loading","World01","World02","World03"};
         static ProjectSetup()
         {
             EditorApplication.delayCall+=()=>
@@ -28,7 +28,7 @@ namespace JumpNotIncluded.EditorTools
         [MenuItem("Tools/Jump Not Included/Setup project")]
         public static void Setup()
         {
-            PlayerSettings.bundleVersion="1.15.0";
+            PlayerSettings.bundleVersion="1.16.0";
             var existing=AssetDatabase.LoadAssetAtPath<GameAssets>("Assets/Resources/GameAssets.asset");
             if(existing!=null)
             {

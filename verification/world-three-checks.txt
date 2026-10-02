@@ -1,0 +1,85 @@
+WORLD THREE / live Play Mode physics and Input System
+PASS: World Two completion queues World Three instead of ending the run
+CAPTURED: 01-world-two-results (1280x720)
+CAPTURED: 01-world-two-results-small (960x540)
+PASS: World Two receipt renders a NEXT WORLD action
+PASS: Next World enters the real Loading scene
+PASS: Loading resolves World03 and builds the full castle
+PASS: World Three retains purchases, coins and ad telemetry from World Two
+PASS: World03 is present and enabled in the player build
+PASS: World Three uses the real Gameplay and UI Input System maps
+PASS: Music, world effects and UI use three separate AudioMixer groups
+PASS: Active play restores the music low-pass cutoff to 22 kHz
+CAPTURED: 02-castle-overview-1 (1280x720)
+CAPTURED: 02-castle-overview-1-small (960x540)
+CAPTURED: 02-castle-overview-2 (1280x720)
+CAPTURED: 02-castle-overview-2-small (960x540)
+CAPTURED: 02-castle-overview-3 (1280x720)
+CAPTURED: 02-castle-overview-3-small (960x540)
+CAPTURED: 02-castle-overview-4 (1280x720)
+CAPTURED: 02-castle-overview-4-small (960x540)
+CAPTURED: 02-castle-overview-5 (1280x720)
+CAPTURED: 02-castle-overview-5-small (960x540)
+PASS: The real entrance furnace seal exceeds a single-jump apex
+PASS: Waiting before the furnace without contact is safe
+PASS: Jump-only Mario remains blocked and sustained furnace contact causes a normal death instead of a progression dead end
+CAPTURED: 03-jump-only-seal (1280x720)
+CAPTURED: 03-jump-only-seal-small (960x540)
+PASS: Death at the entrance opens the real World Three upgrade shop while preserving Jump and the revival requirement
+CAPTURED: 03b-entrance-upgrade-shop (1280x720)
+CAPTURED: 03b-entrance-upgrade-shop-small (960x540)
+PASS: The blocked Jump-only player can see the actual purchase menu
+PASS: Three real Space presses against an unheated ten-unit wall cannot report side contact as ground or ratchet Jump-only Mario above a single-jump apex (peak feet=3.799403)
+PASS: Rising through a real one-way platform never counts its underside or interior as ground and never restores spent Wings
+PASS: Landing on the same one-way platform from above still grounds Mario and restores Wings
+PASS: A real upward head collision cannot break a furnace seal even in Fire form
+PASS: A real downward stomp cannot break a furnace seal
+PASS: Furnace seal loses exactly one health from actual fireball contact 1
+PASS: Furnace seal loses exactly one health from actual fireball contact 2
+PASS: Exactly three real projectile collisions open the furnace seal
+PASS: Broken seal adds exactly 200 points and is persisted in the run state
+PASS: A cleared seal cannot reappear after the map is rebuilt
+PASS: Crossing above an enemy without contact awards no score or enemy event
+PASS: Actual head stomp emits one EnemyDefeated event and one +200 score update
+PASS: An actual stomp replenishes spent Monarch Wings and bounces Mario
+PASS: Repeated defeat requests cannot duplicate the event or score
+PASS: Real Space input after a stomp uses the restored air jump and Wings animation
+PASS: Authored World Three pipe is solid and its first lava gap has no floor
+PASS: A real Gatling shot removes brickwork, an enemy and a crusher in its forward lane
+PASS: Gatling leaves permanent platforms, pipes and the authored gap intact
+PASS: Gatling leaves the castle's non-destructible lava hazards in place
+PASS: The castle's safe checkpoint at x=51 records the tall form above its deck
+PASS: The castle's safe checkpoint at x=116 records the tall form above its deck
+PASS: Rewarded ad activates the AudioMixer 850 Hz music low-pass effect
+PASS: Two-second revival reloads World03 at its safe checkpoint rather than World01
+PASS: Third-world retry preserves death telemetry, purchases and the checkpoint form
+PASS: Returning from the ad restores the full-bandwidth music mixer cutoff
+CAPTURED: 04-third-world-retry (1280x720)
+CAPTURED: 04-third-world-retry-small (960x540)
+PASS: Previously purchased Fire Flower can restore lost fire form in the castle shop without charging twice
+PASS: Restoring an already active fire form is an idempotent no-op
+PASS: Pause freezes castle hazard geometry, player movement and tracked gameplay time
+CAPTURED: 05-third-world-pause (1280x720)
+CAPTURED: 05-third-world-pause-small (960x540)
+PASS: Owned deployed mech equips in World Three with immunity
+PASS: Extreme descent at lava gap x=25 restores mech hover without a death
+PASS: Extreme descent at lava gap x=60 restores mech hover without a death
+PASS: Extreme descent at lava gap x=90 restores mech hover without a death
+PASS: Extreme descent at lava gap x=128 restores mech hover without a death
+PASS: Poison damage and the central kill path cannot kill an equipped mech
+PASS: Authored castle contains destructible hazards for mech contact
+PASS: Entering a live authored crusher or fire hazard with the mech destroys it without damage
+PASS: D-only traversal starts with the authored hazards, enemy army and all three furnace seals intact
+CAPTURED: 06-mech-smash-midpoint (1280x720)
+CAPTURED: 06-mech-smash-midpoint-small (960x540)
+CAPTURED: 07-mech-smash-final-gauntlet (1280x720)
+CAPTURED: 07-mech-smash-final-gauntlet-small (960x540)
+PASS: Holding only D traverses the entire intact World Three and reaches its final receipt (x=152.1192, mode=Results)
+PASS: Full-map mech traversal records zero deaths and fires no laser or Gatling shot
+PASS: Mech contact physically destroys every blocking furnace seal on the authored route
+PASS: Forward mech impact also smashes both authored pipe obstacles
+CAPTURED: 08-final-world-three-receipt (1280x720)
+CAPTURED: 08-final-world-three-receipt-small (960x540)
+PASS: World Three final receipt provides replay rather than a nonexistent fourth world
+PASS: Final receipt freezes telemetry after actual full-map input
+ALL 57 WORLD THREE CHECKS PASSED

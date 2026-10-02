@@ -22,7 +22,7 @@ namespace JumpNotIncluded
             music.volume=PlayerPrefs.GetFloat("jni.music",.26f);
             world.volume=ui.volume=PlayerPrefs.GetFloat("jni.effects",.5f);
             AudioListener.volume=1;
-            levelMusic=game.assets.Clip(game.world==2?"underground":"theme");starMusic=game.assets.Clip("star");
+            levelMusic=game.assets.Clip(game.world>=2?"underground":"theme");starMusic=game.assets.Clip("star");
             music.clip=levelMusic;
             if(game.world>0)music.Play();
             channel=game.events;channel.SoundRequested+=Play;

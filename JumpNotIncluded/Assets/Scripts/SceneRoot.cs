@@ -21,6 +21,8 @@ namespace JumpNotIncluded
         public float toastUntil,adTime,shopTime;
         public const float ReviveAdDuration=2;
         public const float AdCampaignDuration=5;
+        public const int LastWorld=3;
+        public static string WorldScene(int index)=>"World"+Mathf.Clamp(index,1,LastWorld).ToString("00");
         public AdKind adKind;
         public AdCampaign adCampaign;
         public int adEarned;
@@ -45,7 +47,7 @@ namespace JumpNotIncluded
             if(assets==null||session==null||events==null)
             { Debug.LogError("Run Tools > Jump Not Included > Setup project once."); enabled=false;return; }
             string scene=SceneManager.GetActiveScene().name;
-            world=scene=="World02"?2:scene=="World01"?1:0;
+            world=scene=="World03"?3:scene=="World02"?2:scene=="World01"?1:0;
             mode=scene=="Loading"?ScreenMode.Loading:world==0?ScreenMode.Menu:ScreenMode.Playing;
             if(Run==null) session.NewRun();
             deathReason=session.lastDeathReason;
@@ -59,7 +61,7 @@ namespace JumpNotIncluded
             }
             cameraView.orthographic=true; cameraView.orthographicSize=6.75f;
             cameraView.transform.position=new Vector3(11,4.7f,-10);
-            cameraView.backgroundColor=world==2?new Color(.065f,.12f,.22f):new Color(.36f,.58f,.98f);
+            cameraView.backgroundColor=world==3?new Color(.065f,.026f,.07f):world==2?new Color(.065f,.12f,.22f):new Color(.36f,.58f,.98f);
             cameraView.clearFlags=CameraClearFlags.SolidColor;
             input=gameObject.AddComponent<InputRouter>();input.Init();
             events.EnemyDefeated+=OnEnemyDefeated;
@@ -91,7 +93,7 @@ namespace JumpNotIncluded
                 if(player!=null)
                 {
                     // Invisible, fixed safe checkpoints; no terminal or on-screen prompt.
-                    float checkpoint=world==1?(player.transform.position.x>=60?60:26):(player.transform.position.x>=80?80:34);
+                    float checkpoint=world==3?(player.transform.position.x>=116?116:51):world==1?(player.transform.position.x>=60?60:26):(player.transform.position.x>=80?80:34);
                     if(session.checkpointPosition.x<checkpoint&&player.transform.position.x>=checkpoint&&player.grounded&&player.transform.position.y<2)
                         SaveCheckpoint(new Vector2(checkpoint,player.Big?1.02f:.55f));
                     float target=Mathf.Clamp(player.transform.position.x+4,11,level.length-10);
@@ -156,6 +158,13 @@ namespace JumpNotIncluded
             string[] messages={"The ground's monopoly is over. Your Z-axis empire begins.","The sun has accepted your application. Let your enemies admire the heat.","Poison has been abolished. Nature now serves your interests.","The designer's secrets are now your private property.","Hallownest's royal inheritance is yours. Every stomp renews your right to defy the void.","Hold J to erase hostile life and brickwork. Rivers, pipes and gravity decline your refund request."};
             Toast(messages[(int)product],4);
             events.Score(Run.score);SaveCheckpoint(new Vector2(session.checkpointPosition.x,player.Big?1.02f:.55f));return true;
+        }
+        public bool RestorePurchasedFireForm()
+        {
+            if(world!=3||mode!=ScreenMode.Shop||!Run.Owns(Product.FireFlower)||player.forms.Value==Form.Fire)return false;
+            player.PowerUp("flower");events.Sound("powerup");
+            SaveCheckpoint(new Vector2(session.checkpointPosition.x,1.02f));
+            Toast("Lifetime solar entitlement restored. The furnace awaits.");return true;
         }
         public void Refund()
         {
@@ -250,6 +259,7 @@ namespace JumpNotIncluded
         public void KillPlayer(string reason)
         {
             if(!Playing)return;
+            if(player!=null&&player.MechActive){player.mech.AbsorbHit();return;}
             deathReason=session.lastDeathReason=reason;session.reviveRequired=true;
             Run.deaths++;player.forms.Set((int)Form.Dead);
             player.buffs.Set((int)Buff.None,true);player.body.linearVelocity=Vector2.zero;
@@ -258,7 +268,7 @@ namespace JumpNotIncluded
         public void Retry()
         {StartAd(AdKind.Revive);}
         private void ReloadWorld()
-        {Time.timeScale=1;SceneManager.LoadScene(world==2?"World02":"World01");}
+        {Time.timeScale=1;SceneManager.LoadScene(WorldScene(world));}
         public void NewGame()
         {if(Deploying)return;session.NewRun();Time.timeScale=1;SceneManager.LoadScene("Loading");}
         public void ToMenu()
@@ -268,18 +278,20 @@ namespace JumpNotIncluded
         private IEnumerator LoadWorld()
         {
             loading=true;Time.timeScale=1;
-            var operation=SceneManager.LoadSceneAsync(session.nextWorld==2?"World02":"World01");
+            var operation=SceneManager.LoadSceneAsync(WorldScene(session.nextWorld));
             while(!operation.isDone){loadProgress=operation.progress;yield return null;}
         }
         public void CompleteWorld()
         {
             if(!Playing)return;
             AddScore("finish"+world,1000);events.Sound("complete");
-            if(world==1)
+            if(world<LastWorld)
             {
-                Run.Grant("world1",400);session.nextWorld=2;
+                if(world==1)Run.Grant("world1",400);session.nextWorld=world+1;
                 session.carryForm=player.forms.Value;
-                session.checkpointJson="";SetMode(ScreenMode.Results);
+                session.checkpointJson="";session.restoreCheckpoint=false;
+                session.checkpointPosition=new Vector2(2,player.Big?1.02f:.55f);
+                session.checkpointForm=session.carryForm;SetMode(ScreenMode.Results);
             }
             else {RecordHigh();SetMode(ScreenMode.Results);}
         }

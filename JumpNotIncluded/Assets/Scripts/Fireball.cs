@@ -21,12 +21,16 @@ namespace JumpNotIncluded
         private void Update(){if(game.Playing){age+=Time.deltaTime;if(age>2.5f)Destroy(gameObject);}}
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            var wall=collision.collider.GetComponentInParent<CastleBarrier>();
+            if(wall!=null&&game.Playing){wall.HitByShot(this);Destroy(gameObject);return;}
             if(collision.GetContact(0).normal.y>.5f)body.linearVelocity=new Vector2(facing*11,5);
             else Destroy(gameObject);
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(!IsBullet||!game.Playing)return;
+            var castleWall=other.GetComponentInParent<CastleBarrier>();if(castleWall!=null){castleWall.HitByShot(this);return;}
+            var hazard=other.GetComponentInParent<CastleHazard>();if(hazard!=null){hazard.BreakByWeapon(false);return;}
             var enemy=other.GetComponent<EnemyActor>();if(enemy!=null){enemy.Defeat();return;}
             var boss=other.GetComponent<BossActor>();if(boss!=null){boss.TakeDamage(3);return;}
             var brick=other.GetComponent<BlockActor>();if(brick!=null){brick.BreakByBullet();return;}

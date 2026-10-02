@@ -175,8 +175,8 @@ PASS: continuous thrust stops at the visible upper flight boundary
 PASS: S lowers the mech deliberately without restoring gravity
 PASS: controlled mech descent counts toward actual hands-on time
 PASS: abyss safety restores stable hover above an unchanged gap instead of killing the mech
-PASS: rear auto-lock fixture is visible before firing (viewport=(-0.01, 0.19, 10.00), camera=(13.23, 4.70, -10.00), aspect=1.333333)
-PASS: one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots=0 -> 1, target=check.mech.near, defeated=True, camera=(11.96, 4.70, -10.00), nearViewport=(-0.01, 0.19, 10.00), player=(6.00, 3.50))
+PASS: rear auto-lock fixture is visible before firing (viewport=(0.10, 0.19, 10.00), camera=(11.15, 4.70, -10.00), aspect=1.333333)
+PASS: one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots=0 -> 1, target=check.mech.near, defeated=True, camera=(11.07, 4.70, -10.00), nearViewport=(0.10, 0.19, 10.00), player=(6.00, 3.50))
 PASS: one auto-locked laser instantly kills a full-health 18-hit Bowser
 PASS: mech J attack uses its laser rather than ordinary fireballs or Gatling bullets
 PASS: actual Goomba, Bowser, flame and poison contacts cannot damage the equipped mech
@@ -190,7 +190,7 @@ PASS: result screen freezes both receipt timers
 PASS: mech ownership and equipped flight carry through the actual loading scene into World 2
 PASS: ad and hands-on totals carry through the loading scene without adding menu time
 PASS: mech auto-lock destroys all ten Bowsers and clears World 2 without extra deaths (position=(108.02, 7.80), mode=Results)
-PASS: final receipt totals both worlds while preserving the direct SGD purchase and original ad viewing time
+PASS: second-world receipt totals the first two worlds while preserving the direct SGD purchase and original ad viewing time
 PASS: a new run clears receipt telemetry, mech ownership, completed deployment and cash purchases
 PASS: checkout cannot open or submit during normal gameplay
 PASS: SGD checkout requires linking a card while the world stays paused

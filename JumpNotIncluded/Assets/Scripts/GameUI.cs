@@ -186,7 +186,9 @@ namespace JumpNotIncluded
                 Text(x+82,y+28,296,46,product.title,24,paper,true,TextAnchor.MiddleLeft);
                 Text(x+18,y+79,360,87,product.description,16,muted);
                 bool owns=game.Run.Owns(product.product),canBuy=!owns&&game.Run.coins>=product.price;
-                if(owns)Button(x+16,y+173,364,33,"OWNED",null,false,false);
+                if(owns&&product.product==Product.FireFlower&&game.world==3&&game.player.forms.Value!=Form.Fire)
+                    Button(x+16,y+173,364,33,"RESTORE FIRE FORM / FREE",()=>game.RestorePurchasedFireForm(),true);
+                else if(owns)Button(x+16,y+173,364,33,"OWNED",null,false,false);
                 else CoinPriceButton(x+16,y+173,364,33,product.price,()=>game.Buy(product.product),canBuy);
             }
             Text(181,774,805,25,"Collect 1 coin per pickup. Upgrades last this run. All payments are simulated.",14,muted);
@@ -249,8 +251,9 @@ namespace JumpNotIncluded
             string Count(int n)=>n.ToString("N0",culture);
             string Seconds(float n)=>n.ToString("0.0",culture)+" s";
             int spent=run.PaidTotal(),refunded=run.RefundedTotal();bool boughtPower=spent>0||run.WalletPaidTotal()>0;
-            Veil();Window(180,80,1240,744,game.world==1?"WORLD 1-1 / YOUR RUN SO FAR":"WORLD 1-2 / FINAL RECEIPT",
-                game.world==1?"Level cleared. Receipt enclosed.":"VICTORY, ITEMIZED.");
+            bool final=game.world==SceneRoot.LastWorld;
+            Veil();Window(180,80,1240,744,"WORLD 1-"+game.world+(final?" / FINAL RECEIPT":" / YOUR RUN SO FAR"),
+                final?"VICTORY, ITEMIZED.":"Level cleared. Receipt enclosed.");
             Text(216,245,1168,36,boughtPower?"You bought the advantage. The receipt remembers.":"No upgrades purchased. The receipt has nothing to hide.",23,gold);
             ReceiptMetric(216,"ADS WATCHED",Seconds(run.adWatchTime),run.ads+" rewarded ads.\nThank you for your attention.",gold);
             ReceiptMetric(616,"COINS SPENT",Count(spent),"Refunded: "+Count(refunded)+"  |  Net: "+Count(spent-refunded)+"\nCard: "+Money(run.Payments.Total(PaymentMethod.VirtualCard))+"  |  Mech: "+Money(run.WalletPaidTotal()),gold,true);
@@ -265,9 +268,9 @@ namespace JumpNotIncluded
             Text(616,577,368,29,(inputShare*100).ToString("0",culture)+"% USING CONTROLS",18,cyan,true,TextAnchor.MiddleCenter);
             Text(1016,577,368,29,(idleShare*100).ToString("0",culture)+"% IDLE IN LEVEL",18,muted,true,TextAnchor.MiddleCenter);
             Text(216,626,1168,35,"SCORE  "+Count(run.score)+"     BEST  "+Count(game.HighScore)+"     DEATHS  "+run.deaths,23,paper,true,TextAnchor.MiddleCenter);
-            Text(216,668,1168,30,game.world==1?"Next: World 1-2. Clear bonus: up to S$4.00. Your purchases follow you.":
+            Text(216,668,1168,30,game.world==1?"Next: World 1-2. Clear bonus: up to S$4.00. Your purchases follow you.":game.world==2?"Next: THE FORECLOSURE FURNACE. Your purchases follow you into the fire.":
                 boughtPower?"Congratulations. Your purchasing power has defeated the game.":"No purchases. No premium rescue. This victory belongs to you.",20,gold,false,TextAnchor.MiddleCenter);
-            if(game.world==1)Button(216,718,1168,55,"NEXT WORLD",game.NextWorld,true);
+            if(!final)Button(216,718,1168,55,"NEXT WORLD",game.NextWorld,true);
             else
             {
                 Button(216,718,568,55,"PLAY AGAIN",game.NewGame,true);

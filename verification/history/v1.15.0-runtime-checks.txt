@@ -1,0 +1,228 @@
+RUNNING
+PASS: fresh world starts without commerce
+PASS: commerce cannot open during ordinary play
+PASS: current assets retain the short denied-jump cue
+PASS: official SUTD and SL Cheater artwork loads from bundled textures
+PASS: World 1 has no map flowers
+PASS: Jump product text is English after asset migration
+PASS: FireFlower product text is English after asset migration
+PASS: Purify product text is English after asset migration
+PASS: MasterGuide product text is English after asset migration
+PASS: DoubleJump product text is English after asset migration
+PASS: Gatling product text is English after asset migration
+PASS: Mech product text is English after asset migration
+PASS: idle state machines remain stable after asset reload
+PASS: Goomba sprite and collider feet align with floor
+PASS: Goomba frames include all 16 pixels, including feet
+PASS: idle gameplay accrues level time without inventing ad or control time
+PASS: right movement faces right (dx=1.649998, input=0, mode=Playing)
+PASS: real movement input accrues hands-on time once per frame
+PASS: left movement faces left
+PASS: holding gameplay keys in a pause menu adds no tracked time
+PASS: unfocused gameplay input does not count as hands-on time
+PASS: unowned jump remains locked
+PASS: repeated denied jumps do not restart or replace BGM
+PASS: music, world effects and UI route through separate mixer groups
+PASS: music toggle leaves sound effect volume unchanged
+PASS: block side is solid and cannot award a coin
+PASS: player lands on block top without activating it
+PASS: underside head hit awards one coin
+PASS: bump animation leaves the one-tile collision body stationary
+PASS: spent block cannot award twice
+PASS: small Mario bumps an empty brick without consuming it
+PASS: big Mario breaks an empty brick from underneath (form=Super, y=2.060039, height=1.85)
+PASS: death freezes gameplay and reveals the offer
+PASS: revive ad starts with a valid randomized creative
+PASS: revive ad cannot finish early or award cash
+PASS: ads stop counting while the application is unfocused
+PASS: unfocused ad time is excluded from the receipt
+PASS: revive ad keeps one creative until two full seconds
+PASS: two-second ad revives at the checkpoint without a cash reward
+PASS: revive viewing seconds survive the checkpoint scene reload
+PASS: next ad avoids the revive creative across scene reload
+PASS: cash ad pays nothing before one full second
+PASS: cash ad awards exactly one dollar at one full second
+PASS: closing a 2.4-second cash ad preserves two dollars and opens the death shop
+PASS: duplicate cash completion cannot pay again or remove the death gate
+PASS: first three ad openings cover all three campaigns without repetition
+PASS: closing a short repeat ad does not pay for an unfinished second
+PASS: receipt includes fractional cash-ad viewing even when no reward was earned
+PASS: cash ads fund coin packs, then jump costs 199 coins with one coin left
+PASS: purchased jump works through the actual Input System
+PASS: ad-gated retry preserves purchases and balances while recording both revive ads
+PASS: failed attempts retain both viewing and control time after retry
+PASS: repeat cash ad converts into coins for instant Fire Flower
+PASS: flower purchase transforms immediately in the paused shop and saves a tall checkpoint
+PASS: fire Mario shoots in play mode
+PASS: retry restores the purchased fire form above the floor without a pickup
+PASS: World 2 has no map flowers
+PASS: second world carries both balances and purchases with its one-time subsidy
+PASS: death shop refund revokes fire upgrade and returns the exact coin price
+PASS: discount coin pack completes the refund economy route
+PASS: Mushroom ID makes every existing poison mushroom safe
+PASS: cash ad uses actual unscaled time while gameplay is paused
+PASS: cash ad clips the last reward to the cap and stops automatically at 99 dollars
+PASS: cash cap counts only the visible second before the ad auto-closes
+PASS: full wallet cannot start another cash ad
+PASS: coin exchange creates room under the cash cap and funds a repurchase
+PASS: cash ads can be repeated after spending
+PASS: checkpoint retry preserves both balances after reaching the cap
+PASS: VIP trial waits behind the two-second revive ad
+PASS: VIP trial starts only after the revive ad finishes
+PASS: serialized VIP timer expires after eight seconds
+PASS: cash creative stays visible for the first five seconds
+PASS: five-second rotation preserves the ad timer and all cash earned
+PASS: unfocused ads pause both creative rotation and rewards
+PASS: ten-second rotation completes the shuffled set without resetting rewards
+PASS: checkpoint retry preserves rotation history and earned cash while counting revive ads
+PASS: one flower payment activates fire immediately and duplicate clicks cannot charge again
+PASS: first hit changes Fire to Super while preserving feet and granting hurt protection
+PASS: repeated enemy and poison contacts cannot skip the protected Super form
+PASS: hurt timer expires into Super without regaining fire or shrinking again
+PASS: poison damage changes Super to Small instead of killing and keeps feet in place (mode=Playing, form=Small, protected=True, feet=0.09500003 -> 0.09500003, body=(2.00, 0.57), transform=(1.46, 0.94, 0.00))
+PASS: Small Mario is protected against repeated contacts during the shrink grace period
+PASS: only the third unprotected hit kills after Fire to Super to Small
+PASS: actual Goomba side contact shrinks Super Mario once without killing
+PASS: opening Goomba walks past the former invisible patrol wall while staying on the floor
+PASS: unseen Goombas wait for the camera instead of migrating across the level
+PASS: pause freezes a freely walking Goomba
+PASS: opening Goomba reaches the untouched spawn and kills idle Small Mario by actual contact
+PASS: Goomba meets the actual pipe collider without entering it
+PASS: Goomba reverses after contacting a real pipe
+PASS: a moving Goomba can still be stomped and bounce the player
+PASS: distant Goomba starts walking when the camera reaches it
+PASS: Goomba walks off the actual cliff and falls instead of turning at an invisible edge or floating
+PASS: a Goomba falling out of the world is removed without granting a player kill reward
+PASS: unrevealed blocks are invisible triggers outside the ground layer
+PASS: side contact passes through a hidden block without triggering it
+PASS: falling through a hidden block cannot reveal it or fake a landing
+PASS: head contact reveals the hidden block, stops ascent and awards exactly one spendable coin
+PASS: revealed hidden coin cannot be farmed by hitting it twice
+PASS: hidden star block releases an actual invincibility pickup
+PASS: collecting the hidden star enables real invincibility
+PASS: collecting a real star replaces level BGM with the looping Starman track on the music channel
+PASS: Starman BGM keeps advancing instead of restarting every frame
+PASS: pause freezes Starman playback and the invincibility timer together
+PASS: unpausing resumes Starman from its paused position
+PASS: collecting another star refreshes protection without restarting its BGM
+PASS: natural star expiry resumes the overworld music at its saved playhead
+PASS: death stops star music without restarting audible level BGM
+PASS: opening has no hidden blocks and the six-tile cliff conceals eight traps
+PASS: ordinary cliff-edge jump hits the hidden trap and falls (position=(47.24, -4.24), mode=Dead)
+PASS: early first-visit jump also hits the upper ambush and falls into the wider gap
+PASS: largest cash pack credits 2000 coins inside the shop
+PASS: all three premium upgrades purchase through the real death shop at reduced Wings and Gatling prices
+PASS: buying wings includes jumping and blocks a redundant jump purchase
+PASS: Master Guide reveals four outline edges and a reward icon without activating the block
+PASS: second jump restores ascent and displays Monarch Wings through actual input
+PASS: a third press cannot grant another midair jump
+PASS: actual Goomba stomp replenishes an already spent Monarch Wings jump
+PASS: Space after a stomp launches the restored air jump and plays the Wings animation
+PASS: landing recharges the single air jump
+PASS: holding J fires more than three straight Gatling bullets without Fire Mario
+PASS: one Gatling bullet destroys a brick and the enemy behind it
+PASS: shooting a hidden reward pays its coin once before breaking it
+PASS: retry retains all premium abilities and exact coin balance
+PASS: destroyed reward blocks remain destroyed after a checkpoint reload
+PASS: World 2 opens with ten independently identified 18-health Bowsers
+PASS: World 2 contains 29 Goombas and 31 poison mushrooms across its hostile corridors
+PASS: Bowser patrols and fires toward the player
+PASS: pause freezes Bowser and his projectiles
+PASS: ordinary fireball damages Bowser without instantly killing him
+PASS: sustained Gatling fire defeats the front rank of Bowsers
+PASS: Gatling defeats each boss in range without erasing the distant survivors
+PASS: checkpoint retry preserves every boss defeat and leaves the surviving Bowsers alive
+PASS: star music respects the muted music channel in World 2
+PASS: star expiry restores World 2's own track and preserves music mute
+PASS: fresh runs have no arrival sequence or pre-equipped mech
+PASS: the purchased replica remains pending while the defeated player is in the shop
+PASS: an incomplete revival ad cannot launch or bypass mech arrival
+PASS: finishing the revival ad enters the mandatory cinematic and freezes the world
+PASS: delivery's three audio sources route to World SFX, the braking engine loop plays, and ordinary BGM stays paused
+PASS: the revival gate is satisfied but the suit remains unequipped until consciousness transfer finishes
+PASS: Escape, Space, J, Enter and movement inputs cannot skip arrival, equip early or fire
+PASS: arrival freezes enemies and does not count as gameplay, player control or ad viewing
+PASS: menu, restart, scene travel, finish, retry and direct Playing-mode callbacks cannot escape the mandatory cinematic
+PASS: losing focus pauses arrival time instead of silently completing it in the background
+PASS: losing focus pauses the cinematic's dedicated sound sources
+PASS: regaining focus continues the pending cinematic without granting early control
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: the complete landing and consciousness-transfer sequence hands control to the suit at its landing position
+PASS: deployment neither charges twice nor changes currency or death totals
+PASS: completed deployment is saved to the existing checkpoint together with ownership
+PASS: pausing and resuming an equipped mech does not replay the introduction
+PASS: checkpoint reload preserves completed deployment without starting another cinematic
+PASS: the equipped mech enters the next world without replaying arrival
+PASS: loading a purchased but undeployed save starts the full arrival sequence
+PASS: reloading during arrival restarts the mandatory sequence rather than bypassing it
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: new runs reset both ownership and deployment completion for the next purchase
+PASS: firing backward leaves the cliff and forward traps intact
+PASS: forward Gatling fire removes both tiers of hidden bricks but leaves all six gap tiles empty
+PASS: Gatling clears poisonous ground hazards while preserving the pipe collider
+PASS: Gatling preserves beneficial coins and real mushrooms in its firing corridor
+PASS: repeated Gatling clearing cannot farm hidden rewards or destruction scores
+PASS: checkpoint retry keeps the natural cliff and pipe intact after Gatling use
+PASS: mech cannot be purchased during ordinary gameplay
+PASS: real shop orders one mech and debits exactly SGD 79.99 while preserving coin balance
+PASS: buying the mech schedules deployment without equipping it or skipping the required revive advertisement
+PASS: shop pause blocks mech propulsion audio and weapons
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: holding Space continuously propels the mech upward with gravity disabled
+PASS: mech propulsion has its own looping audio source routed through World SFX
+PASS: releasing Space holds altitude instead of triggering a jump fall
+PASS: continuous thrust stops at the visible upper flight boundary
+PASS: S lowers the mech deliberately without restoring gravity
+PASS: controlled mech descent counts toward actual hands-on time
+PASS: abyss safety restores stable hover above an unchanged gap instead of killing the mech
+PASS: rear auto-lock fixture is visible before firing (viewport=(-0.01, 0.19, 10.00), camera=(13.23, 4.70, -10.00), aspect=1.333333)
+PASS: one J pulse locks the nearest enemy behind the mech without requiring manual aim (shots=0 -> 1, target=check.mech.near, defeated=True, camera=(11.96, 4.70, -10.00), nearViewport=(-0.01, 0.19, 10.00), player=(6.00, 3.50))
+PASS: one auto-locked laser instantly kills a full-health 18-hit Bowser
+PASS: mech J attack uses its laser rather than ordinary fireballs or Gatling bullets
+PASS: actual Goomba, Bowser, flame and poison contacts cannot damage the equipped mech
+PASS: pause freezes flight and laser attacks and silences propulsion
+PASS: checkpoint reload preserves equipped mech, immunity, coin balance and one direct-wallet receipt
+PASS: eighty seconds of ad cash buy the SGD 79.99 mech directly without exchanging coins or buying other abilities
+PASS: real-time deployment finishes before control and mech equipment become available
+PASS: mech flight and auto-lock clear World 1 above unchanged pipes and cliffs with no extra deaths (position=(92.12, 7.80), mode=Results)
+PASS: first-world receipt contains actual ad seconds, control time and a separate SGD mech purchase with zero coins spent
+PASS: result screen freezes both receipt timers
+PASS: mech ownership and equipped flight carry through the actual loading scene into World 2
+PASS: ad and hands-on totals carry through the loading scene without adding menu time
+PASS: mech auto-lock destroys all ten Bowsers and clears World 2 without extra deaths (position=(108.02, 7.80), mode=Results)
+PASS: final receipt totals both worlds while preserving the direct SGD purchase and original ad viewing time
+PASS: a new run clears receipt telemetry, mech ownership, completed deployment and cash purchases
+PASS: checkout cannot open or submit during normal gameplay
+PASS: SGD checkout requires linking a card while the world stays paused
+PASS: linking the virtual card is saved without charging it
+PASS: confirmation starts one pending payment and does not deliver coins early
+PASS: unfocused checkout cannot finish a pending payment
+PASS: cancel returns to pack selection without charging or delivering
+PASS: an ad cannot replace a pending card payment
+PASS: confirmed card payment charges SGD 9.80 and delivers 1000 coins
+PASS: repeated callbacks cannot duplicate a payment or its receipt
+PASS: card binding, payment history and delivered coins survive checkpoint reload
+PASS: unfunded SGD wallet reports failure without creating a charge
+PASS: wallet reward returns to the checkout with SGD credit
+PASS: wallet checkout spends only the chosen source and saves its own receipt
+PASS: payment activity reopens the original immutable receipt and credit balance
+PASS: payment account and history persist across the actual loading scene
+PASS: full restart resets simulated card credit and payment activity
+PASS: death cannot be dismissed by closing, Escape or requesting play mode
+PASS: retry enters the revive ad and Escape cannot skip it
+PASS: 1.99 seconds cannot authorize a checkpoint retry
+PASS: time outside the focused ad cannot satisfy the revive requirement
+PASS: two complete revive seconds grant exactly one continuation without cash
+PASS: a completed revive cannot be claimed twice or reused through Retry
+PASS: checkpoint restoration and scene reload preserve the new death gate
+PASS: Escape from the death shop returns to death instead of resuming
+PASS: closing checkout leaves the player behind the revive gate
+PASS: watching a cash ad earns SGD but does not replace the revive ad
+PASS: purchasing an upgrade and leaving its shop cannot revive for free
+PASS: shop continuation stays frozen until the entire revive ad finishes
+PASS: completed shop revive resumes its safe checkpoint and preserves purchases exactly once
+PASS: restart starts a fresh run rather than continuing the dead run
+PASS: claiming VIP cannot start gameplay or spend its buff timer before revival
+PASS: VIP starts after the full revive ad and consumes its pending claim
+PASS: a later death cannot restore and replay the consumed VIP trial
+ALL RUNTIME CHECKS PASSED

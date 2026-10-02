@@ -1,10 +1,10 @@
 # 跳跃另购 · Jump Not Included
 
-Unity 6.3（6000.3.24f1）二维平台游戏，当前版本 **v1.15.0**。两个短关卡，全部游戏界面与广告文字使用英文。正常游玩保持经典马里奥画面，死亡后才出现广告与购买页。
+Unity 6.3（6000.3.24f1）二维平台游戏，当前为 **v1.16.0 第三关源码预览**（`v1.16.0-world3-preview`）。三个关卡，全部游戏界面与广告文字使用英文。正常游玩保持经典马里奥画面，死亡后才出现广告与购买页。
 
 ## 直接运行
 
-使用已构建的 Windows 包时，运行 `Builds/Windows/JumpNotIncluded.exe`，选择 **1 PLAYER GAME → START**。压缩包需完整解压，保留 exe 旁的数据目录。GitHub 源码仓库不包含生成的 exe，可按下文在 Unity 中运行或构建。
+本轮第三关使用下列 Unity 编辑器步骤运行。若使用历史 Windows 包，完整解压后运行包内 `JumpNotIncluded.exe`，保留 exe 旁的数据目录；源码包不含生成的 exe。
 
 在 Unity 中：
 
@@ -14,6 +14,23 @@ Unity 6.3（6000.3.24f1）二维平台游戏，当前版本 **v1.15.0**。两个
 4. 更新后从主菜单重新开局。旧 Play Mode 中的运行对象不会自动变成新版。
 
 资源自动升级到 revision 12，保留已有 GUID。Input System 1.20.0 已嵌入本地 Packages。
+
+## v1.16.0：World 1-3 / THE FORECLOSURE FURNACE
+
+- 第二关结算后继续进入 World03；第三关才给出最终收据。城堡包含四片熔岩海、六根旋转火条、四个预警压砸机关、四处熔岩喷泉、库巴与高低路线。
+- Jump-only 无法跳过 7.5 格高的入口封印；连续接触城门约 0.55 秒触发一次受伤尝试，仍遵循受伤保护。花用三个火球破门，Wings 使用 6.4 格高的单向平台，Gatling 清场后仍需应对地形。
+- 单向高台允许低路线从下方穿过；`PlayerMotor` 向下检测脚底真实支撑，拒绝墙侧、初始重叠以及头顶高台被误当成落地，避免攀墙或空中重复刷新。
+- 第三关已购 Fire Flower 可在商店点击 **RESTORE FIRE FORM / FREE** 恢复 Fire 形态，不重复收取金币，也不免除复活广告。
+- 机甲在第三关移动时扫过前方碰撞区域，撞碎封印、石柱、水管与机关；熔岩和全局死亡入口均受机甲免伤保护，保留悬停、升降和激光。
+- 第三关原创城堡图形由 `CastleArt` 以 16 PPU 生成；已有机甲动画、复古音效、经济系统与两秒复活流程继续保留。
+
+最终通过 **57 项第三关专项、226 项完整运行回归**，保存 **26 张 Unity 实际渲染图**（1280×720、960×540）。机甲只按 D、无 J/Space 穿越完整第三关，记录零死亡、零射击，并撞碎三座封印与两根水管。
+
+路线检查另通过 **14/14 个花单跳路段、11/11 个 Wings 路段**及两项入口证明。路段使用真实输入、完整地图和自然变化的机关周期，每次独立布置落地起点；不增加无敌、不关闭机关或敌人，成功飞行保持 Fire 形态。**这是分段可行性证据，不是连续无机甲 TAS 或真人通关录像。** [专项报告](../verification/world-three-checks.txt) · [路线报告](../verification/world-three-route-proof.txt) · [实际截图](../verification/previews/world3/)。
+
+本轮交付为 [v1.16.0-world3-preview 源码预览](https://github.com/xl31415926535/JumpNotIncluded/releases/tag/v1.16.0-world3-preview)，Unity 编辑器运行已验证。Windows 构建因 Bee 编译子进程挂起而未生成；[v1.15.0](https://github.com/xl31415926535/JumpNotIncluded/releases/tag/v1.15.0) 仍为最新稳定 Windows 包，不含第三关。
+
+详细设计见 [World 3 说明](../docs/world3-design.md)；验收定位与录屏顺序见 [Lab 3 索引](../docs/lab3-code-guide.md)。第三关演示不会代替普通 Goomba 踩踏、事件计分和 AudioMixer 效果演示。
 
 ## v1.15.0：广告促销页与统一金币图标
 
@@ -158,11 +175,11 @@ v1.15.0 已重新通过 226 项完整 Unity 运行检查，Windows x64 构建成
 六种商品均在本局内有效：
 
 - **Jump DLC · 199 金币**：解锁基础跳跃。
-- **Fire Flower · 299 金币**：购买立即进入 Fire Mario，更新碰撞体与检查点；两关地图都没有花朵。
+- **Fire Flower · 299 金币**：购买立即进入 Fire Mario，更新碰撞体与检查点；三关地图都没有花朵。第三关已购但退化时可在死亡后的商店免费恢复 Fire 形态。
 - **Mushroom ID · 1299 金币**：当前及后续关卡所有毒蘑菇都变为普通蘑菇，恢复正常颜色和成长效果。
 - **Master Guide · 1999 金币**：提前显示暗砖和隐藏奖励位置，仍需撞击或射击才能领取。
 - **Monarch Wings · 999 金币**：基础跳跃加一次空中跳跃；落地或踩怪反弹恢复追加跳跃。未买 Jump DLC 也能直接使用，已经拥有基础跳跃时不退款抵扣。
-- **Gatling · 1999 金币**：持续平射并清理前方 14 格的暗砖、普通砖、毒蘑菇、怪物和库巴火焰。水管与缺口保留，仍需通过跳跃或机甲飞行越过。
+- **Gatling · 1999 金币**：持续平射并清理前方 14 格的暗砖、普通砖、毒蘑菇、怪物和库巴火焰；第三关还可清除封印、旋转火条和压砸机关。石柱、水管、缺口、熔岩和喷泉保留，仍需跳跃或机甲飞行。
 
 六种金币商品总价 **6794 金币**。另有 **War God Replica · S$79.99**：在商品页进入独立展示页，直接扣 SGD 钱包，金币与虚拟卡额度不变。购买获得本局授权，完成两秒复活广告和首次登场动画后，可使用原版怪物免伤、推进升空与悬停、悬崖保护及自动锁定激光；授权跨关有效。无需先购买任何金币能力，重复购买被阻止。
 
@@ -188,7 +205,7 @@ v1.15.0 已重新通过 226 项完整 Unity 运行检查，Windows x64 构建成
 - 检查点重试恢复最近快照的积分、金币、现金、订单、授权、形态、已领取奖励和已击败敌人；死亡次数、广告记录与累计时间保留。短时强化与飞行物清除。
 - 机甲登场完成后才设置并保存 `RunModel.mechDeployed`；同局检查点恢复与换关保留完成状态，未完成的登场在恢复后重新播放，`NewRun` 清除完成标记。
 - 已经进入快照的暗砖保持显现；被击碎的砖和已击败的库巴不会重新出现，奖励不能重复领取。当前加特林不会改变水管或缺口。
-- 隐形检查点位于第一关 26 / 60 格、第二关 34 / 80 格，经过并落地保存。未到检查点的关卡进度会回退，已经花费的广告与操作时间不会回退。
+- 隐形检查点位于第一关 26 / 60 格、第二关 34 / 80 格、第三关 51 / 116 格，经过并落地保存。未到检查点的关卡进度会回退，已经花费的广告与操作时间不会回退。
 - 充值、购买、退款及广告现金入账后保存，货币与能力一起恢复。绑卡与解绑也保存。死亡进入商店时先回到安全检查点。
 - 完整重开清除本局两种余额与所有能力，重置虚拟卡额度和交易记录，保留最高分及音量选项。下一关保留余额、能力与支付账户。
 - 最高分和音量使用 PlayerPrefs；主菜单可清除最高分。检查点只在当前游戏运行期间有效。
@@ -202,8 +219,11 @@ v1.15.0 已重新通过 226 项完整 Unity 运行检查，Windows x64 构建成
 - `GameEvents`：击杀 → 计分 → UI 的事件通知。
 - `AudioDirector`：Music / WorldSFX / UI_Ads 独立音源与 Mixer 分组，购买页低通处理。
 - `BlockActor / BossActor / BossFlame / Fireball`：暗砖、强敌和两类射击。
+- `WorldBuilder.WorldThree / CastleArt / CastleBarrier / CastleHazard / CastlePlatform`：第三关布局、生成像素图、发热封印、周期机关、单向高台与机甲扫障。
 - `MechArt / MechSuit / MechExhaust / MechPixelLaser / MechArrival / GameUI.Mech`：六帧像素机甲、16 PPU 三色喷流与阶梯激光，行走／推进／悬停／落地、独立音源、像素意识接入与钱包直购展示页。
 - 不使用 Singleton 或 DontDestroyOnLoad 管理器。
+
+v1.16.0 源码预览已完成上方所列 57 项第三关专项、226 项完整回归、25 个独立跳跃路段及 26 张截图。下列历史报告保持原版本归属，不作为第三关通过证据。
 
 v1.14.1 已通过 226 项完整 Unity 运行检查、59 项推进专项检查和 44 项机甲音频检查，Windows x64 构建成功。九种新音效的 WAV 格式、信号分析与源码 SHA256 已核对，另保留 11.50 秒分段试听与 6.2 秒真实 Unity 登场混音；原视觉截图及登场／商品页画面报告仍归属 v1.14.0，未声称重新执行。自动检查与试听素材不替代人工游玩或课程验收录屏。
 
@@ -219,6 +239,8 @@ v1.12.0 的机甲通过真实键盘输入连续完成两关，击败第二关全
 
 - 父目录 `./tools/check-project.ps1`：C# 编译、纯经济规则、100 轮随机广告验证。
 - Unity **Tools → Jump Not Included → Run runtime checks**：实际场景回归；结束恢复测试输入设备和最高分，输出到父目录 `work/unity-runtime-checks.txt`。
+- Unity **Tools → Jump Not Included → Run World Three checks and captures**：第三关真实物理/Input System 专项及实际渲染图；报告输出到父目录 `work/world-three-checks.txt`，截图在 `artifacts/world-three-previews`。隔离工程运行时路径相对该工程计算。
+- Unity **Tools → Jump Not Included → Prove World Three route segments**：布置各段落地起点，以真实按键验证火球破门、二段跳越门、14 个低路线与 11 个高路线跳跃；报告输出到父目录 `work/world-three-route-proof.txt`。归档输入轨迹见 `verification/route-traces/world3/`，不表示连续无机甲通关。
 - Unity **Tools → Jump Not Included → Build Windows**：生成 Windows 可执行文件。
 - 仓库保存的运行记录及画面预览在父目录 `verification/`；本地打包产物仍生成到 `artifacts/`。完整人工通关、盲测和课程录屏尚未完成。
 

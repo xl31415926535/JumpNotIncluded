@@ -104,6 +104,8 @@ namespace JumpNotIncluded
             if(!Active||!game.Playing)return;
             player.body.gravityScale=0;
             var position=player.body.position;
+            float requestedY=thrust?AscentSpeed:descend?-DescentSpeed:0;
+            game.level.ClearMechObstacles(position,position+new Vector2(movement*CruiseSpeed,requestedY)*Time.fixedDeltaTime);
             // The abyss floor is a flight safety net, not an invisible platform over real ground.
             // Terrain support lets the boots actually touch floors and pipe tops and shut down.
             bool supported=TrySupport(position,out float surfaceY);

@@ -584,7 +584,7 @@ namespace JumpNotIncluded.EditorTools
             Keys();
             bool armyDefeated=true;for(int i=0;i<WorldBuilder.OpeningBossCount;i++)armyDefeated&=g.Run.collected.Contains(WorldBuilder.BossKey(i));
             Check(g.mode==ScreenMode.Results&&g.Run.deaths==deaths&&armyDefeated&&g.player.body.position.x>107,"mech auto-lock destroys all ten Bowsers and clears World 2 without extra deaths (position="+g.player.body.position+", mode="+g.mode+")");
-            Check(g.Run.activeInputTime>hands+10&&g.Run.adWatchTime==watched&&g.Run.PaidTotal()==0&&g.Run.WalletPaidTotal()==7999,"final receipt totals both worlds while preserving the direct SGD purchase and original ad viewing time");
+            Check(g.Run.activeInputTime>hands+10&&g.Run.adWatchTime==watched&&g.Run.PaidTotal()==0&&g.Run.WalletPaidTotal()==7999,"second-world receipt totals the first two worlds while preserving the direct SGD purchase and original ad viewing time");
             g.session.NewRun();Check(g.Run.adWatchTime==0&&g.Run.activeInputTime==0&&g.Run.playTime==0&&g.Run.ads==0&&!g.Run.Owns(Product.Mech)&&!g.Run.mechDeployed&&g.Run.WalletPaidTotal()==0,"a new run clears receipt telemetry, mech ownership, completed deployment and cash purchases");
         }
         private static IEnumerator AwaitArrival()
@@ -696,7 +696,7 @@ namespace JumpNotIncluded.EditorTools
             Place(p,6,3.5f,Vector2.zero);
             // This fixture teleports back from the pit; settle the camera too so the rear
             // target is visible, matching the auto-lock's real viewport requirement.
-            g.cameraView.transform.position=new Vector3(11,4.7f,-10);yield return Wait(.1f);
+            g.cameraView.transform.position=new Vector3(11,4.7f,-10);yield return Wait(.5f);
             var nearby=new GameObject("Mech rear lock target").AddComponent<EnemyActor>();nearby.Init(g,"check.mech.near",4);nearby.enabled=false;
             var boss=new GameObject("Mech armored lock target").AddComponent<BossActor>();boss.Init(g,"check.mech.boss",10,9.5f,10.5f);boss.enabled=false;
             Physics2D.SyncTransforms();

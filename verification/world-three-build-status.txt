@@ -1,0 +1,21 @@
+World Three / v1.16.0 source preview / Windows build status
+
+STATUS: BLOCKED. No Windows executable for this version has been produced.
+Editor: Unity 6000.3.24f1, Windows x64 Mono target.
+
+The final game source passed 57 World Three PlayMode checks and the 226-check
+runtime suite. The editor imported and compiled the scripts without C# errors.
+The build stopped making progress at Unity Bee's ScriptAssembliesAndTypeDB stage.
+Its BuildPlayerDataGenerator command wrapper remained suspended with zero CPU.
+
+Retried in the validation project and original project, with a fresh Bee cache,
+the project build method, the official buildWindows64Player command, and a
+separate diagnostic worker. None produced a successful BuildReport. Directly
+running the type-layout generator succeeded, but is not a Unity player build.
+No generated editor data or previous executable is being passed off as a new
+Windows build. Failed build processes were stopped; source and evidence retained.
+
+Delivery: v1.16.0-world3-preview contains Unity source, reports and screenshots.
+Open the JumpNotIncluded subfolder in Unity 6000.3.24f1, then use
+Tools > Jump Not Included > Play from MainMenu.
+The previous v1.15.0 Windows release does not include World Three.

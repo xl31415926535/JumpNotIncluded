@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace JumpNotIncluded
 {
-    public class WorldBuilder : MonoBehaviour
+    public partial class WorldBuilder : MonoBehaviour
     {
         public SceneRoot game;public float length;
         private int world;
@@ -19,6 +19,7 @@ namespace JumpNotIncluded
             groundRoot=terrain.transform;terrain.AddComponent<Rigidbody2D>().bodyType=RigidbodyType2D.Static;
             groundCollider=terrain.AddComponent<CompositeCollider2D>();groundCollider.geometryType=CompositeCollider2D.GeometryType.Polygons;
             groundCollider.generationType=CompositeCollider2D.GenerationType.Manual;
+            if(IsCastle){length=156;BuildThree();groundCollider.GenerateGeometry();Flag(length-4);return;}
             Backdrop();
             Floor(0,GapStart);Floor(GapEnd,(int)length+8);
             if(world==1)BuildOne();else BuildTwo();
@@ -86,6 +87,13 @@ namespace JumpNotIncluded
                 if(Ahead(flame.transform.position.x))Destroy(flame.gameObject);
             foreach(var item in FindObjectsByType<PickupActor>(FindObjectsSortMode.None))
                 if(item.IsPoison&&Ahead(item.transform.position.x))item.Vaporize();
+            if(IsCastle)
+            {
+                foreach(var wall in FindObjectsByType<CastleBarrier>(FindObjectsSortMode.None))
+                    if(Ahead(wall.transform.position.x))wall.SmashByMech();
+                foreach(var hazard in FindObjectsByType<CastleHazard>(FindObjectsSortMode.None))
+                    if(hazard.Destructible&&Ahead(hazard.transform.position.x))hazard.BreakByWeapon(false);
+            }
         }
         private void Block(float x,float y,bool question,bool coin,ItemKind kind=ItemKind.Coin,bool hidden=false)
         {
